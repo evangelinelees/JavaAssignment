@@ -5,12 +5,14 @@ import java.awt.GradientPaint;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.geom.Rectangle2D;
-
+import javax.swing.JPanel;
+import javax.swing.JLabel;
+import javax.swing.GroupLayout;
 /**
  *
  * @author RAVEN
  */
-public class Header extends javax.swing.JPanel {
+public class Header extends JPanel {
 
     public Header() {
         initComponents();
@@ -20,7 +22,7 @@ public class Header extends javax.swing.JPanel {
     @Override
     protected void paintComponent(Graphics grphcs) {
         Graphics2D g2 = (Graphics2D) grphcs.create();
-        g2.setPaint(new GradientPaint(0, 0, new Color(106, 123, 157), 0, getHeight(), new Color(70, 130, 180)));
+        g2.setPaint(new GradientPaint(0, 0, new Color(50, 82, 123), 0, getHeight(), new Color(119, 136, 153)));
         g2.fill(new Rectangle2D.Double(0, 0, getWidth(), getHeight()));
         g2.dispose();
         super.paintComponent(grphcs);
