@@ -1,4 +1,4 @@
-package Components;
+package Components.GlobalComponents;
 
 import java.awt.AlphaComposite;
 import java.awt.Color;

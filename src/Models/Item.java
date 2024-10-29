@@ -14,6 +14,7 @@ public class Item {
     private String category;
     private int quantityInStock;
     private double pricePerUnit;
+    private String description;
 
     // Constructor
     public Item(int itemId, String itemName, String category, int quantityInStock, double pricePerUnit) {
@@ -24,7 +25,7 @@ public class Item {
         this.pricePerUnit = pricePerUnit;
     }
 
-    // Getters
+ 
     public int getItemId() {
         return itemId;
     }
@@ -43,9 +44,13 @@ public class Item {
 
     public double getPricePerUnit() {
         return pricePerUnit;
+        
     }
 
-    // Setters
+    public String getDescription() {
+        return description;
+    }
+    
     public void setItemId(int itemId) {
         this.itemId = itemId;
     }
@@ -65,6 +70,11 @@ public class Item {
     public void setPricePerUnit(double pricePerUnit) {
         this.pricePerUnit = pricePerUnit;
     }
+    
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
 
     @Override
     public String toString() {
@@ -76,4 +86,5 @@ public class Item {
                 ", pricePerUnit=" + pricePerUnit +
                 '}';
     }
+
 }

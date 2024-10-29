@@ -1,6 +1,5 @@
 package Forms;
 
-import Components.*;
 import java.awt.Color;
 import raven.chart.geo.utils.GeoData;
 

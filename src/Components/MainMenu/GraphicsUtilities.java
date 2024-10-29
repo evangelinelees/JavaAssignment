@@ -1,4 +1,4 @@
-package Components;
+package Components.MainMenu;
 
 import java.awt.image.BufferedImage;
 import java.awt.image.ColorModel;

@@ -1,9 +1,13 @@
-package Inventory;
+package InventoryManagementSystem;
 
 import Forms.DefaultForm;
 import Forms.HomeForm;
+import Forms.ItemInputForm;
+import Forms.InventoryForm;
+import Forms.UserForm;
+import Forms.InboxForm;
 import java.awt.Component;
-import Components.MenuEvent;
+import Components.MainMenu.MenuEvent;
 import java.awt.Color;
 import javax.swing.JFrame;
 import javax.swing.UIManager;
@@ -15,22 +19,41 @@ import javax.swing.plaf.ColorUIResource;
  */
 public class Main extends javax.swing.JFrame {
 
+
     public Main() {
-    initComponents();
- 
-    menu1.setEvent(new MenuEvent() {
-        @Override
-        public void selected(int index, int subIndex) {
-            Component formToShow;
-            formToShow = switch (index) {
-                case 0 -> new HomeForm();
-                
-                default -> new DefaultForm("Form : " + index + " " + subIndex);
-            };
-            showForm(formToShow); 
-        }
-    });
+        initComponents();
+
+        menu1.setEvent(new MenuEvent() {
+            @Override
+            public void selected(int index, int subIndex) {
+                Component formToShow; // Declare the variable to hold the form
+
+                formToShow = switch (index) {
+                    case 0 -> new HomeForm(); // Dashboard
+                    case 1 -> {
+                        // Handle User submenu based on subIndex
+                        yield switch (subIndex) {
+                            case 0 -> new UserForm(); // Example for User
+                            case 1 -> new InboxForm(); // Example for Inbox
+                            default -> new DefaultForm("User Form: " + subIndex);
+                        };
+                    }
+                    case 2 -> {
+                        // Handle Inventory submenu based on subIndex
+                        yield switch (subIndex) {
+                            case 0 -> new InventoryForm(); // Inventory form
+                            case 1 -> new ItemInputForm(); // Open Item Input Form
+                            default -> new DefaultForm("Inventory Form: " + subIndex);
+                        };
+                    }
+                    default -> new DefaultForm("Form: " + index + " " + subIndex);
+                };
+
+                showForm(formToShow); // Call the method to display the form
+            }
+        });
     }
+
     
     
     
@@ -45,9 +68,9 @@ public class Main extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        header2 = new Components.Header();
-        scrollPaneWin111 = new Components.ScrollPaneWin11();
-        menu1 = new Components.Menu();
+        header = new Components.MainMenu.Header();
+        scrollPaneWin111 = new Components.GlobalComponents.ScrollPaneWin11();
+        menu1 = new Components.MainMenu.MainMenu();
         body = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -63,9 +86,7 @@ public class Main extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(header2, javax.swing.GroupLayout.PREFERRED_SIZE, 1106, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(header, javax.swing.GroupLayout.PREFERRED_SIZE, 1106, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(scrollPaneWin111, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -74,11 +95,11 @@ public class Main extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(header2, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(header, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(scrollPaneWin111, javax.swing.GroupLayout.PREFERRED_SIZE, 689, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 24, Short.MAX_VALUE))
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(body, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -89,9 +110,7 @@ public class Main extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    /**
-     * @param args the command line arguments
-     */
+    
     public static void main(String args[]) {
         
         
@@ -109,8 +128,8 @@ public class Main extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel body;
-    private Components.Header header2;
-    private Components.Menu menu1;
-    private Components.ScrollPaneWin11 scrollPaneWin111;
+    private Components.MainMenu.Header header;
+    private Components.MainMenu.MainMenu menu1;
+    private Components.GlobalComponents.ScrollPaneWin11 scrollPaneWin111;
     // End of variables declaration//GEN-END:variables
 }

@@ -1,6 +1,7 @@
-package Components;
+package Components.MainMenu;
 
-import Inventory.Main;
+import Components.MainMenu.MenuItem;
+import InventoryManagementSystem.Main;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
@@ -18,13 +19,13 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import net.miginfocom.swing.MigLayout;
 
-public class Menu extends JComponent {
+public class MainMenu extends JComponent {
 
     public MenuEvent getEvent() {
         return event;
     }
     
-    public Menu(Main mainFrame) {
+    public MainMenu(Main mainFrame) {
         this.mainFrame = mainFrame; // Store the reference
         init();
     }
@@ -40,7 +41,7 @@ public class Menu extends JComponent {
     private String[][] menuItems = new String[][]{
         {"Dashboard"},
         {"User", "Inbox", "Read", "Compost"},
-        {"Inventory"},
+        {"Inventory","Item Input","Inventory Report"},
         {"Calendar"},
         {"Inventory", "Accordion", "Alerts", "Badges", "Breadcrumbs", "Buttons", "Button group"},
         {"Advanced UI", "Cropper", "Owl Carousel", "Sweet Alert"},
@@ -52,7 +53,7 @@ public class Menu extends JComponent {
     
     
      
-    public Menu() {
+    public MainMenu() {
         init();
     }
 

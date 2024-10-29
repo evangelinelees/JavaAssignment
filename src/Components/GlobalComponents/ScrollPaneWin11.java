@@ -1,5 +1,6 @@
-package Components;
+package Components.GlobalComponents;
 
+import Components.GlobalComponents.ScrollBarWin11UI;
 import java.awt.Container;
 import java.awt.EventQueue;
 import java.awt.Insets;
