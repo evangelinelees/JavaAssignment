@@ -42,4 +42,8 @@ public class InventoryService {
         Item item = new Item(itemId, itemName, description, quantity, price); // Create new Item object
         itemDao.updateItem(item); // Delegate to DAO
     }
+    
+    public void deleteItem(String itemId) {
+        itemDao.deleteItem(itemId);
+    }
 }

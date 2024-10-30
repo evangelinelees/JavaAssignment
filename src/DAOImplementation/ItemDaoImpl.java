@@ -66,10 +66,6 @@ public class ItemDaoImpl implements ItemDao {
         }
     }
     
-    public void deleteItem(String itemId) {
-        itemList.removeIf(item -> item.getItemId() == itemId); // Updated method
-    }
-
     @Override   
      public void updateItem(Item item) {
         List<Item> items = getAllItems(); // Load all items
@@ -163,11 +159,19 @@ public class ItemDaoImpl implements ItemDao {
     }
 
     return new Item(itemId, itemName, description, quantity, price);
-}
+    }
 
-    @Override
-    public void delete(String itemId) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+   
+    public void deleteItem(String itemId) {
+        List<Item> items = loadAll();
+        boolean itemRemoved = items.removeIf(item -> item.getItemId().equals(itemId));
+
+            if (itemRemoved) {
+                saveAll(items);
+            } 
+                else {
+                System.out.println("Item with ID " + itemId + " not found.");
+                }
     }
 
    

@@ -47,19 +47,21 @@ public class ItemInputPanel extends JPanel {
     
     }
 
-    // Method to add a new item to the table
+    
     public void addItem(String itemId, String itemName, String description, String quantity, String price) {
         tableModel.addRow(new Object[]{itemId, itemName, description, quantity, price});
     }
 
-    // Optional: Method to clear the table
     public void clearItems() {
-        tableModel.setRowCount(0); // Clear all rows
+        int selectedRow = table.getSelectedRow(); 
+        
+        if (selectedRow != -1) { 
+            tableModel.removeRow(selectedRow); 
+        }
     }
-    
-   
+
     public void populateItems(List<Item> items) {
-        tableModel.setRowCount(0); // Clear existing rows
+        tableModel.setRowCount(0); 
         for (Item item : items) {
             tableModel.addRow(new Object[]{
                 item.getItemId(),
