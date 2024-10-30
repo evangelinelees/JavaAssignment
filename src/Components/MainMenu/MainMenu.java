@@ -77,7 +77,7 @@ public class MainMenu extends JComponent {
         logoutButton.setForeground(Color.WHITE);
         logoutButton.setBorder(null); // Remove border completely
         logoutButton.setFocusPainted(false);
-        logoutButton.setPreferredSize(new Dimension(250, 40));
+        logoutButton.setPreferredSize(new Dimension(200, 40));
 
         logoutButton.addActionListener(new ActionListener() {
             @Override
