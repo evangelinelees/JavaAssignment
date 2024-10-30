@@ -8,24 +8,31 @@ package Models;
  *
  * @author User
  */
-public class Item {
-    private int itemId;
-    private String itemName;
-    private String category;
-    private int quantityInStock;
-    private double pricePerUnit;
+ import java.io.Serializable;
 
-    // Constructor
-    public Item(int itemId, String itemName, String category, int quantityInStock, double pricePerUnit) {
+public class Item implements Serializable{   //ftwwwwwwww future implentation for byte array <3 <3
+    private String itemId;
+    private String itemName;
+    private String description;
+    private int quantity;
+    private double price;
+
+    
+    public Item() {
+        
+    }
+   
+    // Parameterized constructor
+    public Item(String itemId, String itemName, String description, int quantity, double price) {
         this.itemId = itemId;
         this.itemName = itemName;
-        this.category = category;
-        this.quantityInStock = quantityInStock;
-        this.pricePerUnit = pricePerUnit;
+        this.description = description;
+        this.quantity = quantity;
+        this.price = price;
     }
-
-    // Getters
-    public int getItemId() {
+  
+ 
+    public String getItemId() {
         return itemId;
     }
 
@@ -33,20 +40,20 @@ public class Item {
         return itemName;
     }
 
-    public String getCategory() {
-        return category;
+
+    public int getQuantity() {
+        return quantity;
     }
 
-    public int getQuantityInStock() {
-        return quantityInStock;
+    public double getPrice() {
+        return price;
     }
 
-    public double getPricePerUnit() {
-        return pricePerUnit;
+    public String getDescription() {
+        return description;
     }
-
-    // Setters
-    public void setItemId(int itemId) {
+    
+    public void setItemId(String itemId) {
         this.itemId = itemId;
     }
 
@@ -54,26 +61,21 @@ public class Item {
         this.itemName = itemName;
     }
 
-    public void setCategory(String category) {
-        this.category = category;
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
     }
 
-    public void setQuantityInStock(int quantityInStock) {
-        this.quantityInStock = quantityInStock;
+    public void setPrice(double price) {
+        this.price = price;
     }
-
-    public void setPricePerUnit(double pricePerUnit) {
-        this.pricePerUnit = pricePerUnit;
+    
+    public void setDescription(String description) {
+        this.description = description;
     }
-
-    @Override
+@Override
     public String toString() {
-        return "Item{" +
-                "itemId=" + itemId +
-                ", itemName='" + itemName + '\'' +
-                ", category='" + category + '\'' +
-                ", quantityInStock=" + quantityInStock +
-                ", pricePerUnit=" + pricePerUnit +
-                '}';
+        return String.format("%s,%s,%s,%d,%.2f", itemId, itemName, description, quantity, price);
     }
+
+    
 }

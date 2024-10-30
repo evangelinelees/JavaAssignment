@@ -1,5 +1,6 @@
-package Components;
+package Components.MainMenu;
 
+import Components.MainMenu.MenuItem;
 import java.awt.Component;
 import net.miginfocom.swing.MigLayout;
 import org.jdesktop.animation.timing.Animator;

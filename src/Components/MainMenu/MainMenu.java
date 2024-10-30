@@ -1,6 +1,7 @@
-package Components;
+package Components.MainMenu;
 
-import Inventory.Main;
+import Components.MainMenu.MenuItem;
+import InventoryManagementSystem.Main;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
@@ -18,13 +19,13 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import net.miginfocom.swing.MigLayout;
 
-public class Menu extends JComponent {
+public class MainMenu extends JComponent {
 
     public MenuEvent getEvent() {
         return event;
     }
     
-    public Menu(Main mainFrame) {
+    public MainMenu(Main mainFrame) {
         this.mainFrame = mainFrame; // Store the reference
         init();
     }
@@ -40,8 +41,8 @@ public class Menu extends JComponent {
     private String[][] menuItems = new String[][]{
         {"Dashboard"},
         {"User", "Inbox", "Read", "Compost"},
-        {"Inventory"},
-        {"Calendar"},
+        {"Inventory","Item Input","Inventory Report"},
+        {"Supplier","Suppliers Input","Supllier-Item","Overview"},
         {"Inventory", "Accordion", "Alerts", "Badges", "Breadcrumbs", "Buttons", "Button group"},
         {"Advanced UI", "Cropper", "Owl Carousel", "Sweet Alert"},
         {"Forms", "Basic Elements", "Advanced Elements", "SEditors", "Wizard"},
@@ -52,7 +53,7 @@ public class Menu extends JComponent {
     
     
      
-    public Menu() {
+    public MainMenu() {
         init();
     }
 
@@ -76,7 +77,7 @@ public class Menu extends JComponent {
         logoutButton.setForeground(Color.WHITE);
         logoutButton.setBorder(null); // Remove border completely
         logoutButton.setFocusPainted(false);
-        logoutButton.setPreferredSize(new Dimension(250, 40));
+        logoutButton.setPreferredSize(new Dimension(200, 40));
 
         logoutButton.addActionListener(new ActionListener() {
             @Override
@@ -124,35 +125,36 @@ public class Menu extends JComponent {
     }
 
     private void addMenu(String menuName, int index) {
-        int length = menuItems[index].length;
-        MenuItem item = new MenuItem(menuName, index, length > 1);
-        Icon icon = getIcon(index);
-        if (icon != null) {
-            item.setIcon(icon);
-        }
-        item.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent ae) {
-                if (length > 1) {
-                    if (!item.isSelected()) {
-                        item.setSelected(true);
-                        addSubMenu(item, index, length, getComponentZOrder(item));
-                    } else {
-                        //  Hide menu
-                        hideMenu(item, index);
-                        item.setSelected(false);
-                    }
+    int length = menuItems[index].length;
+    MenuItem item = new MenuItem(menuName, index, length > 1);
+    Icon icon = getIcon(index);
+    if (icon != null) {
+        item.setIcon(icon);
+    }
+    item.addActionListener(new ActionListener() {
+        @Override
+        public void actionPerformed(ActionEvent ae) {
+            if (length > 1) {
+                if (!item.isSelected()) {
+                    item.setSelected(true);
+                    addSubMenu(item, index, length, getComponentZOrder(item));
                 } else {
-                    if (event != null) {
-                        event.selected(index, 0);
-                    }
+                    // Hide menu
+                    hideMenu(item, index);
+                    item.setSelected(false);
+                }
+            } else {
+                // Trigger the event for selected form
+                if (event != null) {
+                    event.selected(index, 0);
                 }
             }
-        });
-        add(item);
-        revalidate();
-        repaint();
-    }
+        }
+    });
+    add(item);
+    revalidate();
+    repaint();
+}
 
     private void addSubMenu(MenuItem item, int index, int length, int indexZorder) {
         Color submenuColor = new Color(39, 41, 61);
