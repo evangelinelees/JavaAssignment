@@ -8,11 +8,13 @@ import Forms.UserForm;
 import Forms.InboxForm;
 import java.awt.Component;
 import Components.MainMenu.MenuEvent;
+import Controller.InventoryController;
+import Components.ItemInput.ItemInputPanel;
 import java.awt.Color;
-import javax.swing.JFrame;
-import javax.swing.UIManager;
+import javax.swing.*;
+import java.awt.BorderLayout;
 import javax.swing.plaf.ColorUIResource;
-import Components.MainMenu.Header;
+
 /**
  *
  * @author RAVEN
@@ -22,7 +24,10 @@ public class Main extends javax.swing.JFrame {
 
     public Main() {
         initComponents();
-
+        InventoryController inventoryController = new InventoryController();
+        ItemInputPanel itemInputPanel = new ItemInputPanel();
+        ItemInputForm itemInputForm = new ItemInputForm(inventoryController, itemInputPanel);
+        
         menu1.setEvent(new MenuEvent() {
             @Override
             public void selected(int index, int subIndex) {
@@ -42,14 +47,14 @@ public class Main extends javax.swing.JFrame {
                         // Handle Inventory submenu based on subIndex
                         yield switch (subIndex) {
                             case 0 -> new InventoryForm(); // Inventory form
-                            case 1 -> new ItemInputForm(); // Open Item Input Form
+                            case 1 -> new ItemInputForm(inventoryController, itemInputPanel); // Open Item Input Form
                             default -> new DefaultForm("Inventory Form: " + subIndex);
                         };
                     }
                     default -> new DefaultForm("Form: " + index + " " + subIndex);
                 };
 
-                showForm(formToShow); // Call the method to display the form
+                showForm((JPanel) formToShow); // Call the method to display the form
             }
         });
     }
@@ -57,12 +62,13 @@ public class Main extends javax.swing.JFrame {
     
     
     
-    private void showForm(Component form) {
-     body.removeAll();
-     body.add(form);
-     body.repaint();
-     body.revalidate();
+    public void showForm(JPanel formToShow) {
+    body.removeAll();
+    body.add(formToShow, BorderLayout.CENTER);
+    body.revalidate();
+    body.repaint();
     }
+
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents

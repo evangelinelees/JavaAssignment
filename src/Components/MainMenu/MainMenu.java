@@ -125,35 +125,36 @@ public class MainMenu extends JComponent {
     }
 
     private void addMenu(String menuName, int index) {
-        int length = menuItems[index].length;
-        MenuItem item = new MenuItem(menuName, index, length > 1);
-        Icon icon = getIcon(index);
-        if (icon != null) {
-            item.setIcon(icon);
-        }
-        item.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent ae) {
-                if (length > 1) {
-                    if (!item.isSelected()) {
-                        item.setSelected(true);
-                        addSubMenu(item, index, length, getComponentZOrder(item));
-                    } else {
-                        //  Hide menu
-                        hideMenu(item, index);
-                        item.setSelected(false);
-                    }
+    int length = menuItems[index].length;
+    MenuItem item = new MenuItem(menuName, index, length > 1);
+    Icon icon = getIcon(index);
+    if (icon != null) {
+        item.setIcon(icon);
+    }
+    item.addActionListener(new ActionListener() {
+        @Override
+        public void actionPerformed(ActionEvent ae) {
+            if (length > 1) {
+                if (!item.isSelected()) {
+                    item.setSelected(true);
+                    addSubMenu(item, index, length, getComponentZOrder(item));
                 } else {
-                    if (event != null) {
-                        event.selected(index, 0);
-                    }
+                    // Hide menu
+                    hideMenu(item, index);
+                    item.setSelected(false);
+                }
+            } else {
+                // Trigger the event for selected form
+                if (event != null) {
+                    event.selected(index, 0);
                 }
             }
-        });
-        add(item);
-        revalidate();
-        repaint();
-    }
+        }
+    });
+    add(item);
+    revalidate();
+    repaint();
+}
 
     private void addSubMenu(MenuItem item, int index, int length, int indexZorder) {
         Color submenuColor = new Color(39, 41, 61);

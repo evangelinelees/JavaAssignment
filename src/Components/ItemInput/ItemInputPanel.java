@@ -4,57 +4,67 @@
  */
 package Components.ItemInput;
 
+import Models.Item;
+import java.util.List;
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 import java.awt.*;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 
-public class ItemInputPanel {
-    private JTextField itemIdField;
-    private JTextField itemNameField;
-    private JTextField descriptionField;
-    private JTextField quantityField;
-    private JTextField priceField;
+public class ItemInputPanel extends JPanel {
+
+    private JTable table;
+    private DefaultTableModel tableModel;
 
     public ItemInputPanel() {
-        itemIdField = new JTextField(20);
-        itemNameField = new JTextField(20);
-        descriptionField = new JTextField(20);
-        quantityField = new JTextField(20);
-        priceField = new JTextField(20);
+        tableModel = new DefaultTableModel(new Object[]{"Item ID", "Item Name", "Description", "Quantity", "Price"}, 0);
+        table = new JTable(tableModel);
+        initComponents();
     }
 
-    public JPanel createInputPanel() {
-        JPanel panel = new JPanel(new GridLayout(5, 2));
-        panel.add(new JLabel("Item ID:"));
-        panel.add(itemIdField);
-        panel.add(new JLabel("Item Name:"));
-        panel.add(itemNameField);
-        panel.add(new JLabel("Description:"));
-        panel.add(descriptionField);
-        panel.add(new JLabel("Quantity:"));
-        panel.add(quantityField);
-        panel.add(new JLabel("Price:"));
-        panel.add(priceField);
-        return panel;
+    private void initComponents() {
+        // Define column names
+        String[] columnNames = {"Item ID", "Item Name", "Description", "Quantity", "Price"};
+
+        // Create the table model and JTable
+        tableModel = new DefaultTableModel(columnNames, 0); // 0 rows initially
+        table = new JTable(tableModel);
+        table.setFillsViewportHeight(true); // Ensure the table fills the view
+
+        // Add JScrollPane for the table
+        JScrollPane scrollPane = new JScrollPane(table);
+        scrollPane.setPreferredSize(new Dimension(400, 200)); // Set preferred size for the table
+
+        // Set the layout and add the scroll pane to the panel
+        setLayout(new BorderLayout());
+        add(scrollPane, BorderLayout.CENTER);
     }
 
-    public JTextField getItemIdField() {
-        return itemIdField;
+    // Method to add a new item to the table
+    public void addItem(String itemId, String itemName, String description, String quantity, String price) {
+        tableModel.addRow(new Object[]{itemId, itemName, description, quantity, price});
     }
 
-    public JTextField getItemNameField() {
-        return itemNameField;
+    // Optional: Method to clear the table
+    public void clearItems() {
+        tableModel.setRowCount(0); // Clear all rows
     }
-
-    public JTextField getDescriptionField() {
-        return descriptionField;
+    
+   
+    public void populateItems(List<Item> items) {
+        tableModel.setRowCount(0); // Clear existing rows
+        for (Item item : items) {
+            tableModel.addRow(new Object[]{
+                item.getItemId(),
+                item.getItemName(),
+                item.getDescription(),
+                item.getQuantity(),
+                item.getPrice()
+            });
+        }
     }
-
-    public JTextField getQuantityField() {
-        return quantityField;
-    }
-
-    public JTextField getPriceField() {
-        return priceField;
-    }
+    
+   
 }
 

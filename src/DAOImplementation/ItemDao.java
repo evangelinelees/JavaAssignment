@@ -13,8 +13,11 @@ import java.util.List;
 
 public interface ItemDao {
     void addItem(Item item);
-    void updateItem(Item item); // Update existing item
-    Item getItemById(int itemId);
     List<Item> getAllItems(); // Retrieve all items
-    void deleteItem(int itemId); // Optional, for item removal
+    void save(Item item); // Save a new item to the data source
+    void update(Item item); // Update an existing item in the data source
+    Item findById(String itemId); // Find and return an item by its ID
+    List<Item> loadAll(); // Load and return all items from the data source
+    void delete(String itemId);
+   
 }
