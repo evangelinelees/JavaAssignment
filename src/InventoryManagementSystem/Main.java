@@ -10,6 +10,8 @@ import java.awt.Component;
 import Components.MainMenu.MenuEvent;
 import Controller.InventoryController;
 import Components.ItemInput.ItemInputPanel;
+import DAOImplementation.ItemDao;
+import DAOImplementation.ItemDaoImpl;
 import java.awt.Color;
 import javax.swing.*;
 import java.awt.BorderLayout;
@@ -26,7 +28,8 @@ public class Main extends javax.swing.JFrame {
         initComponents();
         InventoryController inventoryController = new InventoryController();
         ItemInputPanel itemInputPanel = new ItemInputPanel();
-        ItemInputForm itemInputForm = new ItemInputForm(inventoryController, itemInputPanel);
+        ItemDao itemDao = new ItemDaoImpl();
+        ItemInputForm itemInputForm = new ItemInputForm(inventoryController, itemInputPanel, itemDao);
         
         menu1.setEvent(new MenuEvent() {
             @Override
@@ -47,7 +50,7 @@ public class Main extends javax.swing.JFrame {
                         // Handle Inventory submenu based on subIndex
                         yield switch (subIndex) {
                             case 0 -> new InventoryForm(); // Inventory form
-                            case 1 -> new ItemInputForm(inventoryController, itemInputPanel); // Open Item Input Form
+                            case 1 -> new ItemInputForm(inventoryController, itemInputPanel, itemDao); // Open Item Input Form
                             default -> new DefaultForm("Inventory Form: " + subIndex);
                         };
                     }
@@ -95,8 +98,7 @@ public class Main extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(scrollPaneWin111, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
-                .addComponent(body, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(body, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addComponent(header1, javax.swing.GroupLayout.DEFAULT_SIZE, 1106, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
@@ -104,13 +106,10 @@ public class Main extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(header1, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(scrollPaneWin111, javax.swing.GroupLayout.PREFERRED_SIZE, 689, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(body, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(0, 0, 0))))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(scrollPaneWin111, javax.swing.GroupLayout.DEFAULT_SIZE, 689, Short.MAX_VALUE)
+                    .addComponent(body, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();

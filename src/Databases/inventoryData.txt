@@ -1,2 +1,1 @@
-I0009,Fast Hands,Very mindfuil Very Demure,2500,27.50
-I0010,Fast Hand,Very mindfuil Very Demure,2500,27.50
+I0002,Demure Soup,Desperate Soup,4000,4.50

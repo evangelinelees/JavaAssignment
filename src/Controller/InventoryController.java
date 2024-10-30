@@ -28,4 +28,8 @@ public class InventoryController {
         inventoryService.updateItem(itemId, itemName, description, quantity, price);
     }
     
+    public void deleteItem(String itemId) {
+        inventoryService.deleteItem(itemId);
+    }
+    
 }

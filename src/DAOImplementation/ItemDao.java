@@ -18,6 +18,6 @@ public interface ItemDao {
     void updateItem(Item item); // Update an existing item in the data source
     Item findById(String itemId); // Find and return an item by its ID
     List<Item> loadAll(); // Load and return all items from the data source
-    void delete(String itemId);
+    void deleteItem(String itemId);
    
 }
