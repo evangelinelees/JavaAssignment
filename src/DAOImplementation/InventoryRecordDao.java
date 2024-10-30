@@ -8,6 +8,13 @@ package DAOImplementation;
  *
  * @author User
  */
-public class InventoryRecordDao {
-    
+
+import Models.InventoryRecord;
+import java.util.List;
+
+public interface InventoryRecordDao {
+    void addInventoryRecord(InventoryRecord record);
+    List<InventoryRecord> getAllInventoryRecords();
+    // Other methods...
 }
+

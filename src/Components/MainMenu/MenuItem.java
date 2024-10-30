@@ -1,5 +1,7 @@
-package Components;
+package Components.MainMenu;
 
+import Components.GlobalComponents.RippleEffect;
+import Components.GlobalComponents.ShadowRenderer;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;

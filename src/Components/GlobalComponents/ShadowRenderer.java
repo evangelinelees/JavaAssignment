@@ -1,5 +1,6 @@
-package Components;
+package Components.GlobalComponents;
 
+import Components.MainMenu.GraphicsUtilities;
 import java.awt.Color;
 import java.awt.image.BufferedImage;
 

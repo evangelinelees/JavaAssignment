@@ -1,5 +1,6 @@
-package Components;
+package Components.GlobalComponents;
 
+import Components.GlobalComponents.PolygonCorner;
 import java.awt.AlphaComposite;
 import java.awt.Color;
 import java.awt.Dimension;

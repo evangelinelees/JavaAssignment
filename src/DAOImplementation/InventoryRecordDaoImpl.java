@@ -1,16 +1,20 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package DAOImplementation;
 
-/**
- *
- * @author User
- */
-public class InventoryRecordDaoImpl {
 
-    public InventoryRecordDaoImpl() {
+import Models.InventoryRecord;
+import java.util.List;
+
+public class InventoryRecordDaoImpl implements InventoryRecordDao {
+    @Override
+    public void addInventoryRecord(InventoryRecord record) {
+        // Implementation to add record to database
     }
-    
+
+    @Override
+    public List<InventoryRecord> getAllInventoryRecords() {
+        // Implementation to fetch all inventory records from the database
+        return null; // Replace with actual return statement
+    }
+
+    // Other methods...
 }
