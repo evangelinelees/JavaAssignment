@@ -42,7 +42,7 @@ public class MainMenu extends JComponent {
         {"Dashboard"},
         {"User", "Inbox", "Read", "Compost"},
         {"Inventory","Item Input","Inventory Report"},
-        {"Calendar"},
+        {"Supplier","Suppliers Input","Supllier-Item","Overview"},
         {"Inventory", "Accordion", "Alerts", "Badges", "Breadcrumbs", "Buttons", "Button group"},
         {"Advanced UI", "Cropper", "Owl Carousel", "Sweet Alert"},
         {"Forms", "Basic Elements", "Advanced Elements", "SEditors", "Wizard"},

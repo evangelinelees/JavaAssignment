@@ -1,3 +1,1 @@
-jTextField1,jTextField2,jTextField3,20,20.00
-I0004,soap,asd,0,0.00
-I0666,asas,asdasas,0,0.00
+I0009,Fast Hands,Demure,800000000,13.50

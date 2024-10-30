@@ -16,16 +16,16 @@ public class InventoryController {
     }
 
     public void saveItem(String itemId, String itemName, String description, int quantity, double price) {
-        Item item = new Item();
-        item.setItemId(itemId);
-        item.setItemName(itemName);
-        item.setDescription(description);
-        item.setQuantity(quantity);
-        item.setPrice(price);
-        inventoryService.addItem(item);
+        Item newItem = new Item(itemId, itemName, description, quantity, price);
+        inventoryService.addItem(newItem);
     }
 
     public List<Item> getAllItems() {
         return inventoryService.getAllItems();
     }
+    
+    public void updateItem(String itemId, String itemName, String description, int quantity, double price) {
+        inventoryService.updateItem(itemId, itemName, description, quantity, price);
+    }
+    
 }

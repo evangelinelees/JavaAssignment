@@ -4,11 +4,11 @@ package Components.ItemInput;
 import javax.swing.*;
 import java.awt.event.ActionListener;
 
-public class SaveButton extends JButton {
+public class UniversalButton extends JButton {
 
-    public SaveButton() {
+    public UniversalButton() {
         // Set up the button properties
-        setText("Save Input");
+        setText("Button");
         setBackground(new java.awt.Color(106, 123, 157));
         setForeground(java.awt.Color.WHITE);
         setFocusPainted(false);
@@ -19,4 +19,6 @@ public class SaveButton extends JButton {
     public void setSaveActionListener(ActionListener listener) {
         addActionListener(listener);
     }
+    
+
 }

@@ -4,19 +4,21 @@
  */
 package Components.ItemInput;
 
+import Components.GlobalComponents.ScrollBarWin11UI;
+import Components.ItemInput.UniversalButton;
 import Models.Item;
 import java.util.List;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
+
 
 public class ItemInputPanel extends JPanel {
 
     private JTable table;
     private DefaultTableModel tableModel;
-
+     private JTable itemTable;
+     
     public ItemInputPanel() {
         tableModel = new DefaultTableModel(new Object[]{"Item ID", "Item Name", "Description", "Quantity", "Price"}, 0);
         table = new JTable(tableModel);
@@ -24,21 +26,25 @@ public class ItemInputPanel extends JPanel {
     }
 
     private void initComponents() {
-        // Define column names
         String[] columnNames = {"Item ID", "Item Name", "Description", "Quantity", "Price"};
 
         // Create the table model and JTable
-        tableModel = new DefaultTableModel(columnNames, 0); // 0 rows initially
+        tableModel = new DefaultTableModel(columnNames, 0); // Initialize with no rows
         table = new JTable(tableModel);
-        table.setFillsViewportHeight(true); // Ensure the table fills the view
+        table.setFillsViewportHeight(true); // Ensure the table fills the viewport height
 
-        // Add JScrollPane for the table
+        // Add JScrollPane for the JTable
         JScrollPane scrollPane = new JScrollPane(table);
         scrollPane.setPreferredSize(new Dimension(400, 200)); // Set preferred size for the table
+
+        // Set custom scrollbar UI
+        scrollPane.getVerticalScrollBar().setUI(new ScrollBarWin11UI());
+        scrollPane.getHorizontalScrollBar().setUI(new ScrollBarWin11UI());
 
         // Set the layout and add the scroll pane to the panel
         setLayout(new BorderLayout());
         add(scrollPane, BorderLayout.CENTER);
+    
     }
 
     // Method to add a new item to the table
@@ -65,6 +71,9 @@ public class ItemInputPanel extends JPanel {
         }
     }
     
+    public JTable getTable() {
+        return table;
+    }
    
 }
 

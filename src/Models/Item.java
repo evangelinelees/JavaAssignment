@@ -21,7 +21,7 @@ public class Item implements Serializable{   //ftwwwwwwww future implentation fo
     public Item() {
         
     }
-
+   
     // Parameterized constructor
     public Item(String itemId, String itemName, String description, int quantity, double price) {
         this.itemId = itemId;
@@ -30,7 +30,7 @@ public class Item implements Serializable{   //ftwwwwwwww future implentation fo
         this.quantity = quantity;
         this.price = price;
     }
-
+  
  
     public String getItemId() {
         return itemId;
@@ -72,15 +72,10 @@ public class Item implements Serializable{   //ftwwwwwwww future implentation fo
     public void setDescription(String description) {
         this.description = description;
     }
-
-
-    @Override
+@Override
     public String toString() {
-        return "Item{" +
-                "itemId=" + itemId +
-                ", itemName='" + itemName + '\'' +
-                ", quantityInStock=" + quantity +
-                ", pricePerUnit=" + price +
-                '}';
+        return String.format("%s,%s,%s,%d,%.2f", itemId, itemName, description, quantity, price);
     }
+
+    
 }

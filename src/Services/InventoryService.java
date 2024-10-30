@@ -31,11 +31,15 @@ public class InventoryService {
             // Example: Increment quantity if the item already exists
             existingItem.setQuantity(existingItem.getQuantity() + item.getQuantity());
             existingItem.setPrice(item.getPrice()); // Update price if necessary
-            itemDao.update(existingItem); // Update the existing item
+            itemDao.updateItem(existingItem); // Update the existing item
         } else {
             // Create new item entry
-            itemDao.save(item); // Save the new item
+            itemDao.saveItem(item); // Save the new item
         }
     }
-
+    
+    public void updateItem(String itemId, String itemName, String description, int quantity, double price) {
+        Item item = new Item(itemId, itemName, description, quantity, price); // Create new Item object
+        itemDao.updateItem(item); // Delegate to DAO
+    }
 }
