@@ -2,7 +2,7 @@
 package javaassignment;
 
 
-public class Administrator {
+public class Admin {
     private String userId;
     private String password;
     private String role;
