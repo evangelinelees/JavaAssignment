@@ -10,10 +10,7 @@ import javax.swing.JOptionPane;
 
 
 public class AdminRegistrationPage extends javax.swing.JFrame {
-    SalesManager SM;
-    PurchaseManager PM;
-    InventoryManager IM;
-    FinanceManager FM;
+ 
    
     public AdminRegistrationPage() {
         initComponents();
@@ -280,20 +277,31 @@ public class AdminRegistrationPage extends javax.swing.JFrame {
 
     
     public void saveDetailsToFile(String fullName, String IcNumber, String email, String PhNumber, String password, String role) {
-        // File path where the details will be saved
-        String filePath = "C:\\Users\\jchok\\Desktop\\Java Assignment\\JavaAssignment\\USERS.txt";  // Update with your file path
+    // File path where the details will be saved
+    String filePath = "C:\\Users\\jchok\\Desktop\\Java Assignment\\JavaAssignment\\USERS.txt";  // Update with your file path
 
-        // Generate unique ID based on role
-        String prefix = "";
-        switch (role) {
-            case "Sales Manager": prefix = "SM"; break;
-            case "Purchase Manager": prefix = "PM"; break;
-            case "Inventory Manager": prefix = "IM"; break;
-            case "Finance Manager": prefix = "FM"; break;
-        }
+    // Generate unique ID based on role
+    String prefix = "";
+    switch (role) {
+        case "Sales Manager": prefix = "SM"; break;
+        case "Purchase Manager": prefix = "PM"; break;
+        case "Inventory Manager": prefix = "IM"; break;
+        case "Finance Manager": prefix = "FM"; break;
+    }
 
-        String uniqueId = prefix + new Random().nextInt(9999); // Random ID for now, ensure uniqueness as needed
-       
+    String uniqueId = prefix + new Random().nextInt(9999); // Random ID for now, ensure uniqueness as needed
+
+    // String format for saving details (can change the format as needed)
+    String userDetails = uniqueId + "|" + fullName + "|" + IcNumber + "|" + email + "|" + PhNumber + "|" + password + "|" + role;
+
+    // Write to file
+    try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath, true))) { // "true" to append to file
+        writer.write(userDetails);
+        writer.newLine(); // Add a new line after each entry
+        JOptionPane.showMessageDialog(this, "Registration Successful \nYour Id is: " + uniqueId + " \nPassoword: " + password);
+    } catch (IOException e) {
+        JOptionPane.showMessageDialog(this, "Error saving user details", "Error", JOptionPane.ERROR_MESSAGE);
+    }
 }
     
     public static void main(String args[]) {
@@ -322,6 +330,7 @@ public class AdminRegistrationPage extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 new AdminRegistrationPage().setVisible(true);
             }
