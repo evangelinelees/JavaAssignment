@@ -3,7 +3,7 @@ package javaassignment;
 
 
 public class User {
-    private String userId, fullName, email, PhNumber, password,IcNumber;
+    private String userId, fullName, email, PhNumber, password,IcNumber,userRole;
     
     
     
@@ -16,13 +16,23 @@ public class User {
         this.password = password;
     }
     
-    public User(String userId, String email, String PhNumber,int identificationNumber, String password){
+    public User(String userId, String email, String PhNumber,int identificationNumber, String password, String userRole){
         this.userId = userId;
         this.email = email;
         this.IcNumber = IcNumber;
         this.PhNumber = PhNumber;
         this.password = password;
         this.fullName = fullName;
+        this.userRole = userRole;
+        
+    }
+
+    public String getUserRole() {
+        return userRole;
+    }
+
+    public void setUserRole(String userRole) {
+        this.userRole = userRole;
     }
 
  
