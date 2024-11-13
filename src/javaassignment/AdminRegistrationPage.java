@@ -1,6 +1,8 @@
 package javaassignment;
 
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Random;
@@ -246,6 +248,11 @@ public class AdminRegistrationPage extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Invalid phone number format.", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
+        // Check for duplicate IC number
+        if (isIcNumberDuplicate(IcNumber)) {
+            JOptionPane.showMessageDialog(this, "IC Number already exists. Please use a different IC Number.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
 
         // Save details to file
         saveDetailsToFile(fullName, IcNumber, email, PhNumber, password, role);
@@ -276,6 +283,22 @@ public class AdminRegistrationPage extends javax.swing.JFrame {
     }//GEN-LAST:event_Role_CBActionPerformed
 
     
+    private boolean isIcNumberDuplicate(String icNumber) {
+    String filePath = "C:\\Users\\jchok\\Desktop\\Java Assignment\\JavaAssignment\\USERS.txt"; // Update with your file path
+        try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                String[] userDetails = line.split("\\|");
+                if (userDetails.length > 2 && userDetails[2].equals(icNumber)) {
+                    return true; // IC number already exists
+                }
+            }
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+        return false; // No duplicate IC number found
+}
+    
     public void saveDetailsToFile(String fullName, String IcNumber, String email, String PhNumber, String password, String role) {
     // File path where the details will be saved
     String filePath = "C:\\Users\\jchok\\Desktop\\Java Assignment\\JavaAssignment\\USERS.txt";  // Update with your file path
@@ -288,11 +311,21 @@ public class AdminRegistrationPage extends javax.swing.JFrame {
         case "Inventory Manager": prefix = "IM"; break;
         case "Finance Manager": prefix = "FM"; break;
     }
+    
+    // Count existing lines (users) to create a unique ID suffix and add line numbering
+    int userCount = 0;
+    try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
+        while (reader.readLine() != null) {
+            userCount++;
+        }
+    } catch (IOException e) {
+    }
 
     String uniqueId = prefix + new Random().nextInt(9999); // Random ID for now, ensure uniqueness as needed
 
     // String format for saving details (can change the format as needed)
-    String userDetails = uniqueId + "|" + fullName + "|" + IcNumber + "|" + email + "|" + PhNumber + "|" + password + "|" + role;
+    String userDetails = (userCount + 1) + ". " + uniqueId + "|" + fullName + "|" + IcNumber + "|" + email + "|" + PhNumber + "|" + password + "|" + role;
+    
 
     // Write to file
     try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath, true))) { // "true" to append to file
@@ -302,6 +335,8 @@ public class AdminRegistrationPage extends javax.swing.JFrame {
     } catch (IOException e) {
         JOptionPane.showMessageDialog(this, "Error saving user details", "Error", JOptionPane.ERROR_MESSAGE);
     }
+    
+    
 }
     
     public static void main(String args[]) {
@@ -361,5 +396,7 @@ public class AdminRegistrationPage extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JToggleButton jToggleButton1;
     // End of variables declaration//GEN-END:variables
+
+    
 
 }
