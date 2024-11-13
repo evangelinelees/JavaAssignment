@@ -1,8 +1,9 @@
 
 package javaassignment;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import javax.swing.JOptionPane;
 
 public class LoginPage extends javax.swing.JFrame {
@@ -25,8 +26,8 @@ public class LoginPage extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        ID_JField = new javax.swing.JTextField();
-        Pass_JField = new javax.swing.JTextField();
+        ID_TF = new javax.swing.JTextField();
+        Pass_TF = new javax.swing.JTextField();
         Login_Button = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -46,9 +47,9 @@ public class LoginPage extends javax.swing.JFrame {
         jLabel3.setForeground(new java.awt.Color(0, 0, 0));
         jLabel3.setText("Password");
 
-        ID_JField.addActionListener(new java.awt.event.ActionListener() {
+        ID_TF.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ID_JFieldActionPerformed(evt);
+                ID_TFActionPerformed(evt);
             }
         });
 
@@ -80,8 +81,8 @@ public class LoginPage extends javax.swing.JFrame {
                             .addComponent(jLabel3))
                         .addGap(40, 40, 40)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(ID_JField)
-                            .addComponent(Pass_JField, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)))
+                            .addComponent(ID_TF)
+                            .addComponent(Pass_TF, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(270, 270, 270)
                         .addComponent(Login_Button, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -95,11 +96,11 @@ public class LoginPage extends javax.swing.JFrame {
                 .addGap(86, 86, 86)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(ID_JField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(ID_TF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(77, 77, 77)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(Pass_JField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(Pass_TF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 80, Short.MAX_VALUE)
                 .addComponent(Login_Button, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(45, 45, 45))
@@ -119,14 +120,94 @@ public class LoginPage extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void ID_JFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ID_JFieldActionPerformed
+    private void ID_TFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ID_TFActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_ID_JFieldActionPerformed
+    }//GEN-LAST:event_ID_TFActionPerformed
 
     private void Login_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Login_ButtonActionPerformed
-        String ID = ID_JField.getText();
-        String Pass = Pass_JField.getText();
+        String ID = ID_TF.getText();
+        String Pass = Pass_TF.getText();
+        
+        // Validate login details
+        if (validateLogin(ID, Pass)) {
+            String role = getUserRole(ID);
+            if (role != null) {
+                navigateToPageBasedOnRole(role);
+            } else {
+                JOptionPane.showMessageDialog(this, "User role not found!", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Invalid ID or password", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+
     }//GEN-LAST:event_Login_ButtonActionPerformed
+
+    
+    private boolean validateLogin(String ID, String password) {
+        String filePath = "C:\\Users\\jchok\\Desktop\\Java_Assignment\\JavaAssignment-master\\USERS.TXT";
+        try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                String[] userDetails = line.split("\\|");
+                if (userDetails.length == 7) {
+                    String storedID = userDetails[1]; // Assuming ID is the second element
+                    String storedPassword = userDetails[5]; // Assuming password is the sixth element
+                    if (storedID.equals(ID) && storedPassword.equals(password)) {
+                        return true;
+                    }
+                }
+            }
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(this, "Error reading user data", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+        return false;
+    }
+    
+     private String getUserRole(String ID) {
+        String filePath = "C:\\Users\\jchok\\Desktop\\Java Assignment\\JavaAssignment\\USERS.txt";
+        try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                String[] userDetails = line.split("\\|");
+                if (userDetails.length == 7) {
+                    String storedID = userDetails[1]; // Assuming ID is the second element
+                    String role = userDetails[6]; // Assuming role is the seventh element
+                    if (storedID.equals(ID)) {
+                        return role;
+                    }
+                }
+            }
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(this, "Error reading user data", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+        return null;
+    }
+
+     
+     
+      private void navigateToPageBasedOnRole(String role) {
+        switch (role) {
+            case "Sales Manager":
+                // Open Sales Manager Page
+                JOptionPane.showMessageDialog(this, "Welcome Sales Manager");
+                break;
+            case "Purchase Manager":
+                // Open Purchase Manager Page
+                JOptionPane.showMessageDialog(this, "Welcome Purchase Manager");
+                break;
+            case "Inventory Manager":
+                // Open Inventory Manager Page
+                JOptionPane.showMessageDialog(this, "Welcome Inventory Manager");
+                break;
+            case "Finance Manager":
+                // Open Finance Manager Page
+                JOptionPane.showMessageDialog(this, "Welcome Finance Manager");
+                break;
+            default:
+                JOptionPane.showMessageDialog(this, "Role not recognized", "Error", JOptionPane.ERROR_MESSAGE);
+                break;
+        }
+    }
 
     /**
      * @param args the command line arguments
@@ -164,9 +245,9 @@ public class LoginPage extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField ID_JField;
+    private javax.swing.JTextField ID_TF;
     private javax.swing.JButton Login_Button;
-    private javax.swing.JTextField Pass_JField;
+    private javax.swing.JTextField Pass_TF;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

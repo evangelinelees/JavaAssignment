@@ -61,8 +61,8 @@
                           </Group>
                           <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="ID_JField" max="32767" attributes="0"/>
-                              <Component id="Pass_JField" pref="250" max="32767" attributes="0"/>
+                              <Component id="ID_TF" max="32767" attributes="0"/>
+                              <Component id="Pass_TF" pref="250" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
@@ -82,12 +82,12 @@
                   <EmptySpace min="-2" pref="86" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="ID_JField" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="ID_TF" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="77" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="Pass_JField" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="Pass_TF" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace pref="80" max="32767" attributes="0"/>
                   <Component id="Login_Button" min="-2" pref="28" max="-2" attributes="0"/>
@@ -130,12 +130,12 @@
             <Property name="text" type="java.lang.String" value="Password"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="ID_JField">
+        <Component class="javax.swing.JTextField" name="ID_TF">
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ID_JFieldActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ID_TFActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JTextField" name="Pass_JField">
+        <Component class="javax.swing.JTextField" name="Pass_TF">
         </Component>
         <Component class="javax.swing.JButton" name="Login_Button">
           <Properties>

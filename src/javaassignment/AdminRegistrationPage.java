@@ -284,7 +284,7 @@ public class AdminRegistrationPage extends javax.swing.JFrame {
 
     
     private boolean isIcNumberDuplicate(String icNumber) {
-    String filePath = "C:\\Users\\jchok\\Desktop\\Java Assignment\\JavaAssignment\\USERS.txt"; // Update with your file path
+    String filePath = "C:\\Users\\jchok\\Desktop\\Java_Assignment\\JavaAssignment-master\\USERS.TXT"; // Update with your file path
         try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
             String line;
             while ((line = reader.readLine()) != null) {
@@ -301,7 +301,7 @@ public class AdminRegistrationPage extends javax.swing.JFrame {
     
     public void saveDetailsToFile(String fullName, String IcNumber, String email, String PhNumber, String password, String role) {
     // File path where the details will be saved
-    String filePath = "C:\\Users\\jchok\\Desktop\\Java Assignment\\JavaAssignment\\USERS.txt";  // Update with your file path
+    String filePath = "C:\\Users\\jchok\\Desktop\\Java_Assignment\\JavaAssignment-master\\USERS.TXT";  // Update with your file path
 
     // Generate unique ID based on role
     String prefix = "";
