@@ -7,10 +7,16 @@ import java.io.IOException;
 import javax.swing.JOptionPane;
 
 public class LoginPage extends javax.swing.JFrame {
-
+    Admin admin;
+    SalesManager salesManager;
+    PurchaseManager purchaseManager;
+    InventoryManager inventoryManager;
+    FinanceManager financeManager;
+    
     
     public LoginPage() {
         initComponents();
+        admin = new Admin();
     }
 
     /**
@@ -125,6 +131,7 @@ public class LoginPage extends javax.swing.JFrame {
     }//GEN-LAST:event_ID_TFActionPerformed
 
     private void Login_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Login_ButtonActionPerformed
+        
         String ID = ID_TF.getText();
         String Pass = Pass_TF.getText();
         
@@ -187,6 +194,13 @@ public class LoginPage extends javax.swing.JFrame {
      
       private void navigateToPageBasedOnRole(String role) {
         switch (role) {
+            case "Admin":
+                // Open Sales Manager Page
+                JOptionPane.showMessageDialog(this, "Welcome Admin");
+                AdminMainPage AMP = new AdminMainPage();
+                AMP.setVisible(true);
+                this.dispose();
+                break;
             case "Sales Manager":
                 // Open Sales Manager Page
                 JOptionPane.showMessageDialog(this, "Welcome Sales Manager");
