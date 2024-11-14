@@ -153,21 +153,31 @@ public class LoginPage extends javax.swing.JFrame {
     private boolean validateLogin(String ID, String password) {
         String filePath = "C:\\Users\\jchok\\Desktop\\Java_Assignment\\JavaAssignment-master\\USERS.TXT";
         try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
-            String line;
-            while ((line = reader.readLine()) != null) {
-                String[] userDetails = line.split("\\|");
-                if (userDetails.length == 7) {
-                    String storedID = userDetails[1]; // Assuming ID is the second element
-                    String storedPassword = userDetails[5]; // Assuming password is the sixth element
-                    if (storedID.equals(ID) && storedPassword.equals(password)) {
-                        return true;
-                    }
+        String line;
+        while ((line = reader.readLine()) != null) {
+            String[] userDetails = line.split("\\|");
+            
+            // Debug: Print each read line and array length
+            System.out.println("Read line: " + line);
+            System.out.println("Array length: " + userDetails.length);
+            
+            if (userDetails.length == 7) {
+                String storedID = userDetails[0].trim(); // Assuming ID is the second element
+                String storedPassword = userDetails[5].trim(); // Assuming password is the sixth element
+                
+                // Debug: Print ID and password for comparison
+                System.out.println("Stored ID: " + storedID);
+                System.out.println("Stored Password: " + storedPassword);
+                
+                if (storedID.equals(ID) && storedPassword.equals(password)) {
+                    return true;
                 }
             }
-        } catch (IOException e) {
-            JOptionPane.showMessageDialog(this, "Error reading user data", "Error", JOptionPane.ERROR_MESSAGE);
         }
-        return false;
+    } catch (IOException e) {
+        JOptionPane.showMessageDialog(this, "Error reading user data", "Error", JOptionPane.ERROR_MESSAGE);
+    }
+    return false;
     }
     
      private String getUserRole(String ID) {
@@ -177,7 +187,7 @@ public class LoginPage extends javax.swing.JFrame {
             while ((line = reader.readLine()) != null) {
                 String[] userDetails = line.split("\\|");
                 if (userDetails.length == 7) {
-                    String storedID = userDetails[1]; // Assuming ID is the second element
+                    String storedID = userDetails[0]; // Assuming ID is the second element
                     String role = userDetails[6]; // Assuming role is the seventh element
                     if (storedID.equals(ID)) {
                         return role;
