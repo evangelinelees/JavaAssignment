@@ -137,15 +137,16 @@ public class LoginPage extends javax.swing.JFrame {
         
         // Validate login details
         if (validateLogin(ID, Pass)) {
-            String role = getUserRole(ID);
-            if (role != null) {
-                navigateToPageBasedOnRole(role);
-            } else {
-                JOptionPane.showMessageDialog(this, "User role not found!", "Error", JOptionPane.ERROR_MESSAGE);
-            }
+        String role = getUserRole(ID);
+        if (role != null) {
+            // Pass ID, Pass, and role to navigateToPageBasedOnRole
+            navigateToPageBasedOnRole(ID, Pass, role);
         } else {
-            JOptionPane.showMessageDialog(this, "Invalid ID or password", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "User role not found!", "Error", JOptionPane.ERROR_MESSAGE);
         }
+    } else {
+        JOptionPane.showMessageDialog(this, "Invalid ID or password", "Error", JOptionPane.ERROR_MESSAGE);
+    }
 
     }//GEN-LAST:event_Login_ButtonActionPerformed
 
@@ -207,37 +208,41 @@ public class LoginPage extends javax.swing.JFrame {
 
      
      
-      private void navigateToPageBasedOnRole(String role) {
+      private void navigateToPageBasedOnRole(String userId, String password, String role) {
         switch (role) {
-            case "Admin":
-                // Open Sales Manager Page
+             case "Admin":
+            Admin admin = new Admin(); // Create an instance of Admin
+            if (userId.equals(admin.getUserId()) && password.equals(admin.getPassword())) {
                 JOptionPane.showMessageDialog(this, "Welcome Admin");
                 AdminMainPage AMP = new AdminMainPage();
                 AMP.setVisible(true);
                 this.dispose();
-                break;
-            case "Sales Manager":
-                // Open Sales Manager Page
-                JOptionPane.showMessageDialog(this, "Welcome Sales Manager");
-                break;
-            case "Purchase Manager":
-                // Open Purchase Manager Page
-                JOptionPane.showMessageDialog(this, "Welcome Purchase Manager");
-                break;
-            case "Inventory Manager":
-                // Open Inventory Manager Page
-                JOptionPane.showMessageDialog(this, "Welcome Inventory Manager");
-                break;
-            case "Finance Manager":
-                // Open Finance Manager Page
-                JOptionPane.showMessageDialog(this, "Welcome Finance Manager");
-                break;
-            default:
-                JOptionPane.showMessageDialog(this, "Role not recognized", "Error", JOptionPane.ERROR_MESSAGE);
-                break;
-        }
-    }
+            } else {
+                JOptionPane.showMessageDialog(this, "Invalid Admin Credentials", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+            break;
 
+        case "Sales Manager":
+            JOptionPane.showMessageDialog(this, "Welcome Sales Manager");
+            break;
+
+        case "Purchase Manager":
+            JOptionPane.showMessageDialog(this, "Welcome Purchase Manager");
+            break;
+
+        case "Inventory Manager":
+            JOptionPane.showMessageDialog(this, "Welcome Inventory Manager");
+            break;
+
+        case "Finance Manager":
+            JOptionPane.showMessageDialog(this, "Welcome Finance Manager");
+            break;
+
+        default:
+            JOptionPane.showMessageDialog(this, "Role not recognized", "Error", JOptionPane.ERROR_MESSAGE);
+            break;
+    }
+}
     /**
      * @param args the command line arguments
      */
@@ -282,4 +287,18 @@ public class LoginPage extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
+
+    /**
+     * @return the admin
+     */
+    public Admin getAdmin() {
+        return admin;
+    }
+
+    /**
+     * @param admin the admin to set
+     */
+    public void setAdmin(Admin admin) {
+        this.admin = admin;
+    }
 }
