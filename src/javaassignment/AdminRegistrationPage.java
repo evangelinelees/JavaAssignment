@@ -274,7 +274,9 @@ public class AdminRegistrationPage extends javax.swing.JFrame {
     }//GEN-LAST:event_PNumber_TFActionPerformed
 
     private void Back_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Back_ButtonActionPerformed
-        // TODO add your handling code here:
+        AdminMainPage AMP = new AdminMainPage();
+        AMP.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_Back_ButtonActionPerformed
 
     private void Role_CBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Role_CBActionPerformed

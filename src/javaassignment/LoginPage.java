@@ -150,26 +150,24 @@ public class LoginPage extends javax.swing.JFrame {
     }//GEN-LAST:event_Login_ButtonActionPerformed
 
     
-    private boolean validateLogin(String ID, String password) {
-        String filePath = "C:\\Users\\jchok\\Desktop\\Java_Assignment\\JavaAssignment-master\\USERS.TXT";
-        try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
+    private boolean validateLogin(String ID, String Pass) {
+        // Check if the credentials match the Admin's default credentials using getters
+    if (ID.equals(admin.getUserId()) && Pass.equals(admin.getPassword())) {
+        return true; // Admin login successful
+    }
+
+    // File-based user validation for non-Admin users
+    String filePath = "C:\\Users\\jchok\\Desktop\\Java_Assignment\\JavaAssignment-master\\USERS.TXT";
+    try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
         String line;
         while ((line = reader.readLine()) != null) {
             String[] userDetails = line.split("\\|");
-            
-            // Debug: Print each read line and array length
-            System.out.println("Read line: " + line);
-            System.out.println("Array length: " + userDetails.length);
-            
             if (userDetails.length == 7) {
-                String storedID = userDetails[0].trim(); // Assuming ID is the second element
-                String storedPassword = userDetails[5].trim(); // Assuming password is the sixth element
-                
-                // Debug: Print ID and password for comparison
-                System.out.println("Stored ID: " + storedID);
-                System.out.println("Stored Password: " + storedPassword);
-                
-                if (storedID.equals(ID) && storedPassword.equals(password)) {
+                String storedID = userDetails[0].trim();
+                String storedPassword = userDetails[5].trim();
+
+                // Validate the ID and password
+                if (storedID.equals(ID) && storedPassword.equals(Pass)) {
                     return true;
                 }
             }
@@ -177,10 +175,17 @@ public class LoginPage extends javax.swing.JFrame {
     } catch (IOException e) {
         JOptionPane.showMessageDialog(this, "Error reading user data", "Error", JOptionPane.ERROR_MESSAGE);
     }
-    return false;
+
+    return false; // Login failed
     }
     
      private String getUserRole(String ID) {
+            // Check if the ID is Admin's default ID
+       if (ID.equals(admin.getUserId())) {
+           return "Admin";
+       }
+
+         
         String filePath = "C:\\Users\\jchok\\Desktop\\Java Assignment\\JavaAssignment\\USERS.txt";
         try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
             String line;
