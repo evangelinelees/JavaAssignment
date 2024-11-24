@@ -1,11 +1,6 @@
 package javaassignment;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.util.Random;
+
 import javax.swing.JOptionPane;
 
 
@@ -230,6 +225,12 @@ public class AdminRegistrationPage extends javax.swing.JFrame {
         String IcNumber = IC_TF.getText();
         String fullName = FN_TF.getText();
         String role = Role_CB.getSelectedItem().toString();
+        
+            // Prevent registration of the fixed admin account
+       if (Admin.getAdminId().equals(fullName) || Admin.getAdminId().equals(IcNumber)) {
+           JOptionPane.showMessageDialog(this, "Cannot register fixed admin credentials", "Error", JOptionPane.ERROR_MESSAGE);
+           return;
+       }
 
         // Basic validation checks
         if (fullName.isEmpty() || IcNumber.isEmpty() || email.isEmpty() || PhNumber.isEmpty() || password.isEmpty()) {
@@ -248,14 +249,19 @@ public class AdminRegistrationPage extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Invalid phone number format.", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
-        // Check for duplicate IC number
-        if (isIcNumberDuplicate(IcNumber)) {
+        // Use DAO for duplicate IC check
+        UserDAO userDAO = new UserDAOImpl();
+        if (userDAO.isIcNumberDuplicate(IcNumber)) {
             JOptionPane.showMessageDialog(this, "IC Number already exists. Please use a different IC Number.", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
 
-        // Save details to file
-        saveDetailsToFile(fullName, IcNumber, email, PhNumber, password, role);
+            boolean isSaved = userDAO.saveUser(fullName, IcNumber, email, PhNumber, password, role);
+        if (isSaved) {
+            JOptionPane.showMessageDialog(this, "Registration Successful");
+        } else {
+            JOptionPane.showMessageDialog(this, "Error saving user details", "Error", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_Register_ButtonActionPerformed
         
     
@@ -285,61 +291,7 @@ public class AdminRegistrationPage extends javax.swing.JFrame {
     }//GEN-LAST:event_Role_CBActionPerformed
 
     
-    private boolean isIcNumberDuplicate(String icNumber) {
-    String filePath = "C:\\Users\\jchok\\Desktop\\Java_Assignment\\JavaAssignment-master\\USERS.TXT"; // Update with your file path
-        try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
-            String line;
-            while ((line = reader.readLine()) != null) {
-                String[] userDetails = line.split("\\|");
-                if (userDetails.length > 2 && userDetails[2].equals(icNumber)) {
-                    return true; // IC number already exists
-                }
-            }
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
-        return false; // No duplicate IC number found
-}
     
-    public void saveDetailsToFile(String fullName, String IcNumber, String email, String PhNumber, String password, String role) {
-    // File path where the details will be saved
-    String filePath = "C:\\Users\\jchok\\Desktop\\Java_Assignment\\JavaAssignment-master\\USERS.TXT";  // Update with your file path
-
-    // Generate unique ID based on role
-    String prefix = "";
-    switch (role) {
-        case "Sales Manager": prefix = "SM"; break;
-        case "Purchase Manager": prefix = "PM"; break;
-        case "Inventory Manager": prefix = "IM"; break;
-        case "Finance Manager": prefix = "FM"; break;
-    }
-    
-    // Count existing lines (users) to create a unique ID suffix and add line numbering
-    int userCount = 0;
-    try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
-        while (reader.readLine() != null) {
-            userCount++;
-        }
-    } catch (IOException e) {
-    }
-
-    String uniqueId = prefix + new Random().nextInt(9999); // Random ID for now, ensure uniqueness as needed
-
-    // String format for saving details (can change the format as needed)
-    String userDetails = (userCount + 1) + ". " + uniqueId + "|" + fullName + "|" + IcNumber + "|" + email + "|" + PhNumber + "|" + password + "|" + role;
-    
-
-    // Write to file
-    try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath, true))) { // "true" to append to file
-        writer.write(userDetails);
-        writer.newLine(); // Add a new line after each entry
-        JOptionPane.showMessageDialog(this, "Registration Successful \nYour Id is: " + uniqueId + " \nPassoword: " + password);
-    } catch (IOException e) {
-        JOptionPane.showMessageDialog(this, "Error saving user details", "Error", JOptionPane.ERROR_MESSAGE);
-    }
-    
-    
-}
     
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */

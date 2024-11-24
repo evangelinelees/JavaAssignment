@@ -1,22 +1,15 @@
 
 package javaassignment;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
+
 import javax.swing.JOptionPane;
 
 public class LoginPage extends javax.swing.JFrame {
-    Admin admin;
-    SalesManager salesManager;
-    PurchaseManager purchaseManager;
-    InventoryManager inventoryManager;
-    FinanceManager financeManager;
-    
+    private UserDAO userDAO;
     
     public LoginPage() {
         initComponents();
-        admin = new Admin();
+        userDAO = new UserDAOImpl(); // Initialize the DAO
     }
 
     /**
@@ -134,76 +127,48 @@ public class LoginPage extends javax.swing.JFrame {
         
         String ID = ID_TF.getText();
         String Pass = Pass_TF.getText();
-        
-        // Validate login details
+
         if (validateLogin(ID, Pass)) {
-            String role = getUserRole(ID);
+        if (Admin.validate(ID, Pass)) {
+            // Navigate to Admin Main Page
+            JOptionPane.showMessageDialog(this, "Welcome Admin");
+            AdminMainPage AMP = new AdminMainPage();
+            AMP.setVisible(true);
+            this.dispose();
+        } else {
+            String role = userDAO.getUserRole(ID);
             if (role != null) {
                 navigateToPageBasedOnRole(role);
             } else {
                 JOptionPane.showMessageDialog(this, "User role not found!", "Error", JOptionPane.ERROR_MESSAGE);
             }
-        } else {
-            JOptionPane.showMessageDialog(this, "Invalid ID or password", "Error", JOptionPane.ERROR_MESSAGE);
         }
+    } else {
+        JOptionPane.showMessageDialog(this, "Invalid ID or password", "Error", JOptionPane.ERROR_MESSAGE);
+    }
 
     }//GEN-LAST:event_Login_ButtonActionPerformed
 
     
     private boolean validateLogin(String ID, String Pass) {
-        // Check if the credentials match the Admin's default credentials using getters
-    if (ID.equals(admin.getUserId()) && Pass.equals(admin.getPassword())) {
-        return true; // Admin login successful
-    }
+        // Check if the credentials match the Admin's default credentials
+     if (Admin.validate(ID, Pass)) {
+         return true; // Admin login successful
+     }
 
-    // File-based user validation for non-Admin users
-    String filePath = "C:\\Users\\jchok\\Desktop\\Java_Assignment\\JavaAssignment-master\\USERS.TXT";
-    try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
-        String line;
-        while ((line = reader.readLine()) != null) {
-            String[] userDetails = line.split("\\|");
-            if (userDetails.length == 7) {
-                String storedID = userDetails[0].trim();
-                String storedPassword = userDetails[5].trim();
-
-                // Validate the ID and password
-                if (storedID.equals(ID) && storedPassword.equals(Pass)) {
-                    return true;
-                }
-            }
-        }
-    } catch (IOException e) {
-        JOptionPane.showMessageDialog(this, "Error reading user data", "Error", JOptionPane.ERROR_MESSAGE);
-    }
-
-    return false; // Login failed
+     // File-based user validation for non-Admin users
+     UserDAO userDAO = new UserDAOImpl();
+     return userDAO.validateLogin(ID, Pass);
     }
     
-     private String getUserRole(String ID) {
-            // Check if the ID is Admin's default ID
-       if (ID.equals(admin.getUserId())) {
-           return "Admin";
-       }
-
-         
-        String filePath = "C:\\Users\\jchok\\Desktop\\Java Assignment\\JavaAssignment\\USERS.txt";
-        try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
-            String line;
-            while ((line = reader.readLine()) != null) {
-                String[] userDetails = line.split("\\|");
-                if (userDetails.length == 7) {
-                    String storedID = userDetails[0]; // Assuming ID is the second element
-                    String role = userDetails[6]; // Assuming role is the seventh element
-                    if (storedID.equals(ID)) {
-                        return role;
-                    }
-                }
-            }
-        } catch (IOException e) {
-            JOptionPane.showMessageDialog(this, "Error reading user data", "Error", JOptionPane.ERROR_MESSAGE);
-        }
-        return null;
+     private String getUserRole(String id) {
+        return userDAO.getUserRole(id);
     }
+
+    
+
+    
+       
 
      
      
@@ -237,7 +202,6 @@ public class LoginPage extends javax.swing.JFrame {
                 break;
         }
     }
-
     /**
      * @param args the command line arguments
      */

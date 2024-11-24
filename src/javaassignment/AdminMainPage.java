@@ -2,7 +2,7 @@ package javaassignment;
 
 
 public class AdminMainPage extends javax.swing.JFrame {
-
+    private User user;
     /**
      * Creates new form AdminMainPage
      */
@@ -51,6 +51,11 @@ public class AdminMainPage extends javax.swing.JFrame {
         });
 
         EditBTN.setText("Edit user ");
+        EditBTN.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EditBTNActionPerformed(evt);
+            }
+        });
 
         InventoryBTN.setText("Inventory");
         InventoryBTN.addActionListener(new java.awt.event.ActionListener() {
@@ -176,8 +181,7 @@ public class AdminMainPage extends javax.swing.JFrame {
                         .addGap(17, 17, 17))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -224,6 +228,12 @@ public class AdminMainPage extends javax.swing.JFrame {
         LP.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_LogoutBTNActionPerformed
+
+    private void EditBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EditBTNActionPerformed
+        UsersList usersListPage = new UsersList();
+        usersListPage.setVisible(true); // Show the edit user page
+        this.dispose(); // Close the current page if required
+    }//GEN-LAST:event_EditBTNActionPerformed
 
 
     

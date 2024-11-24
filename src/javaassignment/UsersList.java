@@ -4,6 +4,11 @@
  */
 package javaassignment;
 
+import java.util.List;
+import javaassignment.UserDAO;
+import javaassignment.UserDAOImpl;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author jchok
@@ -15,6 +20,7 @@ public class UsersList extends javax.swing.JFrame {
      */
     public UsersList() {
         initComponents();
+        loadUsers();
     }
 
     /**
@@ -31,9 +37,9 @@ public class UsersList extends javax.swing.JFrame {
         jTable1 = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        AddUser_BTN = new javax.swing.JButton();
+        UpdateUserBTN = new javax.swing.JButton();
+        Delete_BTN = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -67,20 +73,35 @@ public class UsersList extends javax.swing.JFrame {
             }
         });
 
-        jButton2.setBackground(new java.awt.Color(255, 255, 204));
-        jButton2.setForeground(new java.awt.Color(0, 0, 0));
-        jButton2.setText("Add User");
-        jButton2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        AddUser_BTN.setBackground(new java.awt.Color(255, 255, 204));
+        AddUser_BTN.setForeground(new java.awt.Color(0, 0, 0));
+        AddUser_BTN.setText("Add User");
+        AddUser_BTN.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        AddUser_BTN.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AddUser_BTNActionPerformed(evt);
+            }
+        });
 
-        jButton3.setBackground(new java.awt.Color(255, 255, 204));
-        jButton3.setForeground(new java.awt.Color(0, 0, 0));
-        jButton3.setText("Edit User");
-        jButton3.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        UpdateUserBTN.setBackground(new java.awt.Color(255, 255, 204));
+        UpdateUserBTN.setForeground(new java.awt.Color(0, 0, 0));
+        UpdateUserBTN.setText("Edit User");
+        UpdateUserBTN.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        UpdateUserBTN.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                UpdateUserBTNActionPerformed(evt);
+            }
+        });
 
-        jButton4.setBackground(new java.awt.Color(255, 255, 204));
-        jButton4.setForeground(new java.awt.Color(0, 0, 0));
-        jButton4.setText("Delete User");
-        jButton4.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        Delete_BTN.setBackground(new java.awt.Color(255, 255, 204));
+        Delete_BTN.setForeground(new java.awt.Color(0, 0, 0));
+        Delete_BTN.setText("Delete User");
+        Delete_BTN.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        Delete_BTN.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Delete_BTNActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -96,11 +117,11 @@ public class UsersList extends javax.swing.JFrame {
                 .addGap(70, 70, 70)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(AddUser_BTN, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(189, 189, 189)
-                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(UpdateUserBTN, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(Delete_BTN, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 645, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(94, Short.MAX_VALUE))
         );
@@ -115,9 +136,9 @@ public class UsersList extends javax.swing.JFrame {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 247, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 58, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton4)
-                    .addComponent(jButton3)
-                    .addComponent(jButton2))
+                    .addComponent(Delete_BTN)
+                    .addComponent(UpdateUserBTN)
+                    .addComponent(AddUser_BTN))
                 .addGap(48, 48, 48))
         );
 
@@ -138,6 +159,56 @@ public class UsersList extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void UpdateUserBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UpdateUserBTNActionPerformed
+        int selectedRow = jTable1.getSelectedRow();
+    if (selectedRow != -1) {
+        // Get the user ID from the selected row
+        String userId = jTable1.getValueAt(selectedRow, 0).toString();
+        
+        // Fetch the user from the database using the UserDAO
+        UserDAO userDAO = new UserDAOImpl();
+        User user = userDAO.getUserById(userId);  // Use userId instead of id
+
+        if (user != null) {
+            // Open the Update User form and pass the User object
+            EditUser EditUser = new EditUser(user);  // UpdateUser should have a constructor accepting a User object
+            EditUser.setVisible(true);
+        } else {
+            // Handle case where user was not found
+            JOptionPane.showMessageDialog(this, "User not found.");
+        }
+    } else {
+        JOptionPane.showMessageDialog(this, "Please select a user to edit.");
+    }
+    this.dispose();
+    }//GEN-LAST:event_UpdateUserBTNActionPerformed
+
+    private void Delete_BTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Delete_BTNActionPerformed
+         int selectedRow = jTable1.getSelectedRow();
+    if (selectedRow != -1) {
+        String userId = jTable1.getValueAt(selectedRow, 0).toString();
+        UserDAO userDAO = new UserDAOImpl();
+        boolean isDeleted = userDAO.deleteUser(userId);
+        if (isDeleted) {
+            JOptionPane.showMessageDialog(this, "User deleted successfully.");
+            loadUsers(); // Reload the users list after deletion
+        } else {
+            JOptionPane.showMessageDialog(this, "Error deleting user.");
+        }
+    } else {
+        JOptionPane.showMessageDialog(this, "Please select a user to delete.");
+    }
+    this.dispose();
+               
+    }//GEN-LAST:event_Delete_BTNActionPerformed
+
+    private void AddUser_BTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddUser_BTNActionPerformed
+            // Open the Add User form (AddUserForm is the subclass)
+        AddUser AddUser = new AddUser();  // Create an instance of AddUserForm (a concrete subclass)
+        AddUser.setVisible(true);  // Make it visible
+        this.dispose();
+    }//GEN-LAST:event_AddUser_BTNActionPerformed
 
     /**
      * @param args the command line arguments
@@ -173,12 +244,38 @@ public class UsersList extends javax.swing.JFrame {
             }
         });
     }
+    
+    private void loadUsers() {
+    // Get the list of users from the UserDAO (this can be from a file or database)
+    UserDAO userDAO = new UserDAOImpl();
+    List<User> users = userDAO.getAllUsers(); // Fetch the list of users
+    
+    // Create a 2D array to hold the user data for the table
+    Object[][] userData = new Object[users.size()][6];
+    
+    for (int i = 0; i < users.size(); i++) {
+        User user = users.get(i);
+        userData[i][0] = user.getUserId();     
+        userData[i][1] = user.getFullName();
+        userData[i][2] = user.getEmail();
+        userData[i][3] = user.getIcNumber();
+        userData[i][4] = user.getPhNumber();       
+        userData[i][5] = user.getUserRole();      
+                
+    }
+    
+    // Define the column names for the table
+    String[] columnNames = {"User ID", "Full Name", "Email", "Ic Number","Phone Number", "Role"};
+    
+    // Set the table model with column names and data
+    jTable1.setModel(new javax.swing.table.DefaultTableModel(userData, columnNames));
+}
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton AddUser_BTN;
+    private javax.swing.JButton Delete_BTN;
+    private javax.swing.JButton UpdateUserBTN;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;

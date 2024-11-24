@@ -3,7 +3,13 @@ package javaassignment;
 
 
 public class User {
-    private String userId, fullName, email, PhNumber, password,IcNumber,userRole;
+    private String userId;
+    private String fullName;
+    private String email;
+    private String PhNumber;
+    private String IcNumber;
+    private String password;
+    private String userRole;
     
     
     
@@ -16,16 +22,19 @@ public class User {
         this.password = password;
     }
     
-    public User(String userId, String email, String PhNumber,int identificationNumber, String password, String userRole){
-        this.userId = userId;
-        this.email = email;
-        this.IcNumber = IcNumber;
-        this.PhNumber = PhNumber;
-        this.password = password;
-        this.fullName = fullName;
-        this.userRole = userRole;
+   public User(String[] userDetails) {
+        this.userId = userDetails[0];
+        this.fullName = userDetails[1];
+        this.email = userDetails[2];
+        this.PhNumber = userDetails[3];
+        this.IcNumber = userDetails[4];
+        this.password = userDetails[5];
+        this.userRole = userDetails[6];
+        
         
     }
+
+  
 
     public String getUserRole() {
         return userRole;
@@ -82,6 +91,10 @@ public class User {
 
     public void setIcNumber(String IcNumber) {
         this.IcNumber = IcNumber;
+    }
+    
+    public String[] toDataString() {
+        return new String[] { userId, fullName, email, PhNumber, IcNumber, password, userRole };
     }
     
 
