@@ -12,7 +12,7 @@ import javaassignment.User;
 import javaassignment.UserDAO;
 
 public class UserDAOImpl implements UserDAO {
-    private final String filePath = "C:\\Users\\jchok\\Desktop\\Java_Assignment\\JavaAssignment-master\\USERS.TXT";
+    private final String filePath = "USERS.TXT";
 
     @Override
     public boolean validateLogin(String id, String password) {
