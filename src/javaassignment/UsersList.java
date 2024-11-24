@@ -36,7 +36,7 @@ public class UsersList extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
-        Back_BTN = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
         AddUser_BTN = new javax.swing.JButton();
         UpdateUserBTN = new javax.swing.JButton();
         Delete_BTN = new javax.swing.JButton();
@@ -63,13 +63,13 @@ public class UsersList extends javax.swing.JFrame {
         jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setText("Users");
 
-        Back_BTN.setBackground(new java.awt.Color(255, 255, 204));
-        Back_BTN.setForeground(new java.awt.Color(0, 0, 0));
-        Back_BTN.setText("Back");
-        Back_BTN.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        Back_BTN.addActionListener(new java.awt.event.ActionListener() {
+        jButton1.setBackground(new java.awt.Color(255, 255, 204));
+        jButton1.setForeground(new java.awt.Color(0, 0, 0));
+        jButton1.setText("Back");
+        jButton1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Back_BTNActionPerformed(evt);
+                jButton1ActionPerformed(evt);
             }
         });
 
@@ -111,7 +111,7 @@ public class UsersList extends javax.swing.JFrame {
                 .addGap(62, 62, 62)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(Back_BTN, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(26, 26, 26))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(70, 70, 70)
@@ -131,7 +131,7 @@ public class UsersList extends javax.swing.JFrame {
                 .addGap(20, 20, 20)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1)
-                    .addComponent(Back_BTN))
+                    .addComponent(jButton1))
                 .addGap(66, 66, 66)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 247, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 58, Short.MAX_VALUE)
@@ -156,13 +156,12 @@ public class UsersList extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void Back_BTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Back_BTNActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_Back_BTNActionPerformed
+                                           
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         AdminMainPage adminmain = new AdminMainPage();
         adminmain.setVisible(true); // Show the edit user page
         this.dispose(); // Close the current page if required
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void UpdateUserBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UpdateUserBTNActionPerformed
@@ -280,9 +279,9 @@ public class UsersList extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton AddUser_BTN;
-    private javax.swing.JButton Back_BTN;
     private javax.swing.JButton Delete_BTN;
     private javax.swing.JButton UpdateUserBTN;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
