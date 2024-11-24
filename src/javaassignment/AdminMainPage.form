@@ -74,7 +74,6 @@
                       <Group type="102" alignment="1" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="jLabel1" min="-2" pref="34" max="-2" attributes="0"/>
-                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace max="32767" attributes="0"/>
@@ -165,6 +164,9 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Edit user "/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="EditBTNActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="InventoryBTN">
               <Properties>

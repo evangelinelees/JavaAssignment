@@ -1,34 +1,55 @@
 
 package javaassignment;
 
+import java.util.List;
 
-public class Admin extends User{
-    private String userId, password;
+
+public abstract class Admin extends User implements UserDAO{
+    private static final String ADMIN_ID = "admin";
+    private static final String ADMIN_PASSWORD = "password123";
+
     
-    public Admin(){
-    this.userId = "Admin";
-    this.password = "admin123";
-}
-
-    @Override
-    public String getUserId() {
-        return userId;
+    public static boolean validate(String id, String password) {
+        return ADMIN_ID.equals(id) && ADMIN_PASSWORD.equals(password);
+    }
+    
+    public static String getAdminId() {
+        return ADMIN_ID;
     }
 
-   
-    @Override
-    public void setUserId(String userId) {
-        this.userId = userId;
+    public static String getAdminPassword() {
+        return ADMIN_PASSWORD;
     }
 
+    
     @Override
-    public String getPassword() {
-        return password;
+    public boolean validateLogin(String id, String password) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public void setPassword(String password) {
-        this.password = password;
+    public String getUserRole(String id) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public boolean addUser(User user) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public boolean updateUser(User user) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public boolean deleteUser(String id) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public List<User> getAllUsers() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
     
     
