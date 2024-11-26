@@ -5,11 +5,11 @@ package javaassignment;
 import javax.swing.JOptionPane;
 
 public class LoginPage extends javax.swing.JFrame {
-    private UserDAO userDAO;
+    private AdminDAO userDAO;
     
     public LoginPage() {
         initComponents();
-        userDAO = new UserDAOImpl(); // Initialize the DAO
+        userDAO = new AdminDAOImpl(); // Initialize the DAO
     }
 
     /**
@@ -157,7 +157,7 @@ public class LoginPage extends javax.swing.JFrame {
      }
 
      // File-based user validation for non-Admin users
-     UserDAO userDAO = new UserDAOImpl();
+     AdminDAO userDAO = new AdminDAOImpl();
      return userDAO.validateLogin(ID, Pass);
     }
     

@@ -4,7 +4,7 @@ package javaassignment;
 import java.util.List;
 
 
-public interface UserDAO {
+public interface AdminDAO {
     boolean validateLogin(String id, String password);
     String getUserRole(String id);
     User getUserById(String id);  
