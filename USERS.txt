@@ -1,2 +1,2 @@
 SM3348|jenn|12345667890|asd@gmail.com|01111407971|asd12345|Sales Manager
-PM8484|Alvin|031111101114|jenn@gmail.com|01111407971|12345|Purchase Manager
+PM8484|Alvin Khoo|031111101114|jenn@gmail.com|01111407971|12345|Purchase Manager

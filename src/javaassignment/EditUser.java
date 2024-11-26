@@ -247,25 +247,30 @@ public class EditUser extends javax.swing.JFrame {
 
     private void Save_BTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Save_BTNActionPerformed
         // Get the updated details from the text fields
-        String updatedFullName = FName_TF.getText();
-        String updatedIcNumber = ICNum_TF.getText();
-        String updatedPassword = Password_TF.getText();
-        String updatedEmail = email_TF.getText();
-        String updatedPhoneNumber = PN_TF.getText();
+    String updatedFullName = FName_TF.getText();
+    String updatedIcNumber = ICNum_TF.getText();
+    String updatedPassword = Password_TF.getText();
+    String updatedEmail = email_TF.getText();
+    String updatedPhoneNumber = PN_TF.getText();
 
-        // Update the user object
-        user.setFullName(updatedFullName);
-        user.setIcNumber(updatedIcNumber);
-        user.setPassword(updatedPassword);
-        user.setEmail(updatedEmail);
-        user.setPhNumber(updatedPhoneNumber);
+    // Update the user object
+    user.setFullName(updatedFullName);
+    user.setIcNumber(updatedIcNumber);
+    user.setPassword(updatedPassword);
+    user.setEmail(updatedEmail);
+    user.setPhNumber(updatedPhoneNumber);
 
-        // Save the updated user details to the data source
-        // For example, saving to a file
-        saveUserToFile(user);
+    // Call the update method from the AdminDAOImpl to save the updated details
+    AdminDAOImpl adminDAO = new AdminDAOImpl();  // Assuming you have access to AdminDAOImpl
+    boolean isUpdated = adminDAO.updateUser(user);
 
+    if (isUpdated) {
         // Optionally, show a message confirming the update
         JOptionPane.showMessageDialog(this, "User details updated successfully!");
+    } else {
+        // Handle the case where the user was not found or update failed
+        JOptionPane.showMessageDialog(this, "User update failed or user not found.");
+    }
     }//GEN-LAST:event_Save_BTNActionPerformed
 
     private void Back_BTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Back_BTNActionPerformed
