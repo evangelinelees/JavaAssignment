@@ -9,9 +9,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import javaassignment.User;
-import javaassignment.UserDAO;
+import javaassignment.AdminDAO;
 
-public class UserDAOImpl implements UserDAO {
+public class AdminDAOImpl implements AdminDAO {
     private final String filePath = "USERS.TXT";
 
     @Override

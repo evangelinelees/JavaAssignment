@@ -250,7 +250,7 @@ public class AdminRegistrationPage extends javax.swing.JFrame {
             return;
         }
         // Use DAO for duplicate IC check
-        UserDAO userDAO = new UserDAOImpl();
+        AdminDAO userDAO = new AdminDAOImpl();
         if (userDAO.isIcNumberDuplicate(IcNumber)) {
             JOptionPane.showMessageDialog(this, "IC Number already exists. Please use a different IC Number.", "Error", JOptionPane.ERROR_MESSAGE);
             return;

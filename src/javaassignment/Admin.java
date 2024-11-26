@@ -4,7 +4,7 @@ package javaassignment;
 import java.util.List;
 
 
-public abstract class Admin extends User implements UserDAO{
+public abstract class Admin extends User implements AdminDAO{
     private static final String ADMIN_ID = "admin";
     private static final String ADMIN_PASSWORD = "password123";
 
