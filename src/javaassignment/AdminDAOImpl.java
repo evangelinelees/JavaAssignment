@@ -60,23 +60,28 @@ public class AdminDAOImpl implements AdminDAO {
 
     @Override
     public boolean updateUser(User user) {
-        List<User> users = getAllUsers();
-        boolean updated = false;
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
-            for (User existingUser : users) {
-                if (existingUser.getUserId().equals(user.getUserId())) {
-                    writer.write(String.join("|", user.toDataString()));
-                    updated = true;
-                } else {
-                    writer.write(String.join("|", existingUser.toDataString()));
-                }
-                writer.newLine();
+    List<User> users = getAllUsers();
+    boolean updated = false;
+    
+    try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
+        // Go through all users and update the target one
+        for (User existingUser : users) {
+            if (existingUser.getUserId().equals(user.getUserId())) {
+                // If we find the user, we update their information
+                writer.write(String.join("|", user.toDataString()));
+                updated = true;
+            } else {
+                // If the user isn't the one we're updating, write their data as is
+                writer.write(String.join("|", existingUser.toDataString()));
             }
-        } catch (IOException e) {
-            e.printStackTrace();
+            writer.newLine();  // Ensure each record is written on a new line
         }
-        return updated;
+    } catch (IOException e) {
+        e.printStackTrace();
     }
+    
+    return updated;
+}
 
     @Override
     public boolean deleteUser(String id) {
