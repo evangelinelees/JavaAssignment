@@ -7,11 +7,15 @@ import javax.swing.table.DefaultTableModel;
 
 public class AdminMainPage extends javax.swing.JFrame {
     private User user;
+    private ChangeLogDAO changeLogImpl; // Correct name for the variable
+
+    
     /**
      * Creates new form AdminMainPage
      */
     public AdminMainPage() {
         initComponents();
+        
     }
 
     /**
@@ -255,8 +259,33 @@ public class AdminMainPage extends javax.swing.JFrame {
     }//GEN-LAST:event_EditBTNActionPerformed
 
     private void Refresh_BTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Refresh_BTNActionPerformed
-       
+        try {
+        // Fetch data
+        ChangeLogDAO changeLogImpl = new ChangeLogImpl();
+        List<ChangeLog> logs = changeLogImpl.loadLogsFromFile(); // Correct method call
 
+        // Clear table
+        DefaultTableModel tableModel = (DefaultTableModel) notificationTable.getModel();
+        tableModel.setRowCount(0);
+
+        // Populate table
+        for (ChangeLog log : logs) {
+            Object[] rowData = {
+                log.getLogNo(),
+                log.getUserId(),
+                log.getChangeInfo(),
+                log.getStatus()
+            };
+            tableModel.addRow(rowData);
+        }
+
+        notificationTable.revalidate();
+        notificationTable.repaint();
+
+    } catch (Exception e) {
+        JOptionPane.showMessageDialog(this, "Error refreshing data: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        e.printStackTrace();
+    }
          
     }//GEN-LAST:event_Refresh_BTNActionPerformed
 

@@ -1,11 +1,21 @@
 
 package javaassignment;
 
-import java.util.List;
 
 
-public abstract class ChangeLog implements ChangeLogDAO {
+
+public  class ChangeLog  {
     private int logNo;
+    private String userId;
+    private String changeInfo;
+    private String status;
+    
+    public ChangeLog(int logNo, String userId, String changeInfo, String status) {
+        this.logNo = logNo;
+        this.userId = userId;
+        this.changeInfo = changeInfo;
+        this.status = status;
+    }
 
     public int getLogNo() {
         return logNo;
@@ -38,8 +48,11 @@ public abstract class ChangeLog implements ChangeLogDAO {
     public void setStatus(String status) {
         this.status = status;
     }
-    private String userId;
-    private String changeInfo;
-    private String status;
+    
+    @Override
+    public String toString(){
+        return logNo + ". " + userId + " | " + changeInfo + " | " + status;
+    }
+
 
 }
