@@ -1,0 +1,4 @@
+Refrigerator|2
+Phone|5
+TV|3
+Plug|2
