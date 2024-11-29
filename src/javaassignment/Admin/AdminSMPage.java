@@ -4,11 +4,11 @@
  */
 package javaassignment.Admin;
 
-import javaassignment.CreateRequisition_SM;
-import javaassignment.DailyItemEntryPage_SM;
-import javaassignment.SalesReportPage_SM;
-import javaassignment.StockLevelsPage_SM;
-import javaassignment.ViewSalesItemPage_SM;
+import javaassignment.SalesManager.CreateRequisition_SM;
+import javaassignment.SalesManager.DailyItemEntryPage_SM;
+import javaassignment.SalesManager.SalesReportPage_SM;
+import javaassignment.SalesManager.StockLevelsPage_SM;
+import javaassignment.SalesManager.ViewSalesItemPage_SM;
 
 /**
  *
