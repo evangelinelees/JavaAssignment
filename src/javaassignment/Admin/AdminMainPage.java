@@ -1,6 +1,7 @@
-package javaassignment;
+package javaassignment.Admin;
 
 import java.util.List;
+import javaassignment.LoginPage;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -153,21 +154,22 @@ public class AdminMainPage extends javax.swing.JFrame {
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(63, 63, 63)
-                .addComponent(RegisterBTN)
-                .addGap(44, 44, 44)
-                .addComponent(EditBTN)
-                .addGap(44, 44, 44)
-                .addComponent(InventoryBTN)
-                .addGap(44, 44, 44)
-                .addComponent(FinanceBTN)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(SalesBTN)
-                .addGap(38, 38, 38))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(52, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 303, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(63, 63, 63)
+                        .addComponent(RegisterBTN)
+                        .addGap(44, 44, 44)
+                        .addComponent(EditBTN)
+                        .addGap(44, 44, 44)
+                        .addComponent(InventoryBTN)
+                        .addGap(44, 44, 44)
+                        .addComponent(FinanceBTN)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(SalesBTN))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addContainerGap(52, Short.MAX_VALUE)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 303, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(Refresh_BTN)
                 .addGap(11, 11, 11))
@@ -231,7 +233,9 @@ public class AdminMainPage extends javax.swing.JFrame {
     }//GEN-LAST:event_RegisterBTNActionPerformed
 
     private void SalesBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SalesBTNActionPerformed
-        // TODO add your handling code here:
+        AdminSMPage ASMP = new AdminSMPage();
+        ASMP.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_SalesBTNActionPerformed
 
     private void notificationTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_notificationTableMouseClicked

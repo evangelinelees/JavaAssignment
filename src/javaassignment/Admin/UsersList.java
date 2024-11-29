@@ -1,13 +1,11 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
-package javaassignment;
 
+package javaassignment.Admin;
+
+import javaassignment.Admin.AdminMainPage;
 import java.util.List;
-import javaassignment.AdminDAOImpl;
+import javaassignment.Admin.AdminDAOImpl;
 import javax.swing.JOptionPane;
-import javaassignment.AdminDAO;
+import javaassignment.Admin.AdminDAO;
 
 /**
  *

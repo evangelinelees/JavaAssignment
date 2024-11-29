@@ -1,4 +1,4 @@
-package javaassignment;
+package javaassignment.Admin;
 
 
 import javax.swing.JOptionPane;

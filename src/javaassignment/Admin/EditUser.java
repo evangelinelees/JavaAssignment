@@ -1,6 +1,7 @@
 
-package javaassignment;
+package javaassignment.Admin;
 
+import javaassignment.Admin.AdminDAOImpl;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
