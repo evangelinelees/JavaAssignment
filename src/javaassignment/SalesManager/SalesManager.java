@@ -1,15 +1,9 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
-package javaassignment;
+
+package javaassignment.SalesManager;
 
 import javaassignment.Admin.User;
 
-/**
- *
- * @author jchok
- */
+
 public class SalesManager extends User {
 
     // Constructor using User's constructor

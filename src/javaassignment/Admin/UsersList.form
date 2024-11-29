@@ -56,7 +56,7 @@
                       <Group type="102" attributes="0">
                           <Component id="AddUser_BTN" min="-2" pref="71" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="189" max="-2" attributes="0"/>
-                          <Component id="UpdateUserBTN" min="-2" pref="72" max="-2" attributes="0"/>
+                          <Component id="EditUserBTN" min="-2" pref="72" max="-2" attributes="0"/>
                           <EmptySpace max="32767" attributes="0"/>
                           <Component id="Delete_BTN" min="-2" pref="82" max="-2" attributes="0"/>
                       </Group>
@@ -79,7 +79,7 @@
                   <EmptySpace pref="58" max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="Delete_BTN" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="UpdateUserBTN" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="EditUserBTN" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="AddUser_BTN" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="48" max="-2" attributes="0"/>
@@ -152,7 +152,7 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="AddUser_BTNActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="UpdateUserBTN">
+        <Component class="javax.swing.JButton" name="EditUserBTN">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="cc" green="ff" red="ff" type="rgb"/>
@@ -165,7 +165,7 @@
             </Property>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="UpdateUserBTNActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="EditUserBTNActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JButton" name="Delete_BTN">

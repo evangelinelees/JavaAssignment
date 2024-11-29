@@ -2,12 +2,12 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package javaassignment;
+package javaassignment.SalesManager;
 
 import java.util.List;
-import javaassignment.Items;
-import javaassignment.ItemsDAO;
-import javaassignment.ItemsDAOImpl;
+import javaassignment.SalesManager.Items;
+import javaassignment.SalesManager.ItemsDAO;
+import javaassignment.SalesManager.ItemsDAOImpl;
 
 import javax.swing.table.DefaultTableModel;
 

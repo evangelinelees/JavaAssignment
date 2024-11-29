@@ -36,7 +36,7 @@ public class UsersList extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         Back_BTN = new javax.swing.JButton();
         AddUser_BTN = new javax.swing.JButton();
-        UpdateUserBTN = new javax.swing.JButton();
+        EditUserBTN = new javax.swing.JButton();
         Delete_BTN = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -78,12 +78,12 @@ public class UsersList extends javax.swing.JFrame {
             }
         });
 
-        UpdateUserBTN.setBackground(new java.awt.Color(255, 255, 204));
-        UpdateUserBTN.setText("Edit User");
-        UpdateUserBTN.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        UpdateUserBTN.addActionListener(new java.awt.event.ActionListener() {
+        EditUserBTN.setBackground(new java.awt.Color(255, 255, 204));
+        EditUserBTN.setText("Edit User");
+        EditUserBTN.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        EditUserBTN.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                UpdateUserBTNActionPerformed(evt);
+                EditUserBTNActionPerformed(evt);
             }
         });
 
@@ -112,7 +112,7 @@ public class UsersList extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(AddUser_BTN, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(189, 189, 189)
-                        .addComponent(UpdateUserBTN, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(EditUserBTN, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(Delete_BTN, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 645, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -130,7 +130,7 @@ public class UsersList extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 58, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Delete_BTN)
-                    .addComponent(UpdateUserBTN)
+                    .addComponent(EditUserBTN)
                     .addComponent(AddUser_BTN))
                 .addGap(48, 48, 48))
         );
@@ -157,7 +157,7 @@ public class UsersList extends javax.swing.JFrame {
 
     }//GEN-LAST:event_Back_BTNActionPerformed
 
-    private void UpdateUserBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UpdateUserBTNActionPerformed
+    private void EditUserBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EditUserBTNActionPerformed
         int selectedRow = jTable1.getSelectedRow();
     if (selectedRow != -1) {
         // Get the user ID from the selected row
@@ -178,8 +178,8 @@ public class UsersList extends javax.swing.JFrame {
     } else {
         JOptionPane.showMessageDialog(this, "Please select a user to edit.");
     }
-    this.dispose();
-    }//GEN-LAST:event_UpdateUserBTNActionPerformed
+    
+    }//GEN-LAST:event_EditUserBTNActionPerformed
 
     private void Delete_BTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Delete_BTNActionPerformed
          int selectedRow = jTable1.getSelectedRow();
@@ -196,17 +196,15 @@ public class UsersList extends javax.swing.JFrame {
     } else {
         JOptionPane.showMessageDialog(this, "Please select a user to delete.");
     }
-    AdminMainPage adminmain = new AdminMainPage();
-    adminmain.setVisible(true); // Show the edit user page
-    this.dispose(); // Close the current page if required
+
                
     }//GEN-LAST:event_Delete_BTNActionPerformed
 
     private void AddUser_BTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddUser_BTNActionPerformed
-            // Open the Add User form (AddUserForm is the subclass)
-        AddUser AddUser = new AddUser();  // Create an instance of AddUserForm (a concrete subclass)
-        AddUser.setVisible(true);  // Make it visible
-        this.dispose();
+        
+       AddUser AU = new AddUser();
+       AU.setVisible(true);
+       this.dispose();
     }//GEN-LAST:event_AddUser_BTNActionPerformed
 
     /**
@@ -274,7 +272,7 @@ public class UsersList extends javax.swing.JFrame {
     private javax.swing.JButton AddUser_BTN;
     private javax.swing.JButton Back_BTN;
     private javax.swing.JButton Delete_BTN;
-    private javax.swing.JButton UpdateUserBTN;
+    private javax.swing.JButton EditUserBTN;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
