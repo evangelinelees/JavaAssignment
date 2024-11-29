@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import javaassignment.Admin.AdminDAO;
+import javax.swing.JOptionPane;
 
 public class AdminDAOImpl implements AdminDAO {
     private final String filePath = "USERS.TXT";
@@ -86,18 +87,55 @@ public class AdminDAOImpl implements AdminDAO {
     public boolean deleteUser(String id) {
         List<User> users = getAllUsers();
         boolean deleted = false;
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
-            for (User user : users) {
-                if (!user.getUserId().equals(id)) {
-                    writer.write(String.join("|", user.toDataString()));
-                    writer.newLine();
-                } else {
-                    deleted = true;
+
+        // Show a confirmation dialog
+        int confirm = JOptionPane.showConfirmDialog(
+            null,
+            "Are you sure you want to delete the user with ID: " + id + "?",
+            "Confirm Deletion",
+            JOptionPane.YES_NO_OPTION
+        );
+
+        // Check user response
+        if (confirm == JOptionPane.YES_OPTION) {
+            try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
+                for (User user : users) {
+                    if (!user.getUserId().equals(id)) {
+                        writer.write(String.join("|", user.toDataString()));
+                        writer.newLine();
+                    } else {
+                        deleted = true;
+                    }
                 }
+            } catch (IOException e) {
+                e.printStackTrace();
             }
-        } catch (IOException e) {
-            e.printStackTrace();
+
+            // Show a message indicating success or failure
+            if (deleted) {
+                JOptionPane.showMessageDialog(
+                    null,
+                    "User with ID: " + id + " has been successfully deleted.",
+                    "Deletion Successful",
+                    JOptionPane.INFORMATION_MESSAGE
+                );
+            } else {
+                JOptionPane.showMessageDialog(
+                    null,
+                    "No user found with ID: " + id + ". Deletion failed.",
+                    "Deletion Failed",
+                    JOptionPane.ERROR_MESSAGE
+                );
+            }
+        } else {
+            JOptionPane.showMessageDialog(
+                null,
+                "Deletion canceled by the user.",
+                "Action Canceled",
+                JOptionPane.INFORMATION_MESSAGE
+            );
         }
+
         return deleted;
     }
 
@@ -173,23 +211,23 @@ public class AdminDAOImpl implements AdminDAO {
 
     @Override
     public User getUserById(String id) {
-try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
-        String line;
-        while ((line = reader.readLine()) != null) {
-            // Split the line by '|' to extract the user details
-            String[] userDetails = line.split("\\|");
-            
-            // Check if the line contains the expected number of columns and matches the user ID
-            if (userDetails.length >= 7 && userDetails[0].equals(id)) {
-                // Return a new User object by passing the userDetails array to the User constructor
-                return new User(userDetails);  // This returns a User object
+        try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    // Split the line by '|' to extract the user details
+                    String[] userDetails = line.split("\\|");
+
+                    // Check if the line contains the expected number of columns and matches the user ID
+                    if (userDetails.length >= 7 && userDetails[0].equals(id)) {
+                        // Return a new User object by passing the userDetails array to the User constructor
+                        return new User(userDetails);  // This returns a User object
+                    }
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
             }
-        }
-    } catch (IOException e) {
-        e.printStackTrace();
-    }
-    return null;  // Return null if the user is not found   
-    }
+            return null;  // Return null if the user is not found   
+            }
 }
     
 
