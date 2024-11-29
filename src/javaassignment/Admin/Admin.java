@@ -1,5 +1,5 @@
 
-package javaassignment;
+package javaassignment.Admin;
 
 import java.util.List;
 

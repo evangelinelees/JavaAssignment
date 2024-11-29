@@ -4,6 +4,8 @@
  */
 package javaassignment;
 
+import javaassignment.Admin.User;
+
 /**
  *
  * @author jchok

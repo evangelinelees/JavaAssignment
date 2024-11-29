@@ -1,4 +1,4 @@
-package javaassignment;
+package javaassignment.Admin;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -8,8 +8,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-import javaassignment.User;
-import javaassignment.AdminDAO;
+import javaassignment.Admin.AdminDAO;
 
 public class AdminDAOImpl implements AdminDAO {
     private final String filePath = "USERS.TXT";
