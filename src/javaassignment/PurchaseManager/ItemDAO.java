@@ -2,15 +2,14 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package javaassignment.SalesManager;
-
+package javaassignment.PurchaseManager;
 import java.util.List;
 
 /**
  *
- * @author vroom
+ * @author User
  */
-public interface ItemsDAO {
-    List<Items> viewItems();
-    
+public interface ItemDAO {
+    List<ItemModel> loadAll(); 
+    List<ItemModel> getAllItems();
 }
