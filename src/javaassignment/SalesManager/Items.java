@@ -1,22 +1,30 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package javaassignment.SalesManager;
 
 public class Items {
 
+    private String itemCode;
     private String itemName;
     private int quantity;
     private boolean needReorder;
 
-    public Items(String itemName, int quantity) {
-
+    public Items(String itemCode, String itemName, int quantity) {
+        this.itemCode = itemCode;
         this.itemName = itemName;
         this.quantity = quantity;
         this.needReorder = quantity <= 3;
     }
+    
+    
 
+
+
+    public String getItemCode() {
+        return itemCode;
+    }
+
+    public void setItemCode(String itemCode) {
+        this.itemCode = itemCode;
+    }
 
 
     public String getItemName() {
@@ -42,12 +50,9 @@ public class Items {
     public void setNeedReorder(boolean needReorder) {
         this.needReorder = needReorder;
     }
-    
+
     @Override
     public String toString() {
-        return itemName + " | " + quantity + " | " + (needReorder ? "Yes" : "No");
+        return itemCode + " | " + itemName + " | " + quantity + " | " + (needReorder ? "Yes" : "No");
     }
-
-    
-    
 }

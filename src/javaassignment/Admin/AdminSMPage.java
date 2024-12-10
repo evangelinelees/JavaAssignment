@@ -4,10 +4,8 @@
  */
 package javaassignment.Admin;
 
-import javaassignment.SalesManager.CreateRequisition_SM;
 import javaassignment.SalesManager.DailyItemEntryPage_SM;
 import javaassignment.SalesManager.SalesReportPage_SM;
-import javaassignment.SalesManager.StockLevelsPage_SM;
 import javaassignment.SalesManager.ViewSalesItemPage_SM;
 
 /**
@@ -39,8 +37,6 @@ public class AdminSMPage extends javax.swing.JFrame {
         ViewSalesItem_BTN = new javax.swing.JButton();
         DailyItemSalesEntry_BTN = new javax.swing.JButton();
         SalesReport_BTN = new javax.swing.JButton();
-        StockLevels_BTN = new javax.swing.JButton();
-        CreateRequisition_BTN = new javax.swing.JButton();
         ViewPurchaseOrder_BTN = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -108,22 +104,6 @@ public class AdminSMPage extends javax.swing.JFrame {
             }
         });
 
-        StockLevels_BTN.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        StockLevels_BTN.setText("Stock Levels");
-        StockLevels_BTN.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                StockLevels_BTNActionPerformed(evt);
-            }
-        });
-
-        CreateRequisition_BTN.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        CreateRequisition_BTN.setText("Create Requisition");
-        CreateRequisition_BTN.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                CreateRequisition_BTNActionPerformed(evt);
-            }
-        });
-
         ViewPurchaseOrder_BTN.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         ViewPurchaseOrder_BTN.setText("View Purchaser Orders");
 
@@ -133,13 +113,9 @@ public class AdminSMPage extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(70, 70, 70)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(ViewSalesItem_BTN, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(StockLevels_BTN, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(ViewSalesItem_BTN)
                 .addGap(40, 40, 40)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(DailyItemSalesEntry_BTN, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(CreateRequisition_BTN, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(DailyItemSalesEntry_BTN)
                 .addGap(40, 40, 40)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(ViewPurchaseOrder_BTN, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -155,10 +131,7 @@ public class AdminSMPage extends javax.swing.JFrame {
                     .addComponent(DailyItemSalesEntry_BTN, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(SalesReport_BTN, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(111, 111, 111)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(StockLevels_BTN, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(CreateRequisition_BTN, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(ViewPurchaseOrder_BTN, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(ViewPurchaseOrder_BTN, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(118, Short.MAX_VALUE))
         );
 
@@ -190,18 +163,6 @@ public class AdminSMPage extends javax.swing.JFrame {
        SR.setVisible(true);
        this.dispose();
     }//GEN-LAST:event_SalesReport_BTNActionPerformed
-
-    private void StockLevels_BTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_StockLevels_BTNActionPerformed
-       StockLevelsPage_SM SL = new StockLevelsPage_SM();
-       SL.setVisible(true);
-       this.dispose();
-    }//GEN-LAST:event_StockLevels_BTNActionPerformed
-
-    private void CreateRequisition_BTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CreateRequisition_BTNActionPerformed
-       CreateRequisition_SM CR = new CreateRequisition_SM();
-       CR.setVisible(true);
-       this.dispose();
-    }//GEN-LAST:event_CreateRequisition_BTNActionPerformed
 
     /**
      * @param args the command line arguments
@@ -241,10 +202,8 @@ public class AdminSMPage extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Back_BTN;
-    private javax.swing.JButton CreateRequisition_BTN;
     private javax.swing.JButton DailyItemSalesEntry_BTN;
     private javax.swing.JButton SalesReport_BTN;
-    private javax.swing.JButton StockLevels_BTN;
     private javax.swing.JButton ViewPurchaseOrder_BTN;
     private javax.swing.JButton ViewSalesItem_BTN;
     private javax.swing.JLabel jLabel1;
