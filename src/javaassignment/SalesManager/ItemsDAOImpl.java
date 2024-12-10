@@ -24,10 +24,13 @@ public class ItemsDAOImpl implements ItemsDAO {
             String line;
             while ((line = reader.readLine()) != null) {
                 String[] data = line.split("\\|");
-                if (data.length == 2) {
-                    String name = data[0].trim();
-                    int quantity = Integer.parseInt(data[1].trim());
-                    items.add(new Items(name, quantity));
+                if (data.length == 3) {
+                    String itemCode = data[0].trim();
+                    String itemName = data[1].trim();
+                    int quantity = Integer.parseInt(data[2].trim());
+                    items.add(new Items(itemCode, itemName, quantity));
+                } else {
+                    System.err.println("Malformed line: " + line);
                 }
             }
         } catch (Exception e) {
@@ -35,6 +38,10 @@ public class ItemsDAOImpl implements ItemsDAO {
         }
         return items;
     }
+    
+    
+
+
     
     
 }

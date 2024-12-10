@@ -1,13 +1,30 @@
+package javaassignment.SalesManager;
+
+
+
+
+
+
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package javaassignment.SalesManager;
+
+
 
 import java.util.List;
+import javaasignment.PurchaseManager.Requisition;
+import javaasignment.PurchaseManager.RequisitionDAO;
+import javaasignment.PurchaseManager.RequisitionDAOImpl;
+import javaassignment.Admin.AdminDAO;
+import javaassignment.Admin.AdminDAOImpl;
+import javaassignment.Admin.User;
 import javaassignment.SalesManager.Items;
 import javaassignment.SalesManager.ItemsDAO;
 import javaassignment.SalesManager.ItemsDAOImpl;
+import javaassignment.SalesManager.SalesManagerMainPage;
+import javax.swing.JOptionPane;
 
 import javax.swing.table.DefaultTableModel;
 
@@ -37,6 +54,7 @@ private final ItemsDAO itemsDAO;
             // Add each item to the table
             for (Items item : items) {
                 tableModel.addRow(new Object[]{
+                    item.getItemCode(),
                     item.getItemName(),            // Item name
                     item.getQuantity(),            // Quantity
                     item.isNeedReorder() ? "Yes" : "No"  // Below reorder threshold
@@ -47,6 +65,10 @@ private final ItemsDAO itemsDAO;
         }
     }
     
+    // Add this code after initializing the table in the constructor or setup methods
+
+
+
     
 
     /**
@@ -62,9 +84,21 @@ private final ItemsDAO itemsDAO;
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        BackBTN = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        ItemCodeField = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
+        ItemNameField = new javax.swing.JTextField();
+        jLabel6 = new javax.swing.JLabel();
+        CurrentQuantityField = new javax.swing.JTextField();
+        jLabel7 = new javax.swing.JLabel();
+        ProposedQuantityField = new javax.swing.JTextField();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        UserIDField = new javax.swing.JTextField();
+        SubmitRequisition = new javax.swing.JButton();
+        jPanel2 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(204, 255, 204));
@@ -73,26 +107,31 @@ private final ItemsDAO itemsDAO;
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        jLabel1.setText("View Sales Item List");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 20, -1, -1));
+        jLabel1.setText("Create Requisition Form");
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 30, -1, -1));
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
             },
             new String [] {
-                "Item Name", "Quantity", "Below Reorder?"
+                "Item Code", "Item Name", "Quantity", "Need Reorder?"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false
+                false, false, false, true
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
+            }
+        });
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
             }
         });
         jScrollPane1.setViewportView(jTable1);
@@ -102,53 +141,153 @@ private final ItemsDAO itemsDAO;
             jTable1.getColumnModel().getColumn(2).setResizable(false);
         }
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 120, 818, 290));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 120, 530, 240));
 
-        jButton2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jButton2.setText("Back");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        BackBTN.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        BackBTN.setText("Back");
+        BackBTN.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                BackBTNActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, -1, -1));
+        jPanel1.add(BackBTN, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, -1, -1));
 
-        jButton3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jButton3.setText("Create Requisition");
-        jButton3.setActionCommand("CreateRequisition");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
-            }
-        });
-        jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 30, -1, -1));
-
-        jLabel2.setText("Please select row before clicking 'Create Requisition' button.");
+        jLabel2.setText("Please select row to fill in Requisition Form.");
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 90, 350, -1));
+
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabel3.setText("Items List");
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 30, -1, -1));
+
+        ItemCodeField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ItemCodeFieldActionPerformed(evt);
+            }
+        });
+        jPanel1.add(ItemCodeField, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 120, 280, -1));
+
+        jLabel5.setText("Item Code");
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 120, 60, 20));
+        jPanel1.add(ItemNameField, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 160, 280, -1));
+
+        jLabel6.setText("Item Name");
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 160, 60, 20));
+        jPanel1.add(CurrentQuantityField, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 200, 70, -1));
+
+        jLabel7.setText("Proposed Quantity");
+        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 200, 110, 20));
+        jPanel1.add(ProposedQuantityField, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 200, 70, -1));
+
+        jLabel8.setText("UserID");
+        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 240, 90, 20));
+
+        jLabel9.setText("Current Quantity");
+        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 200, 90, 20));
+        jPanel1.add(UserIDField, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 240, 260, -1));
+
+        SubmitRequisition.setText("Submit");
+        SubmitRequisition.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SubmitRequisitionActionPerformed(evt);
+            }
+        });
+        jPanel1.add(SubmitRequisition, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 310, -1, -1));
+
+        jPanel2.setBackground(new java.awt.Color(0, 0, 0));
+        jPanel2.setPreferredSize(new java.awt.Dimension(5, 340));
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 5, Short.MAX_VALUE)
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 300, Short.MAX_VALUE)
+        );
+
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 40, -1, 300));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 1059, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 508, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    
+    private void BackBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BackBTNActionPerformed
        SalesManagerMainPage SMM = new SalesManagerMainPage();
        SMM.setVisible(true);
        this.dispose();
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_BackBTNActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void SubmitRequisitionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SubmitRequisitionActionPerformed
+    String itemCode = ItemCodeField.getText();
+        String itemName = ItemNameField.getText();
+        String currentQuantity = CurrentQuantityField.getText();
+        String proposedQuantity = ProposedQuantityField.getText();
+        String userId = UserIDField.getText();
+
+        if (itemCode.isEmpty() || itemName.isEmpty() || currentQuantity.isEmpty() || proposedQuantity.isEmpty() || userId.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Please fill in all fields.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        try {
+            AdminDAO adminDAO = new AdminDAOImpl();
+            User user = adminDAO.getUserById(userId);
+            if (user == null) {
+                JOptionPane.showMessageDialog(this, "Invalid UserID. Please enter a valid UserID.", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            // Create a Requisition object
+            Requisition requisition = new Requisition(itemCode, itemName, currentQuantity, proposedQuantity, userId);
+
+            // Save requisition using DAO
+            RequisitionDAOImpl aaa = new RequisitionDAOImpl();
+            boolean success = aaa.saveRequisition(itemCode, itemName, currentQuantity, proposedQuantity, userId);
+            if (success) {
+                JOptionPane.showMessageDialog(this, "Requisition submitted successfully.");
+            } else {
+                JOptionPane.showMessageDialog(this, "Failed to submit requisition. Try again.", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "An error occurred.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
     
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_SubmitRequisitionActionPerformed
+
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+        // Get the selected row index
+    int selectedRow = jTable1.getSelectedRow();
+
+    if (selectedRow != -1) { // Ensure a row is selected
+        // Fetch data from the table model
+        DefaultTableModel tableModel = (DefaultTableModel) jTable1.getModel();
+
+        // Populate text fields with data from the selected row
+        ItemCodeField.setText(tableModel.getValueAt(selectedRow, 0).toString());
+        ItemNameField.setText(tableModel.getValueAt(selectedRow, 1).toString());
+        CurrentQuantityField.setText(tableModel.getValueAt(selectedRow, 2).toString());
+        ProposedQuantityField.setText(""); // Clear this field for user input
+        UserIDField.setText(""); // Optional: Clear or prepopulate this field
+    }
+    }//GEN-LAST:event_jTable1MouseClicked
+
+    private void ItemCodeFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ItemCodeFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ItemCodeFieldActionPerformed
 
     /**
      * @param args the command line arguments
@@ -172,16 +311,29 @@ private final ItemsDAO itemsDAO;
     java.awt.EventQueue.invokeLater(() -> {
         ViewSalesItemPage_SM frame = new ViewSalesItemPage_SM();
         frame.setVisible(true); 
+
     });
 }
 
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
+    private javax.swing.JButton BackBTN;
+    private javax.swing.JTextField CurrentQuantityField;
+    private javax.swing.JTextField ItemCodeField;
+    private javax.swing.JTextField ItemNameField;
+    private javax.swing.JTextField ProposedQuantityField;
+    private javax.swing.JButton SubmitRequisition;
+    private javax.swing.JTextField UserIDField;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
