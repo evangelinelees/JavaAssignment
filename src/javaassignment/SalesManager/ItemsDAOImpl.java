@@ -18,26 +18,35 @@ public class ItemsDAOImpl implements ItemsDAO {
     private final String filePath = "ITEMS.TXT";
     
     @Override
-    public List<Items> viewItems() {
-        List<Items> items = new ArrayList<>();
-        try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
-            String line;
-            while ((line = reader.readLine()) != null) {
-                String[] data = line.split("\\|");
-                if (data.length == 3) {
+public List<Items> viewItems() {
+    List<Items> items = new ArrayList<>();
+    try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
+        String line;
+        while ((line = reader.readLine()) != null) {
+            //System.out.println("Reading line: " + line); // Debug
+            String[] data = line.split("\\|");
+            //System.out.println("Parsed values: " + Arrays.toString(data)); // Debug
+            if (data.length == 5) {
+                try {
                     String itemCode = data[0].trim();
                     String itemName = data[1].trim();
                     int quantity = Integer.parseInt(data[2].trim());
-                    items.add(new Items(itemCode, itemName, quantity));
-                } else {
-                    System.err.println("Malformed line: " + line);
+                    double price = Double.parseDouble(data[3].trim());
+                    String supplierID = data[4].trim();
+                    items.add(new Items(itemCode, itemName, quantity, price, supplierID));
+                } catch (NumberFormatException e) {
+                    System.err.println("Error parsing numeric values: " + line);
                 }
+            } else {
+                System.err.println("Malformed line: " + line);
             }
-        } catch (Exception e) {
-            e.printStackTrace();
         }
-        return items;
+    } catch (IOException e) {
+        e.printStackTrace();
     }
+    return items;
+}
+
     
     
 

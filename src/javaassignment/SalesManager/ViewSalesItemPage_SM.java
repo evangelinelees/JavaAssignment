@@ -15,15 +15,10 @@ package javaassignment.SalesManager;
 
 import java.util.List;
 import javaasignment.PurchaseManager.Requisition;
-import javaasignment.PurchaseManager.RequisitionDAO;
 import javaasignment.PurchaseManager.RequisitionDAOImpl;
 import javaassignment.Admin.AdminDAO;
 import javaassignment.Admin.AdminDAOImpl;
 import javaassignment.Admin.User;
-import javaassignment.SalesManager.Items;
-import javaassignment.SalesManager.ItemsDAO;
-import javaassignment.SalesManager.ItemsDAOImpl;
-import javaassignment.SalesManager.SalesManagerMainPage;
 import javax.swing.JOptionPane;
 
 import javax.swing.table.DefaultTableModel;
@@ -57,12 +52,16 @@ private final ItemsDAO itemsDAO;
                     item.getItemCode(),
                     item.getItemName(),            // Item name
                     item.getQuantity(),            // Quantity
+                    item.getPrice(),
+                    item.getSupplierID(),
                     item.isNeedReorder() ? "Yes" : "No"  // Below reorder threshold
+                    
                 });
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
+        
     }
     
     // Add this code after initializing the table in the constructor or setup methods
@@ -108,21 +107,21 @@ private final ItemsDAO itemsDAO;
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel1.setText("Create Requisition Form");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 30, -1, -1));
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 70, -1, -1));
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
             },
             new String [] {
-                "Item Code", "Item Name", "Quantity", "Need Reorder?"
+                "Item Code", "Item Name", "Quantity", "Price", "Supplier ID", "Need Reorder?"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, true
+                false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -139,9 +138,12 @@ private final ItemsDAO itemsDAO;
             jTable1.getColumnModel().getColumn(0).setResizable(false);
             jTable1.getColumnModel().getColumn(1).setResizable(false);
             jTable1.getColumnModel().getColumn(2).setResizable(false);
+            jTable1.getColumnModel().getColumn(3).setResizable(false);
+            jTable1.getColumnModel().getColumn(4).setResizable(false);
+            jTable1.getColumnModel().getColumn(5).setResizable(false);
         }
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 120, 530, 240));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 160, 530, 240));
 
         BackBTN.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         BackBTN.setText("Back");
@@ -150,40 +152,40 @@ private final ItemsDAO itemsDAO;
                 BackBTNActionPerformed(evt);
             }
         });
-        jPanel1.add(BackBTN, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, -1, -1));
+        jPanel1.add(BackBTN, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, -1, -1));
 
         jLabel2.setText("Please select row to fill in Requisition Form.");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 90, 350, -1));
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 130, 350, -1));
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel3.setText("Items List");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 30, -1, -1));
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 70, -1, -1));
 
         ItemCodeField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ItemCodeFieldActionPerformed(evt);
             }
         });
-        jPanel1.add(ItemCodeField, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 120, 280, -1));
+        jPanel1.add(ItemCodeField, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 160, 280, -1));
 
         jLabel5.setText("Item Code");
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 120, 60, 20));
-        jPanel1.add(ItemNameField, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 160, 280, -1));
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 160, 60, 20));
+        jPanel1.add(ItemNameField, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 200, 280, -1));
 
         jLabel6.setText("Item Name");
-        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 160, 60, 20));
-        jPanel1.add(CurrentQuantityField, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 200, 70, -1));
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 200, 60, 20));
+        jPanel1.add(CurrentQuantityField, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 240, 70, -1));
 
         jLabel7.setText("Proposed Quantity");
-        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 200, 110, 20));
-        jPanel1.add(ProposedQuantityField, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 200, 70, -1));
+        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 240, 110, 20));
+        jPanel1.add(ProposedQuantityField, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 240, 70, -1));
 
         jLabel8.setText("UserID");
-        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 240, 90, 20));
+        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 280, 90, 20));
 
         jLabel9.setText("Current Quantity");
-        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 200, 90, 20));
-        jPanel1.add(UserIDField, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 240, 260, -1));
+        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 240, 90, 20));
+        jPanel1.add(UserIDField, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 280, 260, -1));
 
         SubmitRequisition.setText("Submit");
         SubmitRequisition.addActionListener(new java.awt.event.ActionListener() {
@@ -191,7 +193,7 @@ private final ItemsDAO itemsDAO;
                 SubmitRequisitionActionPerformed(evt);
             }
         });
-        jPanel1.add(SubmitRequisition, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 310, -1, -1));
+        jPanel1.add(SubmitRequisition, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 350, -1, -1));
 
         jPanel2.setBackground(new java.awt.Color(0, 0, 0));
         jPanel2.setPreferredSize(new java.awt.Dimension(5, 340));
@@ -204,10 +206,10 @@ private final ItemsDAO itemsDAO;
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGap(0, 410, Short.MAX_VALUE)
         );
 
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 40, -1, 300));
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 40, -1, 410));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
