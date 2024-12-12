@@ -6,12 +6,32 @@ public class Items {
     private String itemName;
     private int quantity;
     private boolean needReorder;
+    private double price;
+    private String supplierID;
 
-    public Items(String itemCode, String itemName, int quantity) {
+    public Items(String itemCode, String itemName, int quantity, double price, String supplierID) {
         this.itemCode = itemCode;
         this.itemName = itemName;
         this.quantity = quantity;
         this.needReorder = quantity <= 3;
+        this.price = price;
+        this.supplierID=supplierID;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
+    public String getSupplierID() {
+        return supplierID;
+    }
+
+    public void setSupplierID(String supplierID) {
+        this.supplierID = supplierID;
     }
     
     
@@ -53,6 +73,6 @@ public class Items {
 
     @Override
     public String toString() {
-        return itemCode + " | " + itemName + " | " + quantity + " | " + (needReorder ? "Yes" : "No");
+        return itemCode + " | " + itemName + " | " + quantity + " | " + (needReorder ? "Yes" : "No")+ price + " | " + supplierID ;
     }
 }
