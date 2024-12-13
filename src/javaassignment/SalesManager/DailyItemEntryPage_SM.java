@@ -13,7 +13,7 @@ import java.io.IOException;
 import java.util.List;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.Arrays;
+import javax.swing.JOptionPane;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
@@ -46,6 +46,7 @@ public class DailyItemEntryPage_SM extends javax.swing.JFrame {
         itemCode.setEnabled(false);
         initialQuantity.setEnabled(false);
         grossProfit.setEnabled(false);
+        price.setEnabled(false);
 
         // Add listeners to calculate grossProfit
         addRealTimeListeners();
@@ -195,6 +196,8 @@ public class DailyItemEntryPage_SM extends javax.swing.JFrame {
         jLabel12 = new javax.swing.JLabel();
         lossesField = new javax.swing.JTextField();
         submitReportButton = new javax.swing.JButton();
+        price = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(153, 204, 255));
@@ -321,6 +324,12 @@ public class DailyItemEntryPage_SM extends javax.swing.JFrame {
         });
         jPanel1.add(submitReportButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 390, 350, -1));
 
+        price.setText("Price");
+        jPanel1.add(price, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 300, 100, -1));
+
+        jLabel1.setText("Price per Item");
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 280, -1, -1));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -372,6 +381,7 @@ public class DailyItemEntryPage_SM extends javax.swing.JFrame {
         itemCode.setText(tableModel.getValueAt(selectedRow, 0).toString());
         itemName.setText(tableModel.getValueAt(selectedRow, 1).toString());
         initialQuantity.setText(tableModel.getValueAt(selectedRow, 2).toString());
+        price.setText(tableModel.getValueAt(selectedRow, 3).toString());
 
         // Save selected item's price and initial quantity for calculations
         selectedItemPrice = Double.parseDouble(tableModel.getValueAt(selectedRow, 3).toString());  // Adjust column index if needed
@@ -397,6 +407,7 @@ public class DailyItemEntryPage_SM extends javax.swing.JFrame {
         String reportDate = dateField.getText();
         String Code = this.itemCode.getText();
         String Name = this.itemName.getText();
+        Double Price = Double.valueOf(price.getText());
         int quantitySoldValue = Integer.parseInt(quantitySold.getText());
         int lossesValue = Integer.parseInt(lossesField.getText());
 
@@ -404,24 +415,33 @@ public class DailyItemEntryPage_SM extends javax.swing.JFrame {
         boolean isDuplicate = checkDuplicateInDailyFile(reportDate, Code, Name);
         if (isDuplicate) {
             grossProfit.setText("Error: Duplicate record");
+            JOptionPane.showMessageDialog(null, "Duplicate record found. Report not saved.", "Error", JOptionPane.ERROR_MESSAGE);
             return; // Don't proceed if duplicate exists
         }
 
         // Step 3: Calculate the new gross profit
-        double grossProfitValue = (quantitySoldValue - lossesValue) * selectedItemPrice;
+        double grossProfitValue = (quantitySoldValue - lossesValue) * Price; // Use Price here
         grossProfit.setText(String.format("%.2f", grossProfitValue));
 
         // Step 4: Update the quantity in ITEMS.txt
         updateItemQuantityInItemsFile(Code, quantitySoldValue, lossesValue);
 
         // Step 5: Write the daily report to DAILY.txt
-        writeReportToDailyFile(reportDate, Code, Name, quantitySoldValue, lossesValue, grossProfitValue);
+        writeReportToDailyFile(reportDate, Code, Name, Price, quantitySoldValue, lossesValue, grossProfitValue);
+        
+        // Load items into the table again to refresh it
+        loadItemsToTable();
+
+        // Success message
+        JOptionPane.showMessageDialog(null, "Report successfully saved!", "Success", JOptionPane.INFORMATION_MESSAGE);
 
     } catch (NumberFormatException e) {
         grossProfit.setText("Invalid input");
+        JOptionPane.showMessageDialog(null, "Please enter valid numbers for Price, Quantity Sold, and Losses.", "Input Error", JOptionPane.ERROR_MESSAGE);
     } catch (IOException e) {
         e.printStackTrace();
         grossProfit.setText("Error processing files");
+        JOptionPane.showMessageDialog(null, "An error occurred while processing files.", "File Error", JOptionPane.ERROR_MESSAGE);
     }
 }
 
@@ -439,18 +459,18 @@ private boolean checkDuplicateInDailyFile(String reportDate, String itemCode, St
             String[] fields = line.split("\\|");
 
             // Ensure the line contains at least 3 fields
-            if (fields.length >= 3) {
-                // Trim any extra spaces around the values for accurate comparison
+            if (fields.length >= 4) { // Updated to expect at least Price as the 4th field
                 String existingDate = fields[0].trim();
                 String existingItemCode = fields[1].trim();
                 String existingItemName = fields[2].trim();
 
                 // Check for duplicate record (same date, item code, and item name)
-                if (existingDate.equals(reportDate.trim()) && existingItemCode.equals(itemCode.trim()) && existingItemName.equals(itemName.trim())) {
+                if (existingDate.equals(reportDate.trim()) && 
+                    existingItemCode.equals(itemCode.trim()) && 
+                    existingItemName.equals(itemName.trim())) {
                     return true; // Duplicate found
                 }
             } else {
-                // Handle invalid line format or log it if needed
                 System.out.println("Invalid line in DAILY.txt: " + line);
             }
         }
@@ -459,11 +479,13 @@ private boolean checkDuplicateInDailyFile(String reportDate, String itemCode, St
 }
 
 
-private void writeReportToDailyFile(String reportDate, String Code, String Name, int quantitySold, int losses, double grossProfit) throws IOException {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter("DAILY.txt", true))) {
-            writer.write(String.format("%s|%s|%s|%d|%d|%.2f%n", reportDate, Code, Name, quantitySold, losses, grossProfit));
-        }
+private void writeReportToDailyFile(String reportDate, String Code, String Name, Double Price, int quantitySold, int losses, double grossProfit) throws IOException {
+    try (BufferedWriter writer = new BufferedWriter(new FileWriter("DAILY.txt", true))) {
+        // Include Price in the file output
+        writer.write(String.format("%s|%s|%s|%.2f|%d|%d|%.2f%n", reportDate, Code, Name, Price, quantitySold, losses, grossProfit));
+    }
 }
+
 
 private void updateItemQuantityInItemsFile(String Code, int quantitySold, int losses) throws IOException {
     File itemsFile = new File("ITEMS.txt");
@@ -546,6 +568,7 @@ private void updateItemQuantityInItemsFile(String Code, int quantitySold, int lo
     private javax.swing.JTextField initialQuantity;
     private javax.swing.JTextField itemCode;
     private javax.swing.JTextField itemName;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
@@ -560,6 +583,7 @@ private void updateItemQuantityInItemsFile(String Code, int quantitySold, int lo
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable listTable;
     private javax.swing.JTextField lossesField;
+    private javax.swing.JTextField price;
     private javax.swing.JTextField quantitySold;
     private javax.swing.JButton submitReportButton;
     // End of variables declaration//GEN-END:variables
