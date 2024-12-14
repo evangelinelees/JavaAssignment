@@ -1,6 +1,7 @@
 package javaassignment.Admin;
 
 import java.util.List;
+import java.util.stream.Collectors;
 import javaassignment.LoginPage;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -264,16 +265,31 @@ public class AdminMainPage extends javax.swing.JFrame {
 
     private void Refresh_BTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Refresh_BTNActionPerformed
         try {
-        // Fetch data
+        // Fetch data from ChangeLogDAO
         ChangeLogDAO changeLogImpl = new ChangeLogImpl();
-        List<ChangeLog> logs = changeLogImpl.loadLogsFromFile(); // Correct method call
+        List<ChangeLog> logs = changeLogImpl.getAllLogs(); // Get all logs
 
-        // Clear table
+        // Filter new logs (based on some status, e.g., "new")
+        List<ChangeLog> newLogs = logs.stream()
+                                      .filter(log -> "new".equals(log.getStatus())) // Assuming "new" status for new updates
+                                      .collect(Collectors.toList());
+
+        // If no new logs, show message and exit early
+        if (newLogs.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "No new updates.", "Info", JOptionPane.INFORMATION_MESSAGE);
+            return;
+        }
+
+        // Debugging: Print the number of new logs fetched
+        System.out.println("New Logs fetched: " + newLogs.size());
+
+        // Clear table before populating
         DefaultTableModel tableModel = (DefaultTableModel) notificationTable.getModel();
         tableModel.setRowCount(0);
 
-        // Populate table
-        for (ChangeLog log : logs) {
+        // Populate table with new logs
+        for (ChangeLog log : newLogs) {
+            System.out.println("Adding new row: " + log.getLogNo());  // Debugging: Print row data
             Object[] rowData = {
                 log.getLogNo(),
                 log.getUserId(),
@@ -283,14 +299,19 @@ public class AdminMainPage extends javax.swing.JFrame {
             tableModel.addRow(rowData);
         }
 
+        // Notify table data has changed
+        tableModel.fireTableDataChanged();
+
+        // Optional: UI update
         notificationTable.revalidate();
         notificationTable.repaint();
 
     } catch (Exception e) {
+        // Show an error message if something goes wrong
         JOptionPane.showMessageDialog(this, "Error refreshing data: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         e.printStackTrace();
+        
     }
-         
     }//GEN-LAST:event_Refresh_BTNActionPerformed
 
 
@@ -299,9 +320,12 @@ public class AdminMainPage extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new AdminMainPage().setVisible(true);
+                
             }
         });
     }
+     
+     
      
     
      
