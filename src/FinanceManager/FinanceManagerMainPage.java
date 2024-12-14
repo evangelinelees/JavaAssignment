@@ -2,19 +2,24 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
-package javaassignment;
+package FinanceManager;
+
+import javaassignment.LoginPage;
 
 /**
  *
  * @author Jia Zhi
  */
 public class FinanceManagerMainPage extends javax.swing.JPanel {
+    private String loggedInUser;
 
     /**
      * Creates new form FinanceManagerMainPage
      */
     public FinanceManagerMainPage() {
         initComponents();
+        this.loggedInUser = loggedInUser;
+        sessionUser.setText(loggedInUser);
     }
 
     /**
@@ -29,6 +34,7 @@ public class FinanceManagerMainPage extends javax.swing.JPanel {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         logout_btn = new javax.swing.JButton();
+        sessionUser = new javax.swing.JTextField();
         verify_PO = new javax.swing.JButton();
         view_SupplierPaymentStatus = new javax.swing.JButton();
 
@@ -47,12 +53,17 @@ public class FinanceManagerMainPage extends javax.swing.JPanel {
             }
         });
 
+        sessionUser.setBackground(new java.awt.Color(153, 255, 255));
+        sessionUser.setBorder(null);
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(176, Short.MAX_VALUE)
+                .addGap(15, 15, 15)
+                .addComponent(sessionUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 97, Short.MAX_VALUE)
                 .addComponent(jLabel1)
                 .addGap(125, 125, 125)
                 .addComponent(logout_btn)
@@ -64,7 +75,8 @@ public class FinanceManagerMainPage extends javax.swing.JPanel {
                 .addGap(17, 17, 17)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(logout_btn))
+                    .addComponent(logout_btn)
+                    .addComponent(sessionUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(22, Short.MAX_VALUE))
         );
 
@@ -130,6 +142,7 @@ public class FinanceManagerMainPage extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JButton logout_btn;
+    private javax.swing.JTextField sessionUser;
     private javax.swing.JButton verify_PO;
     private javax.swing.JButton view_SupplierPaymentStatus;
     // End of variables declaration//GEN-END:variables

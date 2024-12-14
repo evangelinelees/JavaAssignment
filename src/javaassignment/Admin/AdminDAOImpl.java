@@ -184,20 +184,8 @@ public class AdminDAOImpl implements AdminDAO {
 
         // Generate unique ID
         String uniqueId = prefix + new Random().nextInt(9999);
-        
-        int userCount = 0;
-        try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
-            while (reader.readLine() != null) {
-                userCount++;
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        
-        String userNumber = String.valueOf(userCount + 1);
 
-        // Format the user details
-        String userDetails = userNumber + ". " + uniqueId + "|" + fullName + "|" + icNumber + "|" + email + "|" + phoneNumber + "|" + password + "|" + role;
+        String userDetails =  uniqueId + "|" + fullName + "|" + icNumber + "|" + email + "|" + phoneNumber + "|" + password + "|" + role;
 
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath, true))) {
             writer.write(userDetails);
