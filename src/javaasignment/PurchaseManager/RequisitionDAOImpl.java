@@ -14,7 +14,7 @@ import java.util.List;
 
 
 
-public class RequisitionDAOImpl /*implements RequisitionDAO*/ {
+public class RequisitionDAOImpl implements RequisitionDAO {
     private final String requisitionFilePath = "REQUISITION.txt";
     
 
@@ -29,55 +29,7 @@ public class RequisitionDAOImpl /*implements RequisitionDAO*/ {
         }
     }
     
-    // Check for duplicates in the file
-    public boolean isDuplicate(String itemCode, String itemName, String currentQuantity, String proposedQuantity, String userId) {
-        try {
-            BufferedReader reader = new BufferedReader(new FileReader(requisitionFilePath));
-            String line;
-
-            // Loop through each line in the file
-            while ((line = reader.readLine()) != null) {
-                String[] requisitionDetails = line.split("\\|");
-                if (requisitionDetails.length == 5) {
-                    Requisition requisition = new Requisition(requisitionDetails);
-                    if (requisition.getItemCode().equals(itemCode) &&
-                        requisition.getItemName().equals(itemName) &&
-                        requisition.getCurrentQuantity().equals(currentQuantity) &&
-                        requisition.getProposedQuantity().equals(proposedQuantity) &&
-                        requisition.getUserId().equals(userId)) {
-                        reader.close();
-                        return true; // Duplicate found
-                    }
-                }
-            }
-            reader.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return false; // No duplicate found
-    }
     
-    // Load all requisitions from the file
-    public List<Requisition> getAllRequisitions() {
-        List<Requisition> requisitions = new ArrayList<>();
-        try {
-            BufferedReader reader = new BufferedReader(new FileReader(requisitionFilePath));
-            String line;
-
-            // Loop through each line in the file
-            while ((line = reader.readLine()) != null) {
-                String[] requisitionDetails = line.split("\\|");
-                if (requisitionDetails.length == 5) {
-                    requisitions.add(new Requisition(requisitionDetails));
-                }
-            }
-            reader.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return requisitions;
-    }
-
     
 }
 
