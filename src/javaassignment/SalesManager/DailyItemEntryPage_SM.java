@@ -10,6 +10,8 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.List;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -163,6 +165,29 @@ public class DailyItemEntryPage_SM extends javax.swing.JFrame {
         grossProfit.setText("Invalid input");
     }
 }
+     
+    private boolean isValidDate(String date) {
+    if (date == null || date.isEmpty()) {
+        return false; // Empty or null is invalid
+    }
+
+    // Regex to match the YYYY-MM-DD format
+    String datePattern = "\\d{4}-\\d{2}-\\d{2}";
+
+    if (!date.matches(datePattern)) {
+        return false; // Invalid format
+    }
+
+    // Additional validation using SimpleDateFormat to ensure it's a real date
+    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+    dateFormat.setLenient(false); // Ensure strict validation
+    try {
+        dateFormat.parse(date); // Try parsing the date
+        return true; // Valid date
+    } catch (ParseException e) {
+        return false; // Invalid date
+    }
+}
 
 
     /**
@@ -198,6 +223,15 @@ public class DailyItemEntryPage_SM extends javax.swing.JFrame {
         submitReportButton = new javax.swing.JButton();
         price = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
+        itemCodeSearch = new javax.swing.JTextField();
+        itemNameSearch = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
+        itemCodeSearchBtn = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        refreshTableBtn = new javax.swing.JButton();
+        jLabel14 = new javax.swing.JLabel();
+        customDate = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(153, 204, 255));
@@ -223,78 +257,78 @@ public class DailyItemEntryPage_SM extends javax.swing.JFrame {
         });
         jScrollPane2.setViewportView(listTable);
 
-        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 90, 400, 320));
+        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 90, 440, 250));
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel2.setText("Daily Sales Item Report");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 30, -1, -1));
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 20, -1, -1));
 
-        jLabel3.setText("Select Item you wish to create daily report for.");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 70, -1, -1));
+        jLabel3.setText("Select Item you wish to create daily report for first.");
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 70, 320, -1));
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel5.setText("Item List");
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 20, -1, -1));
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 30, -1, -1));
 
         jLabel6.setText("Date of Report:");
-        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 100, -1, 20));
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 70, -1, 20));
 
         dateField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 dateFieldActionPerformed(evt);
             }
         });
-        jPanel1.add(dateField, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 100, 130, -1));
+        jPanel1.add(dateField, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 70, 130, -1));
 
         jLabel7.setText("Item Code:");
-        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 140, -1, 20));
+        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 150, -1, 20));
 
         itemCode.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 itemCodeActionPerformed(evt);
             }
         });
-        jPanel1.add(itemCode, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 140, 130, -1));
+        jPanel1.add(itemCode, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 150, 130, -1));
 
         itemName.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 itemNameActionPerformed(evt);
             }
         });
-        jPanel1.add(itemName, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 180, 130, -1));
+        jPanel1.add(itemName, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 190, 130, -1));
 
         jLabel8.setText("Item Name:");
-        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 180, -1, 20));
+        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 190, -1, 20));
 
         initialQuantity.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 initialQuantityActionPerformed(evt);
             }
         });
-        jPanel1.add(initialQuantity, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 220, 130, -1));
+        jPanel1.add(initialQuantity, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 230, 130, -1));
 
         jLabel9.setText("Quantity Sold:");
-        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 260, -1, 20));
+        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 270, -1, 20));
 
         jLabel10.setText("Initial Quantity:");
-        jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 220, -1, 20));
+        jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 230, -1, 20));
 
         quantitySold.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 quantitySoldActionPerformed(evt);
             }
         });
-        jPanel1.add(quantitySold, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 260, 80, -1));
+        jPanel1.add(quantitySold, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 270, 80, -1));
 
         jLabel11.setText("Gross Profit:");
-        jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 340, -1, 20));
+        jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 350, -1, 20));
 
         grossProfit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 grossProfitActionPerformed(evt);
             }
         });
-        jPanel1.add(grossProfit, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 340, 220, -1));
+        jPanel1.add(grossProfit, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 350, 220, -1));
 
         backButton.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         backButton.setText("Back");
@@ -306,14 +340,14 @@ public class DailyItemEntryPage_SM extends javax.swing.JFrame {
         jPanel1.add(backButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, -1, -1));
 
         jLabel12.setText("Losses:");
-        jPanel1.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 300, -1, 20));
+        jPanel1.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 310, -1, 20));
 
         lossesField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 lossesFieldActionPerformed(evt);
             }
         });
-        jPanel1.add(lossesField, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 300, 80, -1));
+        jPanel1.add(lossesField, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 310, 80, -1));
 
         submitReportButton.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         submitReportButton.setText("Submit Daily Report");
@@ -325,10 +359,38 @@ public class DailyItemEntryPage_SM extends javax.swing.JFrame {
         jPanel1.add(submitReportButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 390, 350, -1));
 
         price.setText("Price");
-        jPanel1.add(price, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 300, 100, -1));
+        jPanel1.add(price, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 310, 100, -1));
 
         jLabel1.setText("Price per Item");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 280, -1, -1));
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 290, -1, -1));
+        jPanel1.add(itemCodeSearch, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 380, 90, -1));
+        jPanel1.add(itemNameSearch, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 430, 90, -1));
+
+        jLabel4.setText("Search by Item Code");
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 360, -1, -1));
+
+        jLabel13.setText("Search by Item Name");
+        jPanel1.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 410, -1, -1));
+
+        itemCodeSearchBtn.setText("Search (Item Code)");
+        jPanel1.add(itemCodeSearchBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 380, -1, -1));
+
+        jButton2.setText("Search (Item Name)");
+        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 430, -1, -1));
+
+        refreshTableBtn.setText("Refresh Table");
+        refreshTableBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                refreshTableBtnActionPerformed(evt);
+            }
+        });
+        jPanel1.add(refreshTableBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 350, -1, -1));
+
+        jLabel14.setText("Custom Date:");
+        jPanel1.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 110, -1, -1));
+
+        customDate.setText("YYYY-MM-DD");
+        jPanel1.add(customDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 110, 130, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -341,7 +403,7 @@ public class DailyItemEntryPage_SM extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 470, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 482, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
@@ -402,48 +464,60 @@ public class DailyItemEntryPage_SM extends javax.swing.JFrame {
     }//GEN-LAST:event_grossProfitActionPerformed
 
     private void submitReportButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitReportButtonActionPerformed
-        try {
-        // Step 1: Collect the data
-        String reportDate = dateField.getText();
-        String Code = this.itemCode.getText();
-        String Name = this.itemName.getText();
-        Double Price = Double.valueOf(price.getText());
-        int quantitySoldValue = Integer.parseInt(quantitySold.getText());
-        int lossesValue = Integer.parseInt(lossesField.getText());
+    try {
+            // Step 1: Validate and determine the report date
+            String customDateValue = customDate.getText().trim();
+            String reportDate;
 
-        // Step 2: Check if this report already exists in DAILY.txt
-        boolean isDuplicate = checkDuplicateInDailyFile(reportDate, Code, Name);
-        if (isDuplicate) {
-            grossProfit.setText("Error: Duplicate record");
-            JOptionPane.showMessageDialog(null, "Duplicate record found. Report not saved.", "Error", JOptionPane.ERROR_MESSAGE);
-            return; // Don't proceed if duplicate exists
+            if (isValidDate(customDateValue)) {
+                reportDate = customDateValue; // Use customDate if valid
+            } else {
+                // Show an error if customDate contains invalid characters
+                if (!customDateValue.isEmpty()) {
+                    JOptionPane.showMessageDialog(null, "Invalid date format in Custom Date. Use YYYY-MM-DD.", "Date Error", JOptionPane.ERROR_MESSAGE);
+                    return; // Stop submission
+                }
+                reportDate = dateField.getText().trim(); // Fallback to default date
+            }
+
+            // Proceed with other steps...
+            String Code = this.itemCode.getText();
+            String Name = this.itemName.getText();
+            Double Price = Double.valueOf(price.getText());
+            int quantitySoldValue = Integer.parseInt(quantitySold.getText());
+            int lossesValue = Integer.parseInt(lossesField.getText());
+
+            // Step 2: Check for duplicates
+            boolean isDuplicate = checkDuplicateInDailyFile(reportDate, Code, Name);
+            if (isDuplicate) {
+                grossProfit.setText("Error: Duplicate record");
+                JOptionPane.showMessageDialog(null, "Duplicate record found. Report not saved.", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            // Step 3: Calculate the gross profit
+            double grossProfitValue = (quantitySoldValue - lossesValue) * Price;
+            grossProfit.setText(String.format("%.2f", grossProfitValue));
+
+            // Step 4: Update ITEM.txt
+            updateItemQuantityInItemsFile(Code, quantitySoldValue, lossesValue);
+
+            // Step 5: Write to DAILY.txt
+            writeReportToDailyFile(reportDate, Code, Name, Price, quantitySoldValue, lossesValue, grossProfitValue);
+
+            // Refresh table and success message
+            loadItemsToTable();
+            JOptionPane.showMessageDialog(null, "Report successfully saved!", "Success", JOptionPane.INFORMATION_MESSAGE);
+
+        } catch (NumberFormatException e) {
+            grossProfit.setText("Invalid input");
+            JOptionPane.showMessageDialog(null, "Please enter valid numbers for Price, Quantity Sold, and Losses.", "Input Error", JOptionPane.ERROR_MESSAGE);
+        } catch (IOException e) {
+            e.printStackTrace();
+            grossProfit.setText("Error processing files");
+            JOptionPane.showMessageDialog(null, "An error occurred while processing files.", "File Error", JOptionPane.ERROR_MESSAGE);
         }
-
-        // Step 3: Calculate the new gross profit
-        double grossProfitValue = (quantitySoldValue - lossesValue) * Price; // Use Price here
-        grossProfit.setText(String.format("%.2f", grossProfitValue));
-
-        // Step 4: Update the quantity in ITEMS.txt
-        updateItemQuantityInItemsFile(Code, quantitySoldValue, lossesValue);
-
-        // Step 5: Write the daily report to DAILY.txt
-        writeReportToDailyFile(reportDate, Code, Name, Price, quantitySoldValue, lossesValue, grossProfitValue);
-        
-        // Load items into the table again to refresh it
-        loadItemsToTable();
-
-        // Success message
-        JOptionPane.showMessageDialog(null, "Report successfully saved!", "Success", JOptionPane.INFORMATION_MESSAGE);
-
-    } catch (NumberFormatException e) {
-        grossProfit.setText("Invalid input");
-        JOptionPane.showMessageDialog(null, "Please enter valid numbers for Price, Quantity Sold, and Losses.", "Input Error", JOptionPane.ERROR_MESSAGE);
-    } catch (IOException e) {
-        e.printStackTrace();
-        grossProfit.setText("Error processing files");
-        JOptionPane.showMessageDialog(null, "An error occurred while processing files.", "File Error", JOptionPane.ERROR_MESSAGE);
     }
-}
 
 private boolean checkDuplicateInDailyFile(String reportDate, String itemCode, String itemName) throws IOException {
     // Read the DAILY.txt file
@@ -524,6 +598,10 @@ private void updateItemQuantityInItemsFile(String Code, int quantitySold, int lo
     }
     }//GEN-LAST:event_submitReportButtonActionPerformed
 
+    private void refreshTableBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshTableBtnActionPerformed
+        loadItemsToTable();
+    }//GEN-LAST:event_refreshTableBtnActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -563,17 +641,25 @@ private void updateItemQuantityInItemsFile(String Code, int quantitySold, int lo
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton backButton;
+    private javax.swing.JTextField customDate;
     private javax.swing.JTextField dateField;
     private javax.swing.JTextField grossProfit;
     private javax.swing.JTextField initialQuantity;
     private javax.swing.JTextField itemCode;
+    private javax.swing.JTextField itemCodeSearch;
+    private javax.swing.JButton itemCodeSearchBtn;
     private javax.swing.JTextField itemName;
+    private javax.swing.JTextField itemNameSearch;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
@@ -585,6 +671,7 @@ private void updateItemQuantityInItemsFile(String Code, int quantitySold, int lo
     private javax.swing.JTextField lossesField;
     private javax.swing.JTextField price;
     private javax.swing.JTextField quantitySold;
+    private javax.swing.JButton refreshTableBtn;
     private javax.swing.JButton submitReportButton;
     // End of variables declaration//GEN-END:variables
 }

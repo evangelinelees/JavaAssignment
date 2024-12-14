@@ -23,15 +23,23 @@ import javax.swing.JOptionPane;
 
 import javax.swing.table.DefaultTableModel;
 
-public class ViewSalesItemPage_SM extends javax.swing.JFrame {
+public class ViewItemCreateReq_SM extends javax.swing.JFrame {
 private final ItemsDAO itemsDAO;
     /**
      * Creates new form ViewSalesItemPage_SM
      */
-    public ViewSalesItemPage_SM() {
-        // Initialize the DAO implementation
-        this.itemsDAO = new ItemsDAOImpl();
+    public ViewItemCreateReq_SM() {
         initComponents();
+        
+        
+        ItemCodeField.setEnabled(false);
+        ItemNameField.setEnabled(false);
+        CurrentQuantityField.setEnabled(false);
+        
+        this.itemsDAO = new ItemsDAOImpl();
+        
+        
+        
         loadItemsToTable();
     }
     
@@ -64,7 +72,22 @@ private final ItemsDAO itemsDAO;
         
     }
     
-    // Add this code after initializing the table in the constructor or setup methods
+    private void updateTable(List<Items> items) {
+    DefaultTableModel tableModel = (DefaultTableModel) jTable1.getModel();
+    tableModel.setRowCount(0); // Clear existing rows
+
+    for (Items item : items) {
+        tableModel.addRow(new Object[]{
+            item.getItemCode(),
+            item.getItemName(),
+            item.getQuantity(),
+            item.getPrice(),
+            item.getSupplierID(),
+            item.isNeedReorder() ? "Yes" : "No"
+        });
+    }
+}
+
 
 
 
@@ -98,6 +121,14 @@ private final ItemsDAO itemsDAO;
         UserIDField = new javax.swing.JTextField();
         SubmitRequisition = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
+        showReorderBtn = new javax.swing.JButton();
+        refreshTableBtn = new javax.swing.JButton();
+        jLabel4 = new javax.swing.JLabel();
+        itemCodeSearch = new javax.swing.JTextField();
+        itemCodeSearchBtn = new javax.swing.JButton();
+        jLabel13 = new javax.swing.JLabel();
+        itemNameSearch = new javax.swing.JTextField();
+        searchItemNameBtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(204, 255, 204));
@@ -143,7 +174,7 @@ private final ItemsDAO itemsDAO;
             jTable1.getColumnModel().getColumn(5).setResizable(false);
         }
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 160, 530, 240));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 140, 530, 240));
 
         BackBTN.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         BackBTN.setText("Back");
@@ -155,7 +186,7 @@ private final ItemsDAO itemsDAO;
         jPanel1.add(BackBTN, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, -1, -1));
 
         jLabel2.setText("Please select row to fill in Requisition Form.");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 130, 350, -1));
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 110, 350, -1));
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel3.setText("Items List");
@@ -185,15 +216,22 @@ private final ItemsDAO itemsDAO;
 
         jLabel9.setText("Current Quantity");
         jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 240, 90, 20));
-        jPanel1.add(UserIDField, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 280, 260, -1));
 
-        SubmitRequisition.setText("Submit");
+        UserIDField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                UserIDFieldActionPerformed(evt);
+            }
+        });
+        jPanel1.add(UserIDField, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 280, 260, -1));
+
+        SubmitRequisition.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        SubmitRequisition.setText("Submit Requisition");
         SubmitRequisition.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 SubmitRequisitionActionPerformed(evt);
             }
         });
-        jPanel1.add(SubmitRequisition, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 350, -1, -1));
+        jPanel1.add(SubmitRequisition, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 350, -1, -1));
 
         jPanel2.setBackground(new java.awt.Color(0, 0, 0));
         jPanel2.setPreferredSize(new java.awt.Dimension(5, 340));
@@ -202,14 +240,54 @@ private final ItemsDAO itemsDAO;
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 5, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 410, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 40, -1, 410));
+
+        showReorderBtn.setText("Show only need Reorder");
+        showReorderBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                showReorderBtnActionPerformed(evt);
+            }
+        });
+        jPanel1.add(showReorderBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 440, -1, -1));
+
+        refreshTableBtn.setText("Refresh Table");
+        refreshTableBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                refreshTableBtnActionPerformed(evt);
+            }
+        });
+        jPanel1.add(refreshTableBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 390, -1, -1));
+
+        jLabel4.setText("Search by Item Code");
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 400, -1, -1));
+        jPanel1.add(itemCodeSearch, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 420, 90, -1));
+
+        itemCodeSearchBtn.setText("Search (Item Code)");
+        itemCodeSearchBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itemCodeSearchBtnActionPerformed(evt);
+            }
+        });
+        jPanel1.add(itemCodeSearchBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 420, -1, -1));
+
+        jLabel13.setText("Search by Item Name");
+        jPanel1.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 450, -1, -1));
+        jPanel1.add(itemNameSearch, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 470, 90, -1));
+
+        searchItemNameBtn.setText("Search (Item Name)");
+        searchItemNameBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                searchItemNameBtnActionPerformed(evt);
+            }
+        });
+        jPanel1.add(searchItemNameBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 470, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -219,7 +297,9 @@ private final ItemsDAO itemsDAO;
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 508, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 520, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
@@ -234,39 +314,37 @@ private final ItemsDAO itemsDAO;
 
     private void SubmitRequisitionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SubmitRequisitionActionPerformed
     String itemCode = ItemCodeField.getText();
-        String itemName = ItemNameField.getText();
-        String currentQuantity = CurrentQuantityField.getText();
-        String proposedQuantity = ProposedQuantityField.getText();
-        String userId = UserIDField.getText();
+    String itemName = ItemNameField.getText();
+    String currentQuantity = CurrentQuantityField.getText();
+    String proposedQuantity = ProposedQuantityField.getText();
+    String userId = UserIDField.getText();
 
-        if (itemCode.isEmpty() || itemName.isEmpty() || currentQuantity.isEmpty() || proposedQuantity.isEmpty() || userId.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Please fill in all fields.", "Error", JOptionPane.ERROR_MESSAGE);
+    if (itemCode.isEmpty() || itemName.isEmpty() || currentQuantity.isEmpty() || proposedQuantity.isEmpty() || userId.isEmpty()) {
+        JOptionPane.showMessageDialog(this, "Please fill in all fields.", "Error", JOptionPane.ERROR_MESSAGE);
+        return;
+    }
+
+    try {
+        AdminDAO adminDAO = new AdminDAOImpl();
+        User user = adminDAO.getUserById(userId);
+        if (user == null) {
+            JOptionPane.showMessageDialog(this, "Invalid UserID. Please enter a valid UserID.", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
 
-        try {
-            AdminDAO adminDAO = new AdminDAOImpl();
-            User user = adminDAO.getUserById(userId);
-            if (user == null) {
-                JOptionPane.showMessageDialog(this, "Invalid UserID. Please enter a valid UserID.", "Error", JOptionPane.ERROR_MESSAGE);
-                return;
-            }
+        // Create a Requisition object
+        Requisition requisition = new Requisition(itemCode, itemName, currentQuantity, proposedQuantity, userId);
 
-            // Create a Requisition object
-            Requisition requisition = new Requisition(itemCode, itemName, currentQuantity, proposedQuantity, userId);
-
-            // Save requisition using DAO
-            RequisitionDAOImpl aaa = new RequisitionDAOImpl();
-            boolean success = aaa.saveRequisition(itemCode, itemName, currentQuantity, proposedQuantity, userId);
-            if (success) {
-                JOptionPane.showMessageDialog(this, "Requisition submitted successfully.");
-            } else {
-                JOptionPane.showMessageDialog(this, "Failed to submit requisition. Try again.", "Error", JOptionPane.ERROR_MESSAGE);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-            JOptionPane.showMessageDialog(this, "An error occurred.", "Error", JOptionPane.ERROR_MESSAGE);
-        }
+        // Save requisition using DAO
+        RequisitionDAOImpl requisitionDAO = new RequisitionDAOImpl();
+        boolean success = requisitionDAO.saveRequisition(itemCode, itemName, currentQuantity, proposedQuantity, userId);
+        if (success) {
+            JOptionPane.showMessageDialog(this, "Requisition submitted successfully.");
+        } 
+    } catch (Exception e) {
+        e.printStackTrace();
+        JOptionPane.showMessageDialog(this, "An error occurred.", "Error", JOptionPane.ERROR_MESSAGE);
+    }
     
     }//GEN-LAST:event_SubmitRequisitionActionPerformed
 
@@ -291,6 +369,55 @@ private final ItemsDAO itemsDAO;
         // TODO add your handling code here:
     }//GEN-LAST:event_ItemCodeFieldActionPerformed
 
+    private void refreshTableBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshTableBtnActionPerformed
+        loadItemsToTable();
+    }//GEN-LAST:event_refreshTableBtnActionPerformed
+
+    private void itemCodeSearchBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemCodeSearchBtnActionPerformed
+        String itemCode = itemCodeSearch.getText();
+    if (!itemCode.isEmpty()) {
+        try {
+            List<Items> filteredItems = itemsDAO.searchItemsByCode(itemCode);
+            updateTable(filteredItems);
+        } catch (Exception e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Error fetching data.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    } else {
+        JOptionPane.showMessageDialog(this, "Please enter an Item Code to search.", "Warning", JOptionPane.WARNING_MESSAGE);
+    }
+
+    }//GEN-LAST:event_itemCodeSearchBtnActionPerformed
+
+    private void searchItemNameBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchItemNameBtnActionPerformed
+        String itemName = itemNameSearch.getText();
+    if (!itemName.isEmpty()) {
+        try {
+            List<Items> filteredItems = itemsDAO.searchItemsByName(itemName);
+            updateTable(filteredItems);
+        } catch (Exception e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Error fetching data.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    } else {
+        JOptionPane.showMessageDialog(this, "Please enter an Item Name to search.", "Warning", JOptionPane.WARNING_MESSAGE);
+    }
+    }//GEN-LAST:event_searchItemNameBtnActionPerformed
+
+    private void showReorderBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showReorderBtnActionPerformed
+        try {
+        List<Items> reorderItems = itemsDAO.getItemsNeedingReorder();
+        updateTable(reorderItems);
+    } catch (Exception e) {
+        e.printStackTrace();
+        JOptionPane.showMessageDialog(this, "Error fetching data.", "Error", JOptionPane.ERROR_MESSAGE);
+    }
+    }//GEN-LAST:event_showReorderBtnActionPerformed
+
+    private void UserIDFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UserIDFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_UserIDFieldActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -305,13 +432,14 @@ private final ItemsDAO itemsDAO;
             }
         }
     } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
-        java.util.logging.Logger.getLogger(ViewSalesItemPage_SM.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        java.util.logging.Logger.getLogger(ViewItemCreateReq_SM.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
     }
+    //</editor-fold>
     //</editor-fold>
 
     /* Create and display the form */
     java.awt.EventQueue.invokeLater(() -> {
-        ViewSalesItemPage_SM frame = new ViewSalesItemPage_SM();
+        ViewItemCreateReq_SM frame = new ViewItemCreateReq_SM();
         frame.setVisible(true); 
 
     });
@@ -326,9 +454,14 @@ private final ItemsDAO itemsDAO;
     private javax.swing.JTextField ProposedQuantityField;
     private javax.swing.JButton SubmitRequisition;
     private javax.swing.JTextField UserIDField;
+    private javax.swing.JTextField itemCodeSearch;
+    private javax.swing.JButton itemCodeSearchBtn;
+    private javax.swing.JTextField itemNameSearch;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
@@ -338,5 +471,8 @@ private final ItemsDAO itemsDAO;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
+    private javax.swing.JButton refreshTableBtn;
+    private javax.swing.JButton searchItemNameBtn;
+    private javax.swing.JButton showReorderBtn;
     // End of variables declaration//GEN-END:variables
 }

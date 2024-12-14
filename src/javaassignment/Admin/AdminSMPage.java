@@ -6,7 +6,7 @@ package javaassignment.Admin;
 
 import javaassignment.SalesManager.DailyItemEntryPage_SM;
 import javaassignment.SalesManager.SalesReportPage_SM;
-import javaassignment.SalesManager.ViewSalesItemPage_SM;
+import javaassignment.SalesManager.ViewItemCreateReq_SM;
 
 /**
  *
@@ -147,7 +147,7 @@ public class AdminSMPage extends javax.swing.JFrame {
     }//GEN-LAST:event_Back_BTNActionPerformed
 
     private void ViewSalesItem_BTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ViewSalesItem_BTNActionPerformed
-       ViewSalesItemPage_SM VSIT = new ViewSalesItemPage_SM();
+       ViewItemCreateReq_SM VSIT = new ViewItemCreateReq_SM();
        VSIT.setVisible(true);
        this.dispose();
     }//GEN-LAST:event_ViewSalesItem_BTNActionPerformed
