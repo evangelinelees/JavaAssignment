@@ -11,12 +11,22 @@ import javaassignment.LoginPage;
  * @author vroom
  */
 public class SalesManagerMainPage extends javax.swing.JFrame {
+    private String loggedInUser;
 
     /**
      * Creates new form SalesManagerMainPage
      */
-    public SalesManagerMainPage() {
-        initComponents();
+    public SalesManagerMainPage(String loggedInUser) {
+        initComponents();       
+        this.loggedInUser = loggedInUser;
+        sessionUser.setText(loggedInUser);
+        
+        
+        
+    }
+    
+    public SalesManagerMainPage(){
+        
     }
 
     /**
@@ -32,6 +42,7 @@ public class SalesManagerMainPage extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         LogoutBTN = new javax.swing.JButton();
         ExitBTN = new javax.swing.JButton();
+        sessionUser = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
         ViewSalesItemsBTN = new javax.swing.JButton();
         DailyItemSalesEntryBTN = new javax.swing.JButton();
@@ -63,12 +74,18 @@ public class SalesManagerMainPage extends javax.swing.JFrame {
             }
         });
 
+        sessionUser.setBackground(new java.awt.Color(204, 255, 204));
+        sessionUser.setForeground(new java.awt.Color(204, 255, 204));
+        sessionUser.setBorder(null);
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(310, 310, 310)
+                .addGap(85, 85, 85)
+                .addComponent(sessionUser, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(154, 154, 154)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 116, Short.MAX_VALUE)
                 .addComponent(LogoutBTN)
@@ -81,7 +98,9 @@ public class SalesManagerMainPage extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(23, 23, 23)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(sessionUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(ExitBTN, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(LogoutBTN, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(25, Short.MAX_VALUE))
@@ -247,5 +266,6 @@ public class SalesManagerMainPage extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JTextField sessionUser;
     // End of variables declaration//GEN-END:variables
 }

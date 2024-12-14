@@ -230,10 +230,10 @@ public class AdminRegistrationPage extends javax.swing.JFrame {
         String role = Role_CB.getSelectedItem().toString();
         
             // Prevent registration of the fixed admin account
-       if (Admin.getAdminId().equals(fullName) || Admin.getAdminId().equals(IcNumber)) {
+        if (Admin.getAdminId().equals(fullName) || Admin.getAdminId().equals(IcNumber)) {
            JOptionPane.showMessageDialog(this, "Cannot register fixed admin credentials", "Error", JOptionPane.ERROR_MESSAGE);
            return;
-       }
+        }
 
         // Basic validation checks
         if (fullName.isEmpty() || IcNumber.isEmpty() || email.isEmpty() || PhNumber.isEmpty() || password.isEmpty()) {

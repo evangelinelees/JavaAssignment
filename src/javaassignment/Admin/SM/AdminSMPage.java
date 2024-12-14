@@ -1,6 +1,7 @@
 
-package javaassignment.Admin;
+package javaassignment.Admin.SM;
 
+import javaassignment.Admin.AdminMainPage;
 import javaassignment.SalesManager.DailyItemEntryPage_SM;
 import javaassignment.SalesManager.SalesReportPage_SM;
 import javaassignment.SalesManager.ViewSalesItemPage_SM;

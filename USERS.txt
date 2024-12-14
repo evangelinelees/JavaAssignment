@@ -1,4 +1,6 @@
 PM8484|Alvin Khoo Jian Feng |031111101114|jenn@gmail.com|01111407971|12345|Purchase Manager
-2. SM2804|jenn|123456789010|jchok2003@gmail.com|01312453647|asd123|Sales Manager
-3. SM5921|alvin|761007105160|jchok2003@gmail.com|01111407971|asd123|Sales Manager
-4. PM2283|angie|060808105162|test@gmail.com|0132435678|asdfghj|Purchase Manager
+SM2804|jenn|123456789010|jchok2003@gmail.com|01312453647|asd123|Sales Manager
+SM5921|alvin|761007105160|jchok2003@gmail.com|01111407971|asd123|Sales Manager
+PM2283|angie|060808105162|test@gmail.com|0132435678|asdfghj|Purchase Manager
+SM2663|evangeline|09876543212|test@gmail.com|0111148376|12345|Sales Manager
+SM5624|kyt|09876541324|test@gmail.com|0123457615|1234|Sales Manager
