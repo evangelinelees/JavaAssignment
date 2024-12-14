@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package javaassignment.SalesManager;
+package javaassignment.Admin.SM;
 
 import javaassignment.LoginPage;
 
@@ -10,13 +10,13 @@ import javaassignment.LoginPage;
  *
  * @author vroom
  */
-public class SalesManagerMainPage extends javax.swing.JFrame {
+public class AdminSMPage extends javax.swing.JFrame {
     private String loggedInUser;
 
     /**
      * Creates new form SalesManagerMainPage
      */
-    public SalesManagerMainPage(String loggedInUser) {
+    public AdminSMPage(String loggedInUser) {
         initComponents();       
         this.loggedInUser = loggedInUser;
         sessionUser.setText(loggedInUser);
@@ -25,7 +25,7 @@ public class SalesManagerMainPage extends javax.swing.JFrame {
         
     }
     
-    public SalesManagerMainPage(){
+    public AdminSMPage(){
         
     }
 
@@ -197,25 +197,25 @@ public class SalesManagerMainPage extends javax.swing.JFrame {
     }//GEN-LAST:event_ExitBTNActionPerformed
 
     private void ViewSalesItemsBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ViewSalesItemsBTNActionPerformed
-       ViewItemCreateReq_SM VSIT = new ViewItemCreateReq_SM();
+       AdminViewItemCreateReq_SM VSIT = new AdminViewItemCreateReq_SM();
        VSIT.setVisible(true);
        this.dispose();
     }//GEN-LAST:event_ViewSalesItemsBTNActionPerformed
 
     private void DailyItemSalesEntryBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DailyItemSalesEntryBTNActionPerformed
-       DailyItemEntryPage_SM DIE = new DailyItemEntryPage_SM();
+       AdminDailyItemEntryPage_SM DIE = new AdminDailyItemEntryPage_SM();
        DIE.setVisible(true);
        this.dispose();
     }//GEN-LAST:event_DailyItemSalesEntryBTNActionPerformed
 
     private void SalesReportBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SalesReportBTNActionPerformed
-       SalesReportPage_SM SR = new SalesReportPage_SM();
+       AdminSalesReportPage_SM SR = new AdminSalesReportPage_SM();
        SR.setVisible(true);
        this.dispose();
     }//GEN-LAST:event_SalesReportBTNActionPerformed
 
     private void editDailyItemsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editDailyItemsActionPerformed
-        ViewDeleteSalesEntry EDSE = new ViewDeleteSalesEntry();
+        AdminViewDeleteSalesEntry EDSE = new AdminViewDeleteSalesEntry();
         EDSE.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_editDailyItemsActionPerformed
@@ -237,20 +237,20 @@ public class SalesManagerMainPage extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(SalesManagerMainPage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AdminSMPage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(SalesManagerMainPage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AdminSMPage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(SalesManagerMainPage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AdminSMPage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(SalesManagerMainPage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AdminSMPage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new SalesManagerMainPage().setVisible(true);
+                new AdminSMPage().setVisible(true);
             }
         });
     }
