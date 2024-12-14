@@ -12,6 +12,7 @@ import java.util.List;
  */
 public interface ItemsDAO {
     List<Items> viewItems();
-    
-    
+    List<Items> searchItemsByCode(String itemCode) throws Exception;
+    List<Items> searchItemsByName(String itemName) throws Exception;
+    List<Items> getItemsNeedingReorder() throws Exception;
 }

@@ -10,12 +10,12 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author vroom
  */
-public class DeleteDailySalesEntry extends javax.swing.JFrame {
+public class ViewDeleteSalesEntry extends javax.swing.JFrame {
 
     /**
      * Creates new form EditDailySalesEntry
      */
-    public DeleteDailySalesEntry() {
+    public ViewDeleteSalesEntry() {
         initComponents();
         
         dateField.setEnabled(false);
@@ -174,6 +174,7 @@ public class DeleteDailySalesEntry extends javax.swing.JFrame {
         yearField = new javax.swing.JTextField();
         calendarSearch = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
+        refreshTableBtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -293,21 +294,30 @@ public class DeleteDailySalesEntry extends javax.swing.JFrame {
         jPanel1.add(price, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 310, 100, -1));
 
         monthField.setText("MM");
-        jPanel1.add(monthField, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 390, -1, -1));
+        jPanel1.add(monthField, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 390, -1, 30));
 
         yearField.setText("YYYY");
-        jPanel1.add(yearField, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 390, -1, -1));
+        jPanel1.add(yearField, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 390, -1, 30));
 
+        calendarSearch.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         calendarSearch.setText("Search");
         calendarSearch.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 calendarSearchActionPerformed(evt);
             }
         });
-        jPanel1.add(calendarSearch, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 390, -1, -1));
+        jPanel1.add(calendarSearch, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 390, -1, 30));
 
         jLabel4.setText("Make sure both fields are filled before searching.");
         jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 370, 270, -1));
+
+        refreshTableBtn.setText("Refresh Table");
+        refreshTableBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                refreshTableBtnActionPerformed(evt);
+            }
+        });
+        jPanel1.add(refreshTableBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 360, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -411,6 +421,10 @@ public class DeleteDailySalesEntry extends javax.swing.JFrame {
     }
     }//GEN-LAST:event_deleteButtonActionPerformed
 
+    private void refreshTableBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshTableBtnActionPerformed
+        loadItemsToTable();
+    }//GEN-LAST:event_refreshTableBtnActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -428,21 +442,23 @@ public class DeleteDailySalesEntry extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(DeleteDailySalesEntry.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ViewDeleteSalesEntry.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(DeleteDailySalesEntry.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ViewDeleteSalesEntry.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(DeleteDailySalesEntry.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ViewDeleteSalesEntry.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(DeleteDailySalesEntry.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ViewDeleteSalesEntry.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new DeleteDailySalesEntry().setVisible(true);
+                new ViewDeleteSalesEntry().setVisible(true);
             }
         });
     }
@@ -472,6 +488,7 @@ public class DeleteDailySalesEntry extends javax.swing.JFrame {
     private javax.swing.JTextField monthField;
     private javax.swing.JTextField price;
     private javax.swing.JTextField quantitySold;
+    private javax.swing.JButton refreshTableBtn;
     private javax.swing.JTextField yearField;
     // End of variables declaration//GEN-END:variables
 }

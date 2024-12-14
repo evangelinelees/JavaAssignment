@@ -178,7 +178,7 @@ public class SalesManagerMainPage extends javax.swing.JFrame {
     }//GEN-LAST:event_ExitBTNActionPerformed
 
     private void ViewSalesItemsBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ViewSalesItemsBTNActionPerformed
-       ViewSalesItemPage_SM VSIT = new ViewSalesItemPage_SM();
+       ViewItemCreateReq_SM VSIT = new ViewItemCreateReq_SM();
        VSIT.setVisible(true);
        this.dispose();
     }//GEN-LAST:event_ViewSalesItemsBTNActionPerformed
@@ -196,7 +196,7 @@ public class SalesManagerMainPage extends javax.swing.JFrame {
     }//GEN-LAST:event_SalesReportBTNActionPerformed
 
     private void editDailyItemsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editDailyItemsActionPerformed
-        DeleteDailySalesEntry EDSE = new DeleteDailySalesEntry();
+        ViewDeleteSalesEntry EDSE = new ViewDeleteSalesEntry();
         EDSE.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_editDailyItemsActionPerformed

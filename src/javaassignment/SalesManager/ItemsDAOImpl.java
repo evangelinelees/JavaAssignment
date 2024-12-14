@@ -47,6 +47,62 @@ public List<Items> viewItems() {
     return items;
 }
 
+@Override
+    public List<Items> searchItemsByCode(String itemCode) throws Exception {
+        List<Items> allItems = loadItemsFromFile();
+        List<Items> filteredItems = new ArrayList<>();
+        for (Items item : allItems) {
+            if (item.getItemCode().equalsIgnoreCase(itemCode)) {
+                filteredItems.add(item);
+            }
+        }
+        return filteredItems;
+    }
+    
+    @Override
+    public List<Items> searchItemsByName(String itemName) throws Exception {
+        List<Items> allItems = loadItemsFromFile();
+        List<Items> filteredItems = new ArrayList<>();
+        for (Items item : allItems) {
+            if (item.getItemName().toLowerCase().contains(itemName.toLowerCase())) {
+                filteredItems.add(item);
+            }
+        }
+        return filteredItems;
+    }
+    
+    @Override
+    public List<Items> getItemsNeedingReorder() throws Exception {
+        List<Items> allItems = loadItemsFromFile();
+        List<Items> reorderItems = new ArrayList<>();
+        for (Items item : allItems) {
+            if (item.isNeedReorder()) {
+                reorderItems.add(item);
+            }
+        }
+        return reorderItems;
+    }
+
+    private List<Items> loadItemsFromFile() throws Exception {
+        List<Items> items = new ArrayList<>();
+        try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
+            String line;
+            while ((line = br.readLine()) != null) {
+                String[] parts = line.split("\\|");
+                Items item = new Items(
+                        parts[0],  // Item Code
+                        parts[1],  // Item Name
+                        Integer.parseInt(parts[2]),  // Quantity
+                        Double.parseDouble(parts[3]),  // Price
+                        parts[4]  // Supplier ID
+//                        Boolean.parseBoolean(parts[5])  // Need Reorder
+                );
+                items.add(item);
+            }
+        }
+        return items;
+    }
+
     
     
 
