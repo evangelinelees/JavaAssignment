@@ -7,14 +7,27 @@ package javaassignment.Admin;
 public  class ChangeLog  {
     private int logNo;
     private String userId;
+    private String userRole;
     private String changeInfo;
     private String status;
+
+ 
     
-    public ChangeLog(int logNo, String userId, String changeInfo, String status) {
+    
+    public ChangeLog(int logNo, String userId, String userRole, String changeInfo, String status) {
         this.logNo = logNo;
         this.userId = userId;
+        this.userRole = userRole;
         this.changeInfo = changeInfo;
         this.status = status;
+    }
+    
+    public String getUserRole() {
+        return userRole;
+    }
+
+    public void setUserRole(String userRole) {
+        this.userRole = userRole;
     }
 
     public int getLogNo() {
@@ -50,9 +63,8 @@ public  class ChangeLog  {
     }
     
     @Override
-    public String toString(){
-        return logNo + ". " + userId + " | " + changeInfo + " | " + status;
+    public String toString() {
+        return logNo + " | " + userId + " | " + userRole + " | " + changeInfo + " | " + status;
     }
-
 
 }
