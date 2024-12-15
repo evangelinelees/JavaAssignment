@@ -12,13 +12,14 @@ import javax.swing.JOptionPane;
 
 
 public class EditUser extends javax.swing.JFrame {
-    
+   private String loggedInUser;
    private User user;
 
     /** Creates new form UpdateUser */
     public EditUser(User user) {
         initComponents();
         this.user = user;
+        this.loggedInUser = loggedInUser;
         
         ID_TF.setText(user.getUserId());
         FName_TF.setText(user.getFullName());

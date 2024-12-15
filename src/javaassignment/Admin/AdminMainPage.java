@@ -247,6 +247,7 @@ public class AdminMainPage extends javax.swing.JFrame {
 
     private void RegisterBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RegisterBTNActionPerformed
        AdminRegistrationPage RP = new AdminRegistrationPage();
+       
        RP.setVisible(true);
        this.dispose();
     }//GEN-LAST:event_RegisterBTNActionPerformed

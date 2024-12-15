@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
+
 package javaassignment.SalesManager;
 
 import javaassignment.LoginPage;
@@ -197,13 +194,13 @@ public class SalesManagerMainPage extends javax.swing.JFrame {
     }//GEN-LAST:event_ExitBTNActionPerformed
 
     private void ViewSalesItemsBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ViewSalesItemsBTNActionPerformed
-       ViewItemCreateReq_SM VSIT = new ViewItemCreateReq_SM();
+       ViewItemCreateReq_SM VSIT = new ViewItemCreateReq_SM(loggedInUser);
        VSIT.setVisible(true);
        this.dispose();
     }//GEN-LAST:event_ViewSalesItemsBTNActionPerformed
 
     private void DailyItemSalesEntryBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DailyItemSalesEntryBTNActionPerformed
-       DailyItemEntryPage_SM DIE = new DailyItemEntryPage_SM();
+       DailyItemEntryPage_SM DIE = new DailyItemEntryPage_SM(loggedInUser);
        DIE.setVisible(true);
        this.dispose();
     }//GEN-LAST:event_DailyItemSalesEntryBTNActionPerformed
@@ -215,7 +212,7 @@ public class SalesManagerMainPage extends javax.swing.JFrame {
     }//GEN-LAST:event_SalesReportBTNActionPerformed
 
     private void editDailyItemsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editDailyItemsActionPerformed
-        ViewDeleteSalesEntry EDSE = new ViewDeleteSalesEntry();
+        ViewDeleteSalesEntry EDSE = new ViewDeleteSalesEntry(loggedInUser);
         EDSE.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_editDailyItemsActionPerformed

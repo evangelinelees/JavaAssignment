@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
+
 package javaassignment.SalesManager;
 
 import java.io.BufferedReader;
@@ -29,13 +26,16 @@ public class DailyItemEntryPage_SM extends javax.swing.JFrame {
     private final ItemsDAO itemsDAO;
     private int selectedItemInitialQuantity;
     private double selectedItemPrice;
+    private String loggedInUser;
+    
 
     /**
      * Creates new form DailyItemEntryPage
      */
-    public DailyItemEntryPage_SM() {
+    public DailyItemEntryPage_SM(String loggedInUser) {
          initComponents();
         this.itemsDAO = new ItemsDAOImpl();
+        this.loggedInUser = loggedInUser;
 
         // Set the current date in the dateField
         LocalDate today = LocalDate.now();
@@ -59,6 +59,10 @@ public class DailyItemEntryPage_SM extends javax.swing.JFrame {
         
     }
     
+    public DailyItemEntryPage_SM(){
+        this.itemsDAO = null;
+        
+    }
      
     private void loadItemsToTable() {
         try {
@@ -508,6 +512,8 @@ public class DailyItemEntryPage_SM extends javax.swing.JFrame {
             // Refresh table and success message
             loadItemsToTable();
             JOptionPane.showMessageDialog(null, "Report successfully saved!", "Success", JOptionPane.INFORMATION_MESSAGE);
+            writeToLog(loggedInUser," | Submitted daily report | ","SUCCESS");
+            
 
         } catch (NumberFormatException e) {
             grossProfit.setText("Invalid input");
@@ -602,6 +608,26 @@ private void updateItemQuantityInItemsFile(String Code, int quantitySold, int lo
         loadItemsToTable();
     }//GEN-LAST:event_refreshTableBtnActionPerformed
 
+    public void writeToLog(String uniqueId, String description, String status) {
+        try {
+            File logFilePath = new File("log.txt");
+
+            // Create log.txt if it doesn't exist
+            if (!logFilePath.exists()) {
+                logFilePath.createNewFile();
+            }
+
+            // Append log entry
+            try (BufferedWriter logWriter = new BufferedWriter(new FileWriter(logFilePath, true))) {
+                String logEntry = uniqueId  + description  + status;
+                logWriter.write(logEntry);
+                logWriter.newLine();
+            }
+        } catch (IOException e) {
+            System.err.println("Error writing to log file: " + e.getMessage());
+        }
+        
+    }
     /**
      * @param args the command line arguments
      */

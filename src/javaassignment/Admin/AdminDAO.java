@@ -14,5 +14,8 @@ public interface AdminDAO {
     List<User> getAllUsers();
     boolean isIcNumberDuplicate(String icNumber);
     boolean saveUser(String fullName, String icNumber, String email, String phoneNumber, String password, String role);
+    void writeToLog(String uniqueId, String description, String status);
+    
+    
 }
 

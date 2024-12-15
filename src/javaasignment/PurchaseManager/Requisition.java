@@ -14,14 +14,16 @@ public class Requisition {
     private String currentQuantity;
     private String proposedQuantity;
     private String userId;
+    private String loggedInUser;
 
     // Constructor
-    public Requisition(String itemCode, String itemName, String currentQuantity, String proposedQuantity, String userId) {
+    public Requisition(String itemCode, String itemName, String currentQuantity, String proposedQuantity, String userId,String loggedInUser) {
         this.itemCode = itemCode;
         this.itemName = itemName;
         this.currentQuantity = currentQuantity;
         this.proposedQuantity = proposedQuantity;
         this.userId = userId;
+        this.loggedInUser = loggedInUser;
     }
     
     public Requisition(String[] requisitionDetails) {

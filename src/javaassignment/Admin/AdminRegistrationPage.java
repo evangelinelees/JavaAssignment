@@ -7,11 +7,14 @@ import javax.swing.JOptionPane;
 
 
 public class AdminRegistrationPage extends javax.swing.JFrame {
- 
+    //private String loggedInUser;
    
     public AdminRegistrationPage() {
         initComponents();
+        //this.loggedInUser = loggedInUser;
+        //sessionUser.setText(loggedInUser);
     }
+   
 
    
     @SuppressWarnings("unchecked")
@@ -265,6 +268,8 @@ public class AdminRegistrationPage extends javax.swing.JFrame {
         } else {
             JOptionPane.showMessageDialog(this, "Error saving user details", "Error", JOptionPane.ERROR_MESSAGE);
         }
+        
+        
     }//GEN-LAST:event_Register_ButtonActionPerformed
         
     

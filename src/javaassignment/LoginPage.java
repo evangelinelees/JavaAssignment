@@ -22,7 +22,7 @@ public class LoginPage extends javax.swing.JFrame {
 
 
     
-    private String currentUserID = null;
+   
 
     
     @SuppressWarnings("unchecked")
@@ -157,9 +157,7 @@ public class LoginPage extends javax.swing.JFrame {
 
     }//GEN-LAST:event_Login_ButtonActionPerformed
 
-    private boolean isUserLoggedIn() {
-        return currentUserID != null;
-    }
+   
 
     
     private boolean validateLogin(String ID, String Pass) {              

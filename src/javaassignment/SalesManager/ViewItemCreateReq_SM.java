@@ -13,6 +13,10 @@ package javaassignment.SalesManager;
 
 
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.List;
 import javaasignment.PurchaseManager.Requisition;
 import javaasignment.PurchaseManager.RequisitionDAOImpl;
@@ -24,12 +28,14 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 public class ViewItemCreateReq_SM extends javax.swing.JFrame {
-private final ItemsDAO itemsDAO;
+    private final ItemsDAO itemsDAO;
+    private String loggedInUser;
     /**
      * Creates new form ViewSalesItemPage_SM
      */
-    public ViewItemCreateReq_SM() {
+    public ViewItemCreateReq_SM(String loggedInUser) {
         initComponents();
+        this.loggedInUser = loggedInUser;
         
         
         ItemCodeField.setEnabled(false);
@@ -41,6 +47,10 @@ private final ItemsDAO itemsDAO;
         
         
         loadItemsToTable();
+    }
+    public ViewItemCreateReq_SM(){
+        this.itemsDAO = null;
+        
     }
     
     private void loadItemsToTable() {
@@ -333,13 +343,14 @@ private final ItemsDAO itemsDAO;
         }
 
         // Create a Requisition object
-        Requisition requisition = new Requisition(itemCode, itemName, currentQuantity, proposedQuantity, userId);
+        Requisition requisition = new Requisition(itemCode, itemName, currentQuantity, proposedQuantity, userId, loggedInUser);
 
         // Save requisition using DAO
         RequisitionDAOImpl requisitionDAO = new RequisitionDAOImpl();
         boolean success = requisitionDAO.saveRequisition(itemCode, itemName, currentQuantity, proposedQuantity, userId);
         if (success) {
             JOptionPane.showMessageDialog(this, "Requisition submitted successfully.");
+            writeToLog(loggedInUser," | Requisition created | ","SUCCESS");
         } 
     } catch (Exception e) {
         e.printStackTrace();
@@ -418,6 +429,27 @@ private final ItemsDAO itemsDAO;
         // TODO add your handling code here:
     }//GEN-LAST:event_UserIDFieldActionPerformed
 
+    
+    public void writeToLog(String uniqueId, String description, String status) {
+        try {
+            File logFilePath = new File("log.txt");
+
+            // Create log.txt if it doesn't exist
+            if (!logFilePath.exists()) {
+                logFilePath.createNewFile();
+            }
+
+            // Append log entry
+            try (BufferedWriter logWriter = new BufferedWriter(new FileWriter(logFilePath, true))) {
+                String logEntry = uniqueId  + description  + status;
+                logWriter.write(logEntry);
+                logWriter.newLine();
+            }
+        } catch (IOException e) {
+            System.err.println("Error writing to log file: " + e.getMessage());
+        }
+        
+    }
     /**
      * @param args the command line arguments
      */

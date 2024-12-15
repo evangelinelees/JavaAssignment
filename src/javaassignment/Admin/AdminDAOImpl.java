@@ -2,6 +2,7 @@ package javaassignment.Admin;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -13,6 +14,9 @@ import javax.swing.JOptionPane;
 
 public class AdminDAOImpl implements AdminDAO {
     private final String filePath = "USERS.TXT";
+    private final String logFilePath = "log.txt";
+    
+    
 
     @Override
     public boolean validateLogin(String id, String password) {
@@ -60,6 +64,7 @@ public class AdminDAOImpl implements AdminDAO {
 
     @Override
     public boolean updateUser(User user) {
+    
     List<User> users = getAllUsers();
     boolean updated = false;
     
@@ -75,7 +80,9 @@ public class AdminDAOImpl implements AdminDAO {
                 writer.write(String.join("|", existingUser.toDataString()));
             }
             writer.newLine();  // Ensure each record is written on a new line
+            
         }
+        writeToLog("admin"," | User updated | ","SUCCESS");
     } catch (IOException e) {
         e.printStackTrace();
     }
@@ -119,6 +126,7 @@ public class AdminDAOImpl implements AdminDAO {
                     "Deletion Successful",
                     JOptionPane.INFORMATION_MESSAGE
                 );
+                writeToLog("admin"," | User deleted | ","SUCCESS");
             } else {
                 JOptionPane.showMessageDialog(
                     null,
@@ -190,9 +198,12 @@ public class AdminDAOImpl implements AdminDAO {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath, true))) {
             writer.write(userDetails);
             writer.newLine();
+            
+            writeToLog("admin"," | New user created | ","SUCCESS");
             return true;
         } catch (IOException e) {
             e.printStackTrace();
+            
             return false;
         }
     }
@@ -216,6 +227,28 @@ public class AdminDAOImpl implements AdminDAO {
             }
             return null;  // Return null if the user is not found   
             }
+
+    @Override
+    public void writeToLog(String uniqueId, String description, String status) {
+        try {
+            File logFilePath = new File("log.txt");
+
+            // Create log.txt if it doesn't exist
+            if (!logFilePath.exists()) {
+                logFilePath.createNewFile();
+            }
+
+            // Append log entry
+            try (BufferedWriter logWriter = new BufferedWriter(new FileWriter(logFilePath, true))) {
+                String logEntry = uniqueId  + description  + status;
+                logWriter.write(logEntry);
+                logWriter.newLine();
+            }
+        } catch (IOException e) {
+            System.err.println("Error writing to log file: " + e.getMessage());
+        }
+        
+    }
 }
     
 
