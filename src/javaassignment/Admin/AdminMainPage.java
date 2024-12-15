@@ -1,5 +1,9 @@
 package javaassignment.Admin;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
 import javaassignment.Admin.SM.AdminSMPage;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -283,13 +287,48 @@ public class AdminMainPage extends javax.swing.JFrame {
     }//GEN-LAST:event_EditBTNActionPerformed
 
     private void Refresh_BTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Refresh_BTNActionPerformed
-   
+         loadLogFile();
     }//GEN-LAST:event_Refresh_BTNActionPerformed
 
     private void sessionUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sessionUserActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_sessionUserActionPerformed
 
+    public void loadLogFile() {
+        // Define the file path for the log file
+        File logFile = new File("log.txt");
+
+        // Create a model for the notification table
+        DefaultTableModel model = (DefaultTableModel) notificationTable.getModel();
+
+        // Clear the current contents of the table
+        model.setRowCount(0);
+
+        try (BufferedReader br = new BufferedReader(new FileReader(logFile))) {
+            String line;
+            int rowNumber = 1;  // To add row number to the table
+
+            // Read the file line by line
+            while ((line = br.readLine()) != null) {
+                // Split the line by " | " separator
+                String[] logParts = line.split("\\|");
+
+                if (logParts.length == 4) {
+                    // Trim spaces and extract information from the split line
+                    String counter = logParts[0].trim();
+                    String uniqueId = logParts[1].trim();
+                    String description = logParts[2].trim();
+                    String status = logParts[3].trim();
+
+                    // Add the extracted data as a new row to the table
+                    model.insertRow(0, new Object[]{rowNumber++, uniqueId, description, status});
+                }
+            }
+        } catch (IOException e) {
+            // Handle any errors that occur during reading the file
+            JOptionPane.showMessageDialog(this, "Error reading the log file", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
 
     
      public static void main(String args[]) {
