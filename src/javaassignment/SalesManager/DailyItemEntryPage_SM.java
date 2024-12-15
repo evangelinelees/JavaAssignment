@@ -431,7 +431,7 @@ public class DailyItemEntryPage_SM extends javax.swing.JFrame {
     }//GEN-LAST:event_initialQuantityActionPerformed
 
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
-       SalesManagerMainPage SMM = new SalesManagerMainPage();
+       SalesManagerMainPage SMM = new SalesManagerMainPage(loggedInUser);
        SMM.setVisible(true);
        this.dispose();
     }//GEN-LAST:event_backButtonActionPerformed
@@ -610,16 +610,29 @@ private void updateItemQuantityInItemsFile(String Code, int quantitySold, int lo
 
     public void writeToLog(String uniqueId, String description, String status) {
         try {
-            File logFilePath = new File("log.txt");
+                File logFilePath = new File("log.txt");
+                int counter = 1;
 
-            // Create log.txt if it doesn't exist
-            if (!logFilePath.exists()) {
-                logFilePath.createNewFile();
+                // Create log.txt if it doesn't exist
+                if (!logFilePath.exists()) {
+                    logFilePath.createNewFile();
             }
+
+            // Read existing log entries and calculate the counter
+            try (BufferedReader reader = new BufferedReader(new FileReader(logFilePath))) {
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    counter++;  // Increment the counter for each existing line
+                }
+            } catch (IOException e) {
+                System.err.println("Error reading log file: " + e.getMessage());
+            }
+
+            // Prepare the log entry with the counter
+            String logEntry = counter + " | "+ loggedInUser + description + status;
 
             // Append log entry
             try (BufferedWriter logWriter = new BufferedWriter(new FileWriter(logFilePath, true))) {
-                String logEntry = uniqueId  + description  + status;
                 logWriter.write(logEntry);
                 logWriter.newLine();
             }
