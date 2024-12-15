@@ -4,6 +4,10 @@
  */
 package javaassignment.SalesManager;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -11,12 +15,13 @@ import javax.swing.table.DefaultTableModel;
  * @author vroom
  */
 public class ViewDeleteSalesEntry extends javax.swing.JFrame {
-
+    private String loggedInUser;
     /**
      * Creates new form EditDailySalesEntry
      */
-    public ViewDeleteSalesEntry() {
+    public ViewDeleteSalesEntry(String loggedInUser) {
         initComponents();
+        this.loggedInUser = loggedInUser;
         
         dateField.setEnabled(false);
         itemName.setEnabled(false);
@@ -32,6 +37,9 @@ public class ViewDeleteSalesEntry extends javax.swing.JFrame {
         
     }
     
+    public ViewDeleteSalesEntry(){
+        
+    }
     private void loadItemsToTable() {
     try {
         // Path to the DAILY.txt file
@@ -411,6 +419,7 @@ public class ViewDeleteSalesEntry extends javax.swing.JFrame {
                     tableModel.getValueAt(i, 6)
                 );
                 writer.newLine();
+                writeToLog(loggedInUser," | Sales entry deleted | ","SUCCESS");
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -425,6 +434,27 @@ public class ViewDeleteSalesEntry extends javax.swing.JFrame {
         loadItemsToTable();
     }//GEN-LAST:event_refreshTableBtnActionPerformed
 
+    
+    public void writeToLog(String uniqueId, String description, String status) {
+        try {
+            File logFilePath = new File("log.txt");
+
+            // Create log.txt if it doesn't exist
+            if (!logFilePath.exists()) {
+                logFilePath.createNewFile();
+            }
+
+            // Append log entry
+            try (BufferedWriter logWriter = new BufferedWriter(new FileWriter(logFilePath, true))) {
+                String logEntry = uniqueId  + description  + status;
+                logWriter.write(logEntry);
+                logWriter.newLine();
+            }
+        } catch (IOException e) {
+            System.err.println("Error writing to log file: " + e.getMessage());
+        }
+        
+    }
     /**
      * @param args the command line arguments
      */

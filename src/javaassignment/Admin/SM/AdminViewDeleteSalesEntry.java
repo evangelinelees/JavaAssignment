@@ -4,6 +4,10 @@
  */
 package javaassignment.Admin.SM;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import javaassignment.SalesManager.*;
 import javax.swing.table.DefaultTableModel;
 
@@ -12,12 +16,14 @@ import javax.swing.table.DefaultTableModel;
  * @author vroom
  */
 public class AdminViewDeleteSalesEntry extends javax.swing.JFrame {
+    private String loggedInUser;
 
     /**
      * Creates new form EditDailySalesEntry
      */
-    public AdminViewDeleteSalesEntry() {
+    public AdminViewDeleteSalesEntry(String loggedInUser) {
         initComponents();
+        this.loggedInUser = loggedInUser;
         
         dateField.setEnabled(false);
         itemName.setEnabled(false);
@@ -32,6 +38,10 @@ public class AdminViewDeleteSalesEntry extends javax.swing.JFrame {
 
         
     }
+    public AdminViewDeleteSalesEntry(){
+        
+    }
+            
     
     private void loadItemsToTable() {
     try {
@@ -359,7 +369,7 @@ public class AdminViewDeleteSalesEntry extends javax.swing.JFrame {
     }//GEN-LAST:event_grossProfitActionPerformed
 
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
-       SalesManagerMainPage SMM = new SalesManagerMainPage();
+       SalesManagerMainPage SMM = new SalesManagerMainPage(loggedInUser);
        SMM.setVisible(true);
        this.dispose();
     }//GEN-LAST:event_backButtonActionPerformed
@@ -412,6 +422,7 @@ public class AdminViewDeleteSalesEntry extends javax.swing.JFrame {
                     tableModel.getValueAt(i, 6)
                 );
                 writer.newLine();
+                writeToLog(loggedInUser," | Sales entry deleted | ","SUCCESS");
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -426,6 +437,27 @@ public class AdminViewDeleteSalesEntry extends javax.swing.JFrame {
         loadItemsToTable();
     }//GEN-LAST:event_refreshTableBtnActionPerformed
 
+    
+    public void writeToLog(String uniqueId, String description, String status) {
+        try {
+            File logFilePath = new File("log.txt");
+
+            // Create log.txt if it doesn't exist
+            if (!logFilePath.exists()) {
+                logFilePath.createNewFile();
+            }
+
+            // Append log entry
+            try (BufferedWriter logWriter = new BufferedWriter(new FileWriter(logFilePath, true))) {
+                String logEntry = uniqueId  + description  + status;
+                logWriter.write(logEntry);
+                logWriter.newLine();
+            }
+        } catch (IOException e) {
+            System.err.println("Error writing to log file: " + e.getMessage());
+        }
+        
+    }
     /**
      * @param args the command line arguments
      */

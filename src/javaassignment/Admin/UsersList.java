@@ -12,13 +12,19 @@ import javaassignment.Admin.AdminDAO;
  * @author jchok
  */
 public class UsersList extends javax.swing.JFrame {
+    private String loggedInUser;
 
     /**
      * Creates new form UsersList
      */
-    public UsersList() {
+    public UsersList(String loggedInUser) {
         initComponents();
         loadUsers();
+        this.loggedInUser = loggedInUser;
+        //sessionUser.setText(loggedInUser);
+    }
+    public UsersList() {
+        
     }
 
     /**
@@ -202,8 +208,8 @@ public class UsersList extends javax.swing.JFrame {
 
     private void AddUser_BTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddUser_BTNActionPerformed
         
-       AddUser AU = new AddUser();
-       AU.setVisible(true);
+       AdminRegistrationPage AMP = new AdminRegistrationPage();
+       AMP.setVisible(true);
        this.dispose();
     }//GEN-LAST:event_AddUser_BTNActionPerformed
 

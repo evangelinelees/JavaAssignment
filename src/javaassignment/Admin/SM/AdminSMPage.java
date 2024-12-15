@@ -19,7 +19,7 @@ public class AdminSMPage extends javax.swing.JFrame {
     public AdminSMPage(String loggedInUser) {
         initComponents();       
         this.loggedInUser = loggedInUser;
-        sessionUser.setText(loggedInUser);
+        
         
         
         
@@ -197,13 +197,13 @@ public class AdminSMPage extends javax.swing.JFrame {
     }//GEN-LAST:event_ExitBTNActionPerformed
 
     private void ViewSalesItemsBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ViewSalesItemsBTNActionPerformed
-       AdminViewItemCreateReq_SM VSIT = new AdminViewItemCreateReq_SM();
+       AdminViewItemCreateReq_SM VSIT = new AdminViewItemCreateReq_SM(loggedInUser);
        VSIT.setVisible(true);
        this.dispose();
     }//GEN-LAST:event_ViewSalesItemsBTNActionPerformed
 
     private void DailyItemSalesEntryBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DailyItemSalesEntryBTNActionPerformed
-       AdminDailyItemEntryPage_SM DIE = new AdminDailyItemEntryPage_SM();
+       AdminDailyItemEntryPage_SM DIE = new AdminDailyItemEntryPage_SM(loggedInUser);
        DIE.setVisible(true);
        this.dispose();
     }//GEN-LAST:event_DailyItemSalesEntryBTNActionPerformed
@@ -215,7 +215,7 @@ public class AdminSMPage extends javax.swing.JFrame {
     }//GEN-LAST:event_SalesReportBTNActionPerformed
 
     private void editDailyItemsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editDailyItemsActionPerformed
-        AdminViewDeleteSalesEntry EDSE = new AdminViewDeleteSalesEntry();
+        AdminViewDeleteSalesEntry EDSE = new AdminViewDeleteSalesEntry(loggedInUser);
         EDSE.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_editDailyItemsActionPerformed
