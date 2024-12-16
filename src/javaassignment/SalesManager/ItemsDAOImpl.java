@@ -15,9 +15,9 @@ import java.util.List;
  * @author vroom
  */
 public class ItemsDAOImpl implements ItemsDAO {
-    private final String filePath = "ITEMS.TXT";
+    private final String filePath = "C:\\JAVA\\JavaAssignment\\src\\Databases\\ITEMS.txt";
     
-    @Override
+    
 public List<Items> viewItems() {
     List<Items> items = new ArrayList<>();
     try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {

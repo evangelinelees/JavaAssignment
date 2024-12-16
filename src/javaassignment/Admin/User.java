@@ -96,12 +96,5 @@ public class User {
     public String[] toDataString() {
         return new String[] { userId, fullName, email, PhNumber, IcNumber, password, userRole };
     }
-    
-
-    
-
-
-  
    
-
 }

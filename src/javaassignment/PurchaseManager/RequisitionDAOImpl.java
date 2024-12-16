@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package javaasignment.PurchaseManager;
+package javaassignment.PurchaseManager;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -15,7 +15,7 @@ import java.util.List;
 
 
 public class RequisitionDAOImpl implements RequisitionDAO {
-    private final String requisitionFilePath = "REQUISITION.txt";
+    private final String requisitionFilePath = "C:\\JAVA\\JavaAssignment\\src\\Databases\\REQUISITION.txt";
     
 
     public boolean saveRequisition(String itemCode, String itemName, String currentQuantity, String proposedQuantity, String userId) {
