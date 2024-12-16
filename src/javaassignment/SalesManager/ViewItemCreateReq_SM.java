@@ -1,18 +1,6 @@
 package javaassignment.SalesManager;
 
 
-
-
-
-
-
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
-
-
-
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -20,8 +8,8 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
-import javaasignment.PurchaseManager.Requisition;
-import javaasignment.PurchaseManager.RequisitionDAOImpl;
+import javaassignment.PurchaseManager.Requisition;
+import javaassignment.PurchaseManager.RequisitionDAOImpl;
 import javaassignment.Admin.AdminDAO;
 import javaassignment.Admin.AdminDAOImpl;
 import javaassignment.Admin.User;
@@ -36,6 +24,7 @@ public class ViewItemCreateReq_SM extends javax.swing.JFrame {
      * Creates new form ViewSalesItemPage_SM
      */
     public ViewItemCreateReq_SM(String loggedInUser) {
+        
         initComponents();
         this.loggedInUser = loggedInUser;
         
@@ -47,11 +36,21 @@ public class ViewItemCreateReq_SM extends javax.swing.JFrame {
         this.itemsDAO = new ItemsDAOImpl();
         
         
-        
+        clearFields();
         loadItemsToTable();
     }
+    
+    
+            
     public ViewItemCreateReq_SM(){
         this.itemsDAO = null;
+        initComponents();
+        
+    }
+    
+    private void clearFields() {
+        ProposedQuantityField.setText("");
+        UserIDField.setText("");
         
     }
     
@@ -186,7 +185,7 @@ public class ViewItemCreateReq_SM extends javax.swing.JFrame {
             jTable1.getColumnModel().getColumn(5).setResizable(false);
         }
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 140, 530, 240));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 140, 530, 240));
 
         BackBTN.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         BackBTN.setText("Back");
@@ -358,6 +357,8 @@ public class ViewItemCreateReq_SM extends javax.swing.JFrame {
         e.printStackTrace();
         JOptionPane.showMessageDialog(this, "An error occurred.", "Error", JOptionPane.ERROR_MESSAGE);
     }
+    
+    clearFields();
     
     }//GEN-LAST:event_SubmitRequisitionActionPerformed
 

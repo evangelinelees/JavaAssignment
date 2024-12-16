@@ -23,7 +23,7 @@ public class SalesManagerMainPage extends javax.swing.JFrame {
     }
     
     public SalesManagerMainPage(){
-        
+       
     }
 
     /**

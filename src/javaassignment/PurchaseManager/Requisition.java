@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package javaasignment.PurchaseManager;
+package javaassignment.PurchaseManager;
 
 /**
  *
@@ -57,6 +57,6 @@ public class Requisition {
 
     // Convert to file string format
     public String toFileString() {
-        return itemCode + "|" + itemName + "|" + currentQuantity + "|" + proposedQuantity + "|" + userId;
+        return itemCode + "|" + itemName + "|" + currentQuantity + "|" + proposedQuantity + "|" + userId; //????????? wtffff 
     }
 }
