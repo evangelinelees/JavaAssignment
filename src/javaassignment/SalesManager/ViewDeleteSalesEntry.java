@@ -319,7 +319,7 @@ public class ViewDeleteSalesEntry extends javax.swing.JFrame {
         jPanel1.add(calendarSearch, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 390, -1, 30));
 
         jLabel4.setText("Make sure both fields are filled before searching.");
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 370, 270, -1));
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 370, 280, -1));
 
         refreshTableBtn.setText("Refresh Table");
         refreshTableBtn.addActionListener(new java.awt.event.ActionListener() {

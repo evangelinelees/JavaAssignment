@@ -1,2 +1,8 @@
 1 | admin | New user created | SUCCESS
 
+3 | SM2663 | Submitted daily report | SUCCESS
+4 | SM2663 | Submitted daily report | SUCCESS
+5 | SM2663 | Submitted daily report | SUCCESS
+6 | SM2663 | Submitted daily report | SUCCESS
+7 | SM2663 | Submitted daily report | SUCCESS
+8 | SM2663 | Submitted daily report | SUCCESS
