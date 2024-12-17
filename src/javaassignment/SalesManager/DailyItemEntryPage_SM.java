@@ -12,6 +12,7 @@ import java.text.SimpleDateFormat;
 import java.util.List;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
@@ -236,6 +237,7 @@ public class DailyItemEntryPage_SM extends javax.swing.JFrame {
         refreshTableBtn = new javax.swing.JButton();
         jLabel14 = new javax.swing.JLabel();
         customDate = new javax.swing.JTextField();
+        jLabel15 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(153, 204, 255));
@@ -393,8 +395,15 @@ public class DailyItemEntryPage_SM extends javax.swing.JFrame {
         jLabel14.setText("Custom Date:");
         jPanel1.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 110, -1, -1));
 
-        customDate.setText("YYYY-MM-DD");
+        customDate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                customDateActionPerformed(evt);
+            }
+        });
         jPanel1.add(customDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 110, 130, -1));
+
+        jLabel15.setText("YYYY-MM-DD");
+        jPanel1.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 110, -1, 20));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -560,11 +569,51 @@ private boolean checkDuplicateInDailyFile(String reportDate, String itemCode, St
 
 
 private void writeReportToDailyFile(String reportDate, String Code, String Name, Double Price, int quantitySold, int losses, double grossProfit) throws IOException {
-    try (BufferedWriter writer = new BufferedWriter(new FileWriter("DAILY.txt", true))) {
-        // Include Price in the file output
-        writer.write(String.format("%s|%s|%s|%.2f|%d|%d|%.2f%n", reportDate, Code, Name, Price, quantitySold, losses, grossProfit));
+    File dailyFile = new File("DAILY.txt");
+    List<String> lines = new ArrayList<>();
+
+    // Read the existing lines from the file
+    if (dailyFile.exists()) {
+        try (BufferedReader reader = new BufferedReader(new FileReader(dailyFile))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                lines.add(line);
+            }
+        }
+    }
+
+    // Create the new report line to be inserted
+    String newReportLine = String.format("%s|%s|%s|%.2f|%d|%d|%.2f", reportDate, Code, Name, Price, quantitySold, losses, grossProfit);
+
+    // Insert the new report line at the correct position
+    boolean inserted = false;
+    for (int i = 0; i < lines.size(); i++) {
+        String existingLine = lines.get(i);
+        String[] fields = existingLine.split("\\|");
+        String existingDate = fields[0].trim();
+
+        // Compare dates and insert the new record at the correct position
+        if (reportDate.compareTo(existingDate) < 0) {
+            lines.add(i, newReportLine);
+            inserted = true;
+            break;
+        }
+    }
+
+    // If not inserted yet, it means it should be added at the end
+    if (!inserted) {
+        lines.add(newReportLine);
+    }
+
+    // Write the lines back to the DAILY.txt file with new lines between records
+    try (BufferedWriter writer = new BufferedWriter(new FileWriter(dailyFile))) {
+        for (String line : lines) {
+            writer.write(line);  // Write each line
+            writer.newLine();  // Add newline after each line
+        }
     }
 }
+
 
 
 private void updateItemQuantityInItemsFile(String Code, int quantitySold, int losses) throws IOException {
@@ -607,6 +656,10 @@ private void updateItemQuantityInItemsFile(String Code, int quantitySold, int lo
     private void refreshTableBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshTableBtnActionPerformed
         loadItemsToTable();
     }//GEN-LAST:event_refreshTableBtnActionPerformed
+
+    private void customDateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_customDateActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_customDateActionPerformed
 
     public void writeToLog(String uniqueId, String description, String status) {
         try {
@@ -696,6 +749,7 @@ private void updateItemQuantityInItemsFile(String Code, int quantitySold, int lo
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

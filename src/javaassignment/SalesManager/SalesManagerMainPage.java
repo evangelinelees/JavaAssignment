@@ -17,8 +17,8 @@ public class SalesManagerMainPage extends javax.swing.JFrame {
         initComponents();       
         this.loggedInUser = loggedInUser;
         sessionUser.setText(loggedInUser);
-        
-        
+
+
         
     }
     
