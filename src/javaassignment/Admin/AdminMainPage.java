@@ -7,6 +7,9 @@ import java.io.IOException;
 import javaassignment.Admin.SM.AdminSMPage;
 import java.util.List;
 import java.util.stream.Collectors;
+import javaassignment.Admin.IM.AdminIMPage;
+import javaassignment.Admin.IM.IM_MainMenu;
+import javaassignment.Admin.IM.IM_MainMenu;
 import javaassignment.LoginPage;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -29,7 +32,9 @@ public class AdminMainPage extends javax.swing.JFrame {
     }
     
     public AdminMainPage(){
-        
+       initComponents();
+        this.loggedInUser = loggedInUser;
+        sessionUser.setText(loggedInUser); 
     }
    
     @SuppressWarnings("unchecked")
@@ -250,14 +255,14 @@ public class AdminMainPage extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void RegisterBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RegisterBTNActionPerformed
-       AdminRegistrationPage RP = new AdminRegistrationPage();
+       AdminRegistrationPage RP = new AdminRegistrationPage(loggedInUser);
        
        RP.setVisible(true);
        this.dispose();
     }//GEN-LAST:event_RegisterBTNActionPerformed
 
     private void SalesBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SalesBTNActionPerformed
-        AdminSMPage ASMP = new AdminSMPage();
+        AdminSMPage ASMP = new AdminSMPage(loggedInUser);
         ASMP.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_SalesBTNActionPerformed
@@ -267,7 +272,11 @@ public class AdminMainPage extends javax.swing.JFrame {
     }//GEN-LAST:event_notificationTableMouseClicked
 
     private void InventoryBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_InventoryBTNActionPerformed
-        // TODO add your handling code here:
+        System.out.println("Inventory Button Clicked!");
+        AdminIMPage AMP = new AdminIMPage(loggedInUser); 
+        AMP.setVisible(true);
+        this.dispose();  // Close the current window
+    
     }//GEN-LAST:event_InventoryBTNActionPerformed
 
     private void FinanceBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FinanceBTNActionPerformed
@@ -281,7 +290,7 @@ public class AdminMainPage extends javax.swing.JFrame {
     }//GEN-LAST:event_LogoutBTNActionPerformed
 
     private void EditBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EditBTNActionPerformed
-        UsersList usersListPage = new UsersList();
+        UsersList usersListPage = new UsersList(loggedInUser);
         usersListPage.setVisible(true); // Show the edit user page
         this.dispose(); // Close the current page if required
     }//GEN-LAST:event_EditBTNActionPerformed

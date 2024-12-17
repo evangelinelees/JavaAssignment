@@ -9,6 +9,10 @@ package javaassignment.InventoryManager.Forms;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.List;
 import javaassignment.InventoryManager.Components.ItemInputPanel;
 
@@ -28,12 +32,19 @@ public final class ItemInputForm extends JPanel {
     private final InventoryController inventoryController;
     private final DataHandling inputValidator;
     private final ItemInputPanel itemInputPanel;
+    public String loggedInUser;
     
     
     
 
+    public void ItemInputForm(String loggedInUser){
+        initComponents();
+        this.loggedInUser = loggedInUser;
+    }
+    
     public void ItemInputForm(){
         initComponents();
+        
     }
 
     public ItemInputForm(InventoryController inventoryController, SupplierSelection supplierSelection, ItemInputPanel itemInputPanel1,ItemDao itemDao, SupplierController supplierController ) {
@@ -104,7 +115,7 @@ public final class ItemInputForm extends JPanel {
 
         // Optionally update the item input panel or table with the new item
         itemInputPanel1.addItem(itemId, itemName, description, String.valueOf(quantity), String.valueOf(price),name);
-
+        writeToLog(loggedInUser," | Submitted daily report | ","SUCCESS");
         // Clear the fields after saving
         clearFields();
         supplierSelection.resetSelection();
@@ -211,6 +222,26 @@ public final class ItemInputForm extends JPanel {
     supplierSelection.setSupplierNames(supplierNames);
     }
     
+    public void writeToLog(String uniqueId, String description, String status) {
+        try {
+            File logFilePath = new File("log.txt");
+
+            // Create log.txt if it doesn't exist
+            if (!logFilePath.exists()) {
+                logFilePath.createNewFile();
+            }
+
+            // Append log entry
+            try (BufferedWriter logWriter = new BufferedWriter(new FileWriter(logFilePath, true))) {
+                String logEntry = uniqueId  + description  + status;
+                logWriter.write(logEntry);
+                logWriter.newLine();
+            }
+        } catch (IOException e) {
+            System.err.println("Error writing to log file: " + e.getMessage());
+        }
+        
+    }
     
 
     @SuppressWarnings("unchecked")
@@ -444,6 +475,8 @@ public final class ItemInputForm extends JPanel {
     private javaassignment.InventoryManager.Components.UniversalButton universalButton2;
     private javaassignment.InventoryManager.Components.UniversalButton universalButton3;
     // End of variables declaration//GEN-END:variables
+
+    
 
    
 }

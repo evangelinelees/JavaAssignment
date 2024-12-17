@@ -1,13 +1,13 @@
-package javaassignment.InventoryManager;
+package javaassignment.Admin.IM;
 
 
+import javaassignment.InventoryManager.*;
 import java.awt.Component;
 import java.awt.Color;
 import javax.swing.*;
 import java.awt.BorderLayout;
 import javaassignment.InventoryManager.Components.ItemInputPanel;
 import javaassignment.InventoryManager.Components.MenuEvent;
-import javaassignment.InventoryManager.Components.MainMenu;
 import javaassignment.InventoryManager.Components.SupplierInputPanel;
 import javaassignment.InventoryManager.Components.SupplierSelection;
 import javaassignment.InventoryManager.Controller.InventoryController;
@@ -29,11 +29,11 @@ import javax.swing.plaf.ColorUIResource;
  *
  * @author RAVEN
  */
-public class Main extends javax.swing.JFrame {
-    public String loggedInUser;
+public class AdminIMPage extends javax.swing.JFrame {
+        private String loggedInUser;
 
 
-    public Main(String loggedInUser) {
+    public AdminIMPage( String loggedInUser) {
         this.loggedInUser = loggedInUser;
         initComponents();
         
@@ -74,12 +74,13 @@ public class Main extends javax.swing.JFrame {
             }
         });
     }
-
-     public Main() {
-        initComponents();
-     }
     
     
+    //lol the constructor im so fucking stupifd i even\ okie thankl you remember to call the correct constructore when init the new mainpage
+    
+    public AdminIMPage() {
+         
+        initComponents();}
     
     public void showForm(JPanel formToShow) {
     body.removeAll();
@@ -93,9 +94,9 @@ public class Main extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        body = new javax.swing.JPanel();
         header1 = new javaassignment.InventoryManager.Components.Header();
-        menu1 = new javaassignment.InventoryManager.Components.MainMenu();
+        body = new javax.swing.JPanel();
+        menu1 = new javaassignment.Admin.IM.IM_MainMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -107,21 +108,21 @@ public class Main extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(header1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(menu1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
-                .addComponent(body, javax.swing.GroupLayout.PREFERRED_SIZE, 943, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(body, javax.swing.GroupLayout.PREFERRED_SIZE, 943, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addComponent(header1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(header1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(body, javax.swing.GroupLayout.DEFAULT_SIZE, 695, Short.MAX_VALUE)
-                    .addComponent(menu1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(0, 0, 0)
+                        .addComponent(menu1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
 
         pack();
@@ -139,7 +140,7 @@ public class Main extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Main().setVisible(true);
+                new AdminIMPage().setVisible(true);
             }
         });
     }
@@ -147,6 +148,6 @@ public class Main extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel body;
     private javaassignment.InventoryManager.Components.Header header1;
-    private javaassignment.InventoryManager.Components.MainMenu menu1;
+    private javaassignment.Admin.IM.IM_MainMenu menu1;
     // End of variables declaration//GEN-END:variables
 }

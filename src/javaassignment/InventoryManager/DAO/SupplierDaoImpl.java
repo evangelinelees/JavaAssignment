@@ -8,6 +8,7 @@ package javaassignment.InventoryManager.DAO;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -21,12 +22,15 @@ import javaassignment.InventoryManager.Models.Supplier;
  */
 public class SupplierDaoImpl implements SupplierDao{
    private final List<Supplier> supplierList = new ArrayList<>();
-   private final String FILE_PATH = "C:\\JAVA\\JavaAssignment\\src\\Databases\\supplierData.txt";
+   private final String FILE_PATH = "inventoryData.txt";
+   private final String logFilePath = "log.txt";
+   private String loggedInUser;
 
    
     public void addSupplier(Supplier supplier) {
         // Add supplier to the list
         supplierList.add(supplier);
+        writeToLog(loggedInUser," | Supplier added | ","SUCCESS");
 
         // Write supplier to the file
         writeToFile(supplier);
@@ -71,6 +75,7 @@ public class SupplierDaoImpl implements SupplierDao{
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(FILE_PATH, true))) {
             writer.write(supplierToString(supplier));
             writer.newLine();
+            writeToLog(loggedInUser," | Supplier created | ","SUCCESS");
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -91,6 +96,7 @@ public class SupplierDaoImpl implements SupplierDao{
 
         if (updated) {
             saveAll(suppliers); // Save updated list
+            writeToLog(loggedInUser," | Supplier updated | ","SUCCESS");
         } else {
             System.out.println("Supplier with ID " + supplier.getSupplierId() + " not found for update.");
         }
@@ -102,6 +108,7 @@ public class SupplierDaoImpl implements SupplierDao{
 
         if (removed) {
             saveAll(suppliers);
+            writeToLog(loggedInUser," | Supplier deleted | ","SUCCESS");
         } else {
             System.out.println("Supplier with ID " + supplierId + " not found.");
         }
@@ -192,5 +199,39 @@ public class SupplierDaoImpl implements SupplierDao{
         return supplierNames;
     }
     
+   @Override
+    public void writeToLog(String uniqueId, String description, String status) {
+        try {
+                File logFilePath = new File("log.txt");
+                int counter = 1;
+
+                // Create log.txt if it doesn't exist
+                if (!logFilePath.exists()) {
+                    logFilePath.createNewFile();
+            }
+
+            // Read existing log entries and calculate the counter
+            try (BufferedReader reader = new BufferedReader(new FileReader(logFilePath))) {
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    counter++;  // Increment the counter for each existing line
+                }
+            } catch (IOException e) {
+                System.err.println("Error reading log file: " + e.getMessage());
+            }
+
+            // Prepare the log entry with the counter
+            String logEntry = counter + " | "+ loggedInUser + description + status;
+
+            // Append log entry
+            try (BufferedWriter logWriter = new BufferedWriter(new FileWriter(logFilePath, true))) {
+                logWriter.write(logEntry);
+                logWriter.newLine();
+            }
+        } catch (IOException e) {
+            System.err.println("Error writing to log file: " + e.getMessage());
+        }
+        
+    }
 } 
 

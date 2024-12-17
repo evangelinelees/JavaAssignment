@@ -15,18 +15,15 @@ public class AdminSMPage extends javax.swing.JFrame {
 
     /**
      * Creates new form SalesManagerMainPage
+     * @param loggedInUser
      */
     public AdminSMPage(String loggedInUser) {
-        initComponents();       
-        this.loggedInUser = loggedInUser;
-        
-        
-        
-        
+  
     }
     
     public AdminSMPage(){
-        
+        initComponents();       
+        this.loggedInUser = loggedInUser;
     }
 
     /**

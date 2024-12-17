@@ -23,6 +23,7 @@ public interface SupplierDao {
     void deleteSupplier(String supplierId);
     List<Supplier> loadAll();
     void saveSupplier(Supplier supplier);
+    void writeToLog(String uniqueId, String description, String status);
 
 } 
 

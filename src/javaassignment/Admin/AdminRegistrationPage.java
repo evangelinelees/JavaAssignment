@@ -7,13 +7,19 @@ import javax.swing.JOptionPane;
 
 
 public class AdminRegistrationPage extends javax.swing.JFrame {
-    //private String loggedInUser;
+    private String loggedInUser;
    
-    public AdminRegistrationPage() {
+    public AdminRegistrationPage(String loggedInUser) {
         initComponents();
-        //this.loggedInUser = loggedInUser;
+        this.loggedInUser = loggedInUser;
         //sessionUser.setText(loggedInUser);
     }
+    
+    public AdminRegistrationPage() {
+        initComponents();
+        
+    }
+    
    
 
    

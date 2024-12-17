@@ -20,5 +20,6 @@ public interface ItemDao {
     Item findById(String itemId); // Find and return an item by its ID
     List<Item> loadAll(); // Load and return all items from the data source
     void deleteItem(String itemId);
+    void writeToLog(String uniqueId, String description, String status);
    
 }

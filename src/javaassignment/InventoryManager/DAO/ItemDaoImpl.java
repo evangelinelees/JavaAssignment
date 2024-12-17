@@ -4,6 +4,7 @@ package javaassignment.InventoryManager.DAO;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -14,13 +15,15 @@ import javaassignment.InventoryManager.Models.Item;
 
 public class ItemDaoImpl implements ItemDao {
     private final List<Item> itemList = new ArrayList<>();
-    private final String FILE_PATH = "C:\\JAVA\\JavaAssignment\\src\\Databases\\inventoryData.txt";
+    private final String FILE_PATH = "inventoryData.txt";
+    public String loggedInUser;
 
     
     @Override
     public void addItem(Item item) {
         // Add item to the list
         itemList.add(item);
+        writeToLog(loggedInUser," | Item added | ","SUCCESS");
         
         // Write item to the file
         writeToFile(item);
@@ -64,6 +67,7 @@ public class ItemDaoImpl implements ItemDao {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(FILE_PATH, true))) {
             writer.write(itemToString(item));
             writer.newLine();
+            writeToLog(loggedInUser," | Item saved | ","SUCCESS");
         } catch (IOException e) {
             e.printStackTrace(); // Handle file writing exceptions
         }
@@ -172,10 +176,45 @@ public class ItemDaoImpl implements ItemDao {
 
             if (itemRemoved) {
                 saveAll(items);
+                writeToLog(loggedInUser," | Item deleted | ","SUCCESS");
             } 
                 else {
                 System.out.println("Item with ID " + itemId + " not found.");
                 }
+    }
+
+    @Override
+    public void writeToLog(String uniqueId, String description, String status) {
+        try {
+                File logFilePath = new File("log.txt");
+                int counter = 1;
+
+                // Create log.txt if it doesn't exist
+                if (!logFilePath.exists()) {
+                    logFilePath.createNewFile();
+            }
+
+            // Read existing log entries and calculate the counter
+            try (BufferedReader reader = new BufferedReader(new FileReader(logFilePath))) {
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    counter++;  // Increment the counter for each existing line
+                }
+            } catch (IOException e) {
+                System.err.println("Error reading log file: " + e.getMessage());
+            }
+
+            // Prepare the log entry with the counter
+            String logEntry = counter + " | "+ loggedInUser + description + status;
+
+            // Append log entry
+            try (BufferedWriter logWriter = new BufferedWriter(new FileWriter(logFilePath, true))) {
+                logWriter.write(logEntry);
+                logWriter.newLine();
+            }
+        } catch (IOException e) {
+            System.err.println("Error writing to log file: " + e.getMessage());
+        }
     }
     
     

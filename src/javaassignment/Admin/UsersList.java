@@ -208,7 +208,7 @@ public class UsersList extends javax.swing.JFrame {
 
     private void AddUser_BTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddUser_BTNActionPerformed
         
-       AdminRegistrationPage AMP = new AdminRegistrationPage();
+       AdminRegistrationPage AMP = new AdminRegistrationPage(loggedInUser);
        AMP.setVisible(true);
        this.dispose();
     }//GEN-LAST:event_AddUser_BTNActionPerformed
