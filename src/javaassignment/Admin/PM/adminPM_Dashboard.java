@@ -6,7 +6,10 @@ package javaassignment.Admin.PM;
 
 import javaassignment.PurchaseManager.*;
 
-
+/**
+ *
+ * @author User
+ */
 public class adminPM_Dashboard extends javax.swing.JFrame {
 
     /**
