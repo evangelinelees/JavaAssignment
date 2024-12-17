@@ -1,7 +1,1 @@
 1 | admin | New user created | SUCCESS
-
-3 | null | New user created | SUCCESS
-4 | null | New user created | SUCCESS
-5 | null | New user created | SUCCESS
-6 | null | Requisition created | SUCCESS
-7 | null | Requisition created | SUCCESS

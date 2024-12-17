@@ -6,6 +6,7 @@ import javaassignment.Admin.AdminMainPage;
 import javaassignment.Admin.Admin;
 import javaassignment.Admin.AdminDAO;
 import javaassignment.Admin.AdminDAOImpl;
+import javaassignment.InventoryManager.Main;
 import javaassignment.SalesManager.SalesManagerMainPage;
 import javax.swing.JOptionPane;
 
@@ -197,8 +198,8 @@ public class LoginPage extends javax.swing.JFrame {
                 break;
             case "Inventory Manager":
                 loggedInUser = ID;
-                //SalesManagerMainPage SMMP = new SalesManagerMainPage(loggedInUser);
-                //SMMP.setVisible(true);
+                Main IM_Main = new Main(loggedInUser);
+                IM_Main.setVisible(true);
                 this.dispose();
                 JOptionPane.showMessageDialog(this, "Welcome "+ ID);
                 break;

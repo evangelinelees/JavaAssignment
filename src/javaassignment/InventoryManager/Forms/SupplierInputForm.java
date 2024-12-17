@@ -8,6 +8,12 @@ package javaassignment.InventoryManager.Forms;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.List;
 import javaassignment.InventoryManager.Components.SupplierInputPanel;
 import javaassignment.InventoryManager.Controller.SupplierController;
@@ -18,13 +24,16 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
 
+
 public class SupplierInputForm extends javax.swing.JPanel {
 
     private final SupplierController supplierController;
     private final DataHandling inputValidator;
+    public String loggedInUser;
     
     public void SupplierInputForm() {
         initComponents();
+        this.loggedInUser = loggedInUser;
     }
 
     public SupplierInputForm(SupplierController supplierController,SupplierInputPanel supplierInputPanel, SupplierDao supplierDao) {
@@ -82,6 +91,7 @@ public class SupplierInputForm extends javax.swing.JPanel {
 
         // Optionally update the supplier input panel or table with the new supplier
         supplierInputPanel1.addSupplier(supplierId, name, address, email, phone);
+        writeToLog(loggedInUser," | Supplier added | ","SUCCESS");
 
         // Clear the fields after saving
         clearFields();
@@ -162,6 +172,39 @@ public class SupplierInputForm extends javax.swing.JPanel {
         supplierInputPanel1.populateSupplier(suppliers);
     }
     
+    public void writeToLog(String uniqueId, String description, String status) {
+        try {
+                File logFilePath = new File("log.txt");
+                int counter = 1;
+
+                // Create log.txt if it doesn't exist
+                if (!logFilePath.exists()) {
+                    logFilePath.createNewFile();
+            }
+
+            // Read existing log entries and calculate the counter
+            try (BufferedReader reader = new BufferedReader(new FileReader(logFilePath))) {
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    counter++;  // Increment the counter for each existing line
+                }
+            } catch (IOException e) {
+                System.err.println("Error reading log file: " + e.getMessage());
+            }
+
+            // Prepare the log entry with the counter
+            String logEntry = counter + " | "+ loggedInUser + description + status;
+
+            // Append log entry
+            try (BufferedWriter logWriter = new BufferedWriter(new FileWriter(logFilePath, true))) {
+                logWriter.write(logEntry);
+                logWriter.newLine();
+            }
+        } catch (IOException e) {
+            System.err.println("Error writing to log file: " + e.getMessage());
+        }
+        
+    }
    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -343,6 +386,7 @@ public class SupplierInputForm extends javax.swing.JPanel {
                 loadSupplier();
             }
         });
+        
         
        
         
