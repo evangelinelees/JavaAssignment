@@ -19,6 +19,9 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import net.miginfocom.swing.MigLayout;
 
+
+
+
 public class MainMenu extends JComponent {
 
     public MenuEvent getEvent() {
