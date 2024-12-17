@@ -63,7 +63,7 @@ public class MainMenu extends JComponent {
 
         // Create a panel to hold the logout button
         JPanel logoutPanel = new JPanel();
-        logoutPanel.setBackground(new Color(21, 110, 71)); // Match menu color
+        logoutPanel.setBackground(new Color(106,123,157)); // Match menu color
         logoutPanel.setLayout(new MigLayout("insets 0", "[]", "[]")); // No insets
 
         

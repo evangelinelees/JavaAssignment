@@ -25,9 +25,11 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Component id="header1" max="32767" attributes="0"/>
-          <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="0" pref="188" max="32767" attributes="0"/>
+          <Group type="102" attributes="0">
+              <Component id="menu1" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
               <Component id="body" min="-2" pref="943" max="-2" attributes="0"/>
+              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -36,7 +38,10 @@
           <Group type="102" attributes="0">
               <Component id="header1" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-              <Component id="body" min="-2" pref="695" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                  <Component id="body" pref="695" max="32767" attributes="0"/>
+                  <Component id="menu1" max="32767" attributes="0"/>
+              </Group>
           </Group>
       </Group>
     </DimensionLayout>
@@ -52,6 +57,8 @@
       <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout"/>
     </Container>
     <Component class="javaassignment.InventoryManager.Components.Header" name="header1">
+    </Component>
+    <Component class="javaassignment.InventoryManager.Components.MainMenu" name="menu1">
     </Component>
   </SubComponents>
 </Form>
