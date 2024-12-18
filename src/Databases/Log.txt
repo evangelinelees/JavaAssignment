@@ -1,5 +1,5 @@
-1 | admin | New user created | SUCCESS
+1 | null | New user created | SUCCESS
+2 | admin | New user created | SUCCESS
+3 | admin | User updated | SUCCESS
+4 | SM8175 | Submitted daily report | SUCCESS
 
-3 | null | New user created | SUCCESS
-4 | null | New user created | SUCCESS
-5 | null | New user created | SUCCESS

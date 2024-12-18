@@ -22,5 +22,6 @@ public interface ItemDao {
     void deleteItem(String itemId);
     void writeToLog(String uniqueId, String description, String status);
     
+    
    
 }

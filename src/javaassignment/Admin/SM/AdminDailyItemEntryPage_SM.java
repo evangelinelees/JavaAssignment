@@ -455,7 +455,7 @@ public class AdminDailyItemEntryPage_SM extends javax.swing.JFrame {
 
 private boolean checkDuplicateInDailyFile(String reportDate, String itemCode, String itemName) throws IOException {
     // Read the DAILY.txt file
-    File dailyFile = new File("DAILY.txt");
+    File dailyFile = new File("src/Databases/DAILY.txt");
     if (!dailyFile.exists()) {
         return false; // No file exists, no duplicates
     }
@@ -496,7 +496,7 @@ private void writeReportToDailyFile(String reportDate, String Code, String Name,
 
 
 private void updateItemQuantityInItemsFile(String Code, int quantitySold, int losses) throws IOException {
-    File itemsFile = new File("ITEMS.txt");
+    File itemsFile = new File("src/Databases/ITEMS.txt");
     if (!itemsFile.exists()) {
         return; // If the file does not exist, nothing to update
     }
@@ -534,7 +534,7 @@ private void updateItemQuantityInItemsFile(String Code, int quantitySold, int lo
 
     public void writeToLog(String uniqueId, String description, String status) {
         try {
-            File logFilePath = new File("log.txt");
+            File logFilePath = new File("src/Databases/log.txt");
 
             // Create log.txt if it doesn't exist
             if (!logFilePath.exists()) {

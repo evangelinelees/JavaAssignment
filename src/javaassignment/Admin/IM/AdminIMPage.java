@@ -25,17 +25,14 @@ import javax.swing.plaf.ColorUIResource;
 
 
 
-/**
- *
- * @author RAVEN
- */
+
 public class AdminIMPage extends javax.swing.JFrame {
-        private String loggedInUser;
-
-
-    public AdminIMPage( String loggedInUser) {
-        this.loggedInUser = loggedInUser;
+    public String loggedInUser;
+    
+    public AdminIMPage(String loggedInUser) {
         initComponents();
+        this.loggedInUser = loggedInUser;
+        System.out.println(loggedInUser);
         
         InventoryController inventoryController = new InventoryController();
         ItemInputPanel itemInputPanel = new ItemInputPanel();
@@ -46,6 +43,7 @@ public class AdminIMPage extends javax.swing.JFrame {
         SupplierInputPanel supplierInputPanel = new SupplierInputPanel();
         SupplierDao supplierDao = new SupplierDaoImpl();
         
+        menu1 = new javaassignment.Admin.IM.IM_MainMenu(loggedInUser);
         
         menu1.setEvent(new MenuEvent() {
             @Override
@@ -56,7 +54,8 @@ public class AdminIMPage extends javax.swing.JFrame {
                     case 0 -> {
                         yield switch (subIndex) {
                             case 0 -> new InventoryForm(); // Inventory form
-                            case 1 -> new ItemInputForm(inventoryController, supplierSelection, itemInputPanel, itemDao, supplierController); // Open Item Input Form
+                            case 1 -> new ItemInputForm(inventoryController, supplierSelection, itemInputPanel, 
+                                    itemDao, supplierController, loggedInUser); // Open Item Input Form
                             default -> new DefaultForm("Inventory Form: " + subIndex);
                         };
                     }
@@ -74,19 +73,17 @@ public class AdminIMPage extends javax.swing.JFrame {
             }
         });
     }
-    
-    
-    //lol the constructor im so fucking stupifd i even\ okie thankl you remember to call the correct constructore when init the new mainpage
-    
+
     public AdminIMPage() {
-         
-        initComponents();}
+        
+    }
+   
     
     public void showForm(JPanel formToShow) {
-    body.removeAll();
-    body.add(formToShow, BorderLayout.CENTER);
-    body.revalidate();
-    body.repaint();
+        body.removeAll();
+        body.add(formToShow, BorderLayout.CENTER);
+        body.revalidate();
+        body.repaint();
     }
 
 
@@ -96,7 +93,7 @@ public class AdminIMPage extends javax.swing.JFrame {
 
         header1 = new javaassignment.InventoryManager.Components.Header();
         body = new javax.swing.JPanel();
-        menu1 = new javaassignment.Admin.IM.IM_MainMenu();
+        menu1 = new javaassignment.Admin.IM.IM_MainMenu(loggedInUser);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -109,10 +106,12 @@ public class AdminIMPage extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(7, 7, 7)
+                .addComponent(header1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
                 .addComponent(menu1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(body, javax.swing.GroupLayout.PREFERRED_SIZE, 943, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addComponent(header1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(body, javax.swing.GroupLayout.PREFERRED_SIZE, 824, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -121,8 +120,9 @@ public class AdminIMPage extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(body, javax.swing.GroupLayout.DEFAULT_SIZE, 695, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 0, 0)
-                        .addComponent(menu1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addGap(6, 6, 6)
+                        .addComponent(menu1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap())))
         );
 
         pack();
