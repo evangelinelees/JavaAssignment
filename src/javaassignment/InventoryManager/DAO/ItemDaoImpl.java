@@ -14,27 +14,19 @@ import javaassignment.InventoryManager.Models.Item;
 import javaassignment.InventoryManager.DAO.ItemDao;
 
 
-
 public class ItemDaoImpl implements ItemDao {
     private final List<Item> itemList = new ArrayList<>();
     private final String FILE_PATH = "src/Databases/inventoryData.txt";
-    private final String logFilePath = "src/Databases/Log.txt";
     public String loggedInUser;
 
   
-    public ItemDaoImpl(String loggedInUser) {
-        this.loggedInUser = loggedInUser;
-    }
-    
-    public ItemDaoImpl() {
-        
-    }
+
     
     @Override
     public void addItem(Item item) {
         // Add item to the list
         itemList.add(item);
-        
+        writeToLog(loggedInUser," | Item added | ","SUCCESS");
         
         // Write item to the file
         writeToFile(item);
@@ -78,7 +70,7 @@ public class ItemDaoImpl implements ItemDao {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(FILE_PATH, true))) {
             writer.write(itemToString(item));
             writer.newLine();
-            
+            writeToLog(loggedInUser," | Item saved | ","SUCCESS");
         } catch (IOException e) {
             e.printStackTrace(); // Handle file writing exceptions
         }
@@ -100,9 +92,8 @@ public class ItemDaoImpl implements ItemDao {
 
         if (updated) {
             saveAll(items); // Save only if an item was updated
-//            
-            System.out.println(loggedInUser);
-
+            writeToLog(loggedInUser," | Item updated | ","SUCCESS");
+            
         } else {
             System.out.println("Item with ID " + item.getItemId() + " not found for update.");
         }
@@ -202,7 +193,7 @@ public class ItemDaoImpl implements ItemDao {
     public void writeToLog(String uniqueId, String description, String status) {
   
         try {
-                File logFilePath = new File("src/Databases/Log.txt");
+                File logFilePath = new File("log.txt");
                 int counter = 1;
 
                 // Create log.txt if it doesn't exist

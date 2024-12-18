@@ -20,18 +20,21 @@ public class AdminMainPage extends javax.swing.JFrame {
     private String loggedInUser;
     
     
+    
     /**
      * Creates new form AdminMainPage
      */
     public AdminMainPage(String loggedInUser) {
         initComponents();
         this.loggedInUser = loggedInUser;
-        System.out.println(loggedInUser);
+        sessionUser.setText(loggedInUser);
         
     }
     
-    public AdminMainPage() {
-        
+    public AdminMainPage(){
+       initComponents();
+        this.loggedInUser = loggedInUser;
+        sessionUser.setText(loggedInUser); 
     }
    
     @SuppressWarnings("unchecked")
@@ -51,6 +54,7 @@ public class AdminMainPage extends javax.swing.JFrame {
         notificationTable = new javax.swing.JTable();
         Refresh_BTN = new javax.swing.JToggleButton();
         LogoutBTN = new javax.swing.JButton();
+        sessionUser = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -59,7 +63,7 @@ public class AdminMainPage extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel1.setText("Welcome Admin ");
+        jLabel1.setText("Welcome ");
 
         jPanel2.setBackground(new java.awt.Color(204, 204, 255));
 
@@ -192,6 +196,16 @@ public class AdminMainPage extends javax.swing.JFrame {
             }
         });
 
+        sessionUser.setBackground(new java.awt.Color(153, 204, 255));
+        sessionUser.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        sessionUser.setForeground(new java.awt.Color(0, 0, 0));
+        sessionUser.setBorder(null);
+        sessionUser.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                sessionUserActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -199,9 +213,11 @@ public class AdminMainPage extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(17, 17, 17)
                 .addComponent(LogoutBTN)
-                .addGap(261, 261, 261)
-                .addComponent(jLabel1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(44, 44, 44)
+                .addComponent(sessionUser, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(331, 331, 331))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
@@ -209,11 +225,17 @@ public class AdminMainPage extends javax.swing.JFrame {
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(LogoutBTN)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(LogoutBTN)
+                        .addGap(17, 17, 17))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(sessionUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -232,19 +254,12 @@ public class AdminMainPage extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void LogoutBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LogoutBTNActionPerformed
-        LoginPage LP = new LoginPage();
-        LP.setVisible(true);
-        this.dispose();
-    }//GEN-LAST:event_LogoutBTNActionPerformed
-
-    private void Refresh_BTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Refresh_BTNActionPerformed
-        loadLogFile();
-    }//GEN-LAST:event_Refresh_BTNActionPerformed
-
-    private void notificationTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_notificationTableMouseClicked
-
-    }//GEN-LAST:event_notificationTableMouseClicked
+    private void RegisterBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RegisterBTNActionPerformed
+       AdminRegistrationPage RP = new AdminRegistrationPage(loggedInUser);
+       
+       RP.setVisible(true);
+       this.dispose();
+    }//GEN-LAST:event_RegisterBTNActionPerformed
 
     private void SalesBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SalesBTNActionPerformed
         AdminSMPage ASMP = new AdminSMPage(loggedInUser);
@@ -252,18 +267,27 @@ public class AdminMainPage extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_SalesBTNActionPerformed
 
+    private void notificationTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_notificationTableMouseClicked
+            
+    }//GEN-LAST:event_notificationTableMouseClicked
+
+    private void InventoryBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_InventoryBTNActionPerformed
+        System.out.println("Inventory Button Clicked!");
+        AdminIMPage AMP = new AdminIMPage(loggedInUser); 
+        AMP.setVisible(true);
+        this.dispose();  // Close the current window
+    
+    }//GEN-LAST:event_InventoryBTNActionPerformed
+
     private void FinanceBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FinanceBTNActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_FinanceBTNActionPerformed
 
-    private void InventoryBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_InventoryBTNActionPerformed
-        System.out.println("Inventory Button Clicked!");
-        
-        AdminIMPage AMP = new AdminIMPage(loggedInUser);
-        AMP.setVisible(true);
-        this.dispose();  // Close the current window
-
-    }//GEN-LAST:event_InventoryBTNActionPerformed
+    private void LogoutBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LogoutBTNActionPerformed
+        LoginPage LP = new LoginPage();
+        LP.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_LogoutBTNActionPerformed
 
     private void EditBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EditBTNActionPerformed
         UsersList usersListPage = new UsersList(loggedInUser);
@@ -271,16 +295,17 @@ public class AdminMainPage extends javax.swing.JFrame {
         this.dispose(); // Close the current page if required
     }//GEN-LAST:event_EditBTNActionPerformed
 
-    private void RegisterBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RegisterBTNActionPerformed
-        AdminRegistrationPage RP = new AdminRegistrationPage(loggedInUser);
+    private void Refresh_BTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Refresh_BTNActionPerformed
+         loadLogFile();
+    }//GEN-LAST:event_Refresh_BTNActionPerformed
 
-        RP.setVisible(true);
-        this.dispose();
-    }//GEN-LAST:event_RegisterBTNActionPerformed
+    private void sessionUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sessionUserActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_sessionUserActionPerformed
 
     public void loadLogFile() {
         // Define the file path for the log file
-        File logFile = new File("src/Databases/log.txt");
+        File logFile = new File("log.txt");
 
         // Create a model for the notification table
         DefaultTableModel model = (DefaultTableModel) notificationTable.getModel();
@@ -341,6 +366,7 @@ public class AdminMainPage extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable notificationTable;
+    private javax.swing.JTextField sessionUser;
     // End of variables declaration//GEN-END:variables
 }
 

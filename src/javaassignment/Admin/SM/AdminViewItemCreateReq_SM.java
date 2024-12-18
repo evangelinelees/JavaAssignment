@@ -422,7 +422,7 @@ private String loggedInUser;
 
     public void writeToLog(String uniqueId, String description, String status) {
         try {
-            File logFilePath = new File("src/Databases/log.txt");
+            File logFilePath = new File("log.txt");
 
             // Create log.txt if it doesn't exist
             if (!logFilePath.exists()) {
