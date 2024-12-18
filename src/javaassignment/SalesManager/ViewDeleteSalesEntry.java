@@ -45,7 +45,7 @@ public class ViewDeleteSalesEntry extends javax.swing.JFrame {
     private void loadItemsToTable() {
     try {
         // Path to the DAILY.txt file
-        String filePath = "DAILY.txt";  // Replace with the actual path to your file
+        String filePath = "src\\Databases\\DAILY.txt";  // Replace with the actual path to your file
         // Get the table model
         try ( // Open the file for reading
                 java.io.BufferedReader reader = new java.io.BufferedReader(new java.io.FileReader(filePath))) {
@@ -108,7 +108,7 @@ public class ViewDeleteSalesEntry extends javax.swing.JFrame {
         tableModel.setRowCount(0);
 
         // Reload the data from file
-        String filePath = "DAILY.txt";  // Path to your file
+        String filePath = "src\\Databases\\DAILY.txt";  // Path to your file
         try (java.io.BufferedReader reader = new java.io.BufferedReader(new java.io.FileReader(filePath))) {
             String line;
 
@@ -409,7 +409,7 @@ public class ViewDeleteSalesEntry extends javax.swing.JFrame {
         tableModel.removeRow(selectedRow); // Remove from the table
 
         // Update the file by rewriting its contents
-        try (java.io.BufferedWriter writer = new java.io.BufferedWriter(new java.io.FileWriter("DAILY.txt"))) {
+        try (java.io.BufferedWriter writer = new java.io.BufferedWriter(new java.io.FileWriter("src\\Databases\\DAILY.txt"))) {
             for (int i = 0; i < tableModel.getRowCount(); i++) {
                 writer.write(
                     tableModel.getValueAt(i, 0) + "|" +
