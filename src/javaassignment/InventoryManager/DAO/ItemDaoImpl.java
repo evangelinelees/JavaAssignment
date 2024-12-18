@@ -15,7 +15,7 @@ import javaassignment.InventoryManager.Models.Item;
 
 public class ItemDaoImpl implements ItemDao {
     private final List<Item> itemList = new ArrayList<>();
-    private final String FILE_PATH = "inventoryData.txt";
+    private final String FILE_PATH = "src/Databases/inventoryData.txt";
     public String loggedInUser;
 
     
@@ -83,11 +83,14 @@ public class ItemDaoImpl implements ItemDao {
                 items.set(i, item); // Update the item
                 updated = true; // Set the flag
                 break; // Exit the loop after updating
+                
             }
         }
 
         if (updated) {
             saveAll(items); // Save only if an item was updated
+            writeToLog(loggedInUser," | Item updated | ","SUCCESS");
+            
         } else {
             System.out.println("Item with ID " + item.getItemId() + " not found for update.");
         }

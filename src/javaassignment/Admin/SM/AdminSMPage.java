@@ -4,6 +4,7 @@
  */
 package javaassignment.Admin.SM;
 
+import javaassignment.Admin.AdminMainPage;
 import javaassignment.LoginPage;
 
 /**
@@ -18,13 +19,15 @@ public class AdminSMPage extends javax.swing.JFrame {
      * @param loggedInUser
      */
     public AdminSMPage(String loggedInUser) {
-  
-    }
-    
-    public AdminSMPage(){
         initComponents();       
         this.loggedInUser = loggedInUser;
     }
+    
+    public AdminSMPage(){
+        
+    }
+    
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -37,8 +40,7 @@ public class AdminSMPage extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        LogoutBTN = new javax.swing.JButton();
-        ExitBTN = new javax.swing.JButton();
+        BackBTN = new javax.swing.JButton();
         sessionUser = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
         ViewSalesItemsBTN = new javax.swing.JButton();
@@ -55,19 +57,11 @@ public class AdminSMPage extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel1.setText("Sales Manager Main");
 
-        LogoutBTN.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        LogoutBTN.setText("Logout");
-        LogoutBTN.addActionListener(new java.awt.event.ActionListener() {
+        BackBTN.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        BackBTN.setText("Back");
+        BackBTN.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                LogoutBTNActionPerformed(evt);
-            }
-        });
-
-        ExitBTN.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        ExitBTN.setText("Exit System");
-        ExitBTN.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ExitBTNActionPerformed(evt);
+                BackBTNActionPerformed(evt);
             }
         });
 
@@ -84,10 +78,8 @@ public class AdminSMPage extends javax.swing.JFrame {
                 .addComponent(sessionUser, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(154, 154, 154)
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 116, Short.MAX_VALUE)
-                .addComponent(LogoutBTN)
-                .addGap(18, 18, 18)
-                .addComponent(ExitBTN)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 226, Short.MAX_VALUE)
+                .addComponent(BackBTN)
                 .addGap(31, 31, 31))
         );
         jPanel1Layout.setVerticalGroup(
@@ -98,8 +90,7 @@ public class AdminSMPage extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(sessionUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(ExitBTN, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(LogoutBTN, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(BackBTN, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(25, Short.MAX_VALUE))
         );
 
@@ -183,15 +174,11 @@ public class AdminSMPage extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void LogoutBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LogoutBTNActionPerformed
-       LoginPage LG = new LoginPage();
-       LG.setVisible(true);
+    private void BackBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BackBTNActionPerformed
+       AdminMainPage AMP = new AdminMainPage(loggedInUser);
+       AMP.setVisible(true);
        this.dispose();
-    }//GEN-LAST:event_LogoutBTNActionPerformed
-
-    private void ExitBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ExitBTNActionPerformed
-       System.exit(0);
-    }//GEN-LAST:event_ExitBTNActionPerformed
+    }//GEN-LAST:event_BackBTNActionPerformed
 
     private void ViewSalesItemsBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ViewSalesItemsBTNActionPerformed
        AdminViewItemCreateReq_SM VSIT = new AdminViewItemCreateReq_SM(loggedInUser);
@@ -206,7 +193,7 @@ public class AdminSMPage extends javax.swing.JFrame {
     }//GEN-LAST:event_DailyItemSalesEntryBTNActionPerformed
 
     private void SalesReportBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SalesReportBTNActionPerformed
-       AdminSalesReportPage_SM SR = new AdminSalesReportPage_SM();
+       AdminSalesReportPage SR = new AdminSalesReportPage(loggedInUser);
        SR.setVisible(true);
        this.dispose();
     }//GEN-LAST:event_SalesReportBTNActionPerformed
@@ -253,9 +240,8 @@ public class AdminSMPage extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton BackBTN;
     private javax.swing.JButton DailyItemSalesEntryBTN;
-    private javax.swing.JButton ExitBTN;
-    private javax.swing.JButton LogoutBTN;
     private javax.swing.JButton SalesReportBTN;
     private javax.swing.JButton ViewPOBTN;
     private javax.swing.JButton ViewSalesItemsBTN;

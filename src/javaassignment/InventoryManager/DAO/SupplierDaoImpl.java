@@ -22,7 +22,7 @@ import javaassignment.InventoryManager.Models.Supplier;
  */
 public class SupplierDaoImpl implements SupplierDao{
    private final List<Supplier> supplierList = new ArrayList<>();
-   private final String FILE_PATH = "inventoryData.txt";
+   private final String FILE_PATH = "src/Databases/supplierData.txt";
    private final String logFilePath = "log.txt";
    private String loggedInUser;
 

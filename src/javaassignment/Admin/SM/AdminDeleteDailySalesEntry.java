@@ -412,6 +412,7 @@ public class AdminDeleteDailySalesEntry extends javax.swing.JFrame {
                 );
                 writer.newLine();
             }
+            writeToLog(loggedInUser," | Sales record deleted | ","SUCCESS");
         } catch (Exception e) {
             e.printStackTrace();
             javax.swing.JOptionPane.showMessageDialog(this, "Error updating file.");

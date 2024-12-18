@@ -2,17 +2,6 @@ package javaassignment.Admin.SM;
 
 
 
-
-
-
-
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
-
-
-
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
@@ -319,8 +308,8 @@ private String loggedInUser;
 
     
     private void BackBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BackBTNActionPerformed
-       SalesManagerMainPage SMM = new SalesManagerMainPage();
-       SMM.setVisible(true);
+       AdminSMPage SMP = new AdminSMPage(loggedInUser);
+       SMP.setVisible(true);
        this.dispose();
     }//GEN-LAST:event_BackBTNActionPerformed
 
