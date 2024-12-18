@@ -24,6 +24,7 @@ public interface SupplierDao {
     List<Supplier> loadAll();
     void saveSupplier(Supplier supplier);
     void writeToLog(String uniqueId, String description, String status);
+    
 
 } 
 

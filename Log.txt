@@ -2,3 +2,9 @@
 
 admin | Sales entry deleted | SUCCESS
 4 | null | Item updated | SUCCESS
+5 | null | Supplier created | SUCCESS
+6 | null | Supplier added | SUCCESS
+7 | null | Supplier updated | SUCCESS
+8 | null | Item updated | SUCCESS
+9 | null | Supplier updated | SUCCESS
+10 | null | Item updated | SUCCESS
