@@ -58,7 +58,7 @@ public class IM_MainMenu extends JComponent {
     }
     
     public void setLoggedInUser(String loggedInUser) {
-        this.loggedInUser = loggedInUser;
+        this.loggedInUser = loggedInUser;//changehere pls
     }
     
     public IM_MainMenu() {
