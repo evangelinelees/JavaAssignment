@@ -9,9 +9,12 @@ import javaassignment.InventoryManager.Models.Item;
 
 public class InventoryService {
     private final ItemDao itemDao = new ItemDaoImpl();
+    public String loggedInUser;
     
     public void addItem(Item item) {
         itemDao.addItem(item);
+        
+        this.loggedInUser = loggedInUser;
     }
 
     public List<Item> getAllItems() {

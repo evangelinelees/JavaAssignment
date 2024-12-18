@@ -11,12 +11,15 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import javaassignment.InventoryManager.Models.Item;
+import javaassignment.InventoryManager.DAO.ItemDao;
 
 
 public class ItemDaoImpl implements ItemDao {
     private final List<Item> itemList = new ArrayList<>();
     private final String FILE_PATH = "src/Databases/inventoryData.txt";
     public String loggedInUser;
+
+  
 
     
     @Override
@@ -188,6 +191,7 @@ public class ItemDaoImpl implements ItemDao {
 
     @Override
     public void writeToLog(String uniqueId, String description, String status) {
+  
         try {
                 File logFilePath = new File("log.txt");
                 int counter = 1;

@@ -21,5 +21,6 @@ public interface ItemDao {
     List<Item> loadAll(); // Load and return all items from the data source
     void deleteItem(String itemId);
     void writeToLog(String uniqueId, String description, String status);
+    
    
 }

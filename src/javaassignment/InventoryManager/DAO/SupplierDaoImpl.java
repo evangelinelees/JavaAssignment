@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javaassignment.InventoryManager.Models.Supplier;
 
+
 /**
  *
  * @author User
@@ -25,6 +26,8 @@ public class SupplierDaoImpl implements SupplierDao{
    private final String FILE_PATH = "src/Databases/supplierData.txt";
    private final String logFilePath = "log.txt";
    private String loggedInUser;
+
+  
 
    
     public void addSupplier(Supplier supplier) {
@@ -201,6 +204,7 @@ public class SupplierDaoImpl implements SupplierDao{
     
    @Override
     public void writeToLog(String uniqueId, String description, String status) {
+        
         try {
                 File logFilePath = new File("log.txt");
                 int counter = 1;

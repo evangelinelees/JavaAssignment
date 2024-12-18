@@ -16,6 +16,7 @@ import javaassignment.InventoryManager.Models.Supplier;
  */
 public class SupplierService {
     private final SupplierDao supplierDao = new SupplierDaoImpl();
+    public String loggedInUser;
 
     // Add a supplier
     public void addSupplier(Supplier supplier) {
