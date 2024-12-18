@@ -369,8 +369,8 @@ public class AdminViewDeleteSalesEntry extends javax.swing.JFrame {
     }//GEN-LAST:event_grossProfitActionPerformed
 
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
-       SalesManagerMainPage SMM = new SalesManagerMainPage(loggedInUser);
-       SMM.setVisible(true);
+       AdminSMPage SMP = new AdminSMPage(loggedInUser);
+       SMP.setVisible(true);
        this.dispose();
     }//GEN-LAST:event_backButtonActionPerformed
 
@@ -422,8 +422,9 @@ public class AdminViewDeleteSalesEntry extends javax.swing.JFrame {
                     tableModel.getValueAt(i, 6)
                 );
                 writer.newLine();
-                writeToLog(loggedInUser," | Sales entry deleted | ","SUCCESS");
+                
             }
+            writeToLog(loggedInUser," | Sales entry deleted | ","SUCCESS");
         } catch (Exception e) {
             e.printStackTrace();
             javax.swing.JOptionPane.showMessageDialog(this, "Error updating file.");

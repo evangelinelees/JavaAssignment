@@ -1,1 +1,4 @@
 1 | admin | New user created | SUCCESS
+
+admin | Sales entry deleted | SUCCESS
+4 | null | Item updated | SUCCESS

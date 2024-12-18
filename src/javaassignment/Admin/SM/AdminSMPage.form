@@ -45,10 +45,8 @@
                   <Component id="sessionUser" min="-2" pref="71" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="154" max="-2" attributes="0"/>
                   <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="116" max="32767" attributes="0"/>
-                  <Component id="LogoutBTN" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Component id="ExitBTN" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace pref="226" max="32767" attributes="0"/>
+                  <Component id="BackBTN" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
               </Group>
           </Group>
@@ -62,8 +60,7 @@
                           <Component id="jLabel1" alignment="3" max="32767" attributes="0"/>
                           <Component id="sessionUser" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <Component id="ExitBTN" alignment="0" max="32767" attributes="0"/>
-                      <Component id="LogoutBTN" alignment="0" max="32767" attributes="0"/>
+                      <Component id="BackBTN" alignment="0" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace pref="25" max="32767" attributes="0"/>
               </Group>
@@ -79,26 +76,15 @@
             <Property name="text" type="java.lang.String" value="Sales Manager Main"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JButton" name="LogoutBTN">
+        <Component class="javax.swing.JButton" name="BackBTN">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Segoe UI" size="12" style="1"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Logout"/>
+            <Property name="text" type="java.lang.String" value="Back"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="LogoutBTNActionPerformed"/>
-          </Events>
-        </Component>
-        <Component class="javax.swing.JButton" name="ExitBTN">
-          <Properties>
-            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Segoe UI" size="12" style="1"/>
-            </Property>
-            <Property name="text" type="java.lang.String" value="Exit System"/>
-          </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ExitBTNActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BackBTNActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="sessionUser">
