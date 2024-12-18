@@ -305,7 +305,7 @@ public class AdminMainPage extends javax.swing.JFrame {
 
     public void loadLogFile() {
         // Define the file path for the log file
-        File logFile = new File("log.txt");
+        File logFile = new File("src/Databases/log.txt");
 
         // Create a model for the notification table
         DefaultTableModel model = (DefaultTableModel) notificationTable.getModel();

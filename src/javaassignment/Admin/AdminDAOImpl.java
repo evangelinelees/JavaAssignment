@@ -13,8 +13,8 @@ import javaassignment.Admin.AdminDAO;
 import javax.swing.JOptionPane;
 
 public class AdminDAOImpl implements AdminDAO {
-    private final String filePath = "USERS.TXT";
-    private final String logFilePath = "log.txt";
+    private final String filePath = "src/Databases/USERS.txt";
+    private final String logFilePath = "src/Databases/log.txt";
     private String loggedInUser;
     
     
