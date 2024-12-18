@@ -26,7 +26,7 @@ import net.miginfocom.swing.MigLayout;
 
 
 public class IM_MainMenu extends JComponent {
-    public String loggedInUser;
+    private String loggedInUser;
 
     public MenuEvent getEvent() {
         return event;

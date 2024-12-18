@@ -18,10 +18,17 @@ import javaassignment.InventoryManager.DAO.ItemDao;
 public class ItemDaoImpl implements ItemDao {
     private final List<Item> itemList = new ArrayList<>();
     private final String FILE_PATH = "src/Databases/inventoryData.txt";
+    private final String logFilePath = "src/Databases/Log.txt";
     public String loggedInUser;
 
   
-
+    public ItemDaoImpl(String loggedInUser) {
+        this.loggedInUser = loggedInUser;
+    }
+    
+    public ItemDaoImpl() {
+        
+    }
     
     @Override
     public void addItem(Item item) {
@@ -93,8 +100,9 @@ public class ItemDaoImpl implements ItemDao {
 
         if (updated) {
             saveAll(items); // Save only if an item was updated
-            writeToLog(loggedInUser," | Item updated | ","SUCCESS");
-            
+//            writeToLog(loggedInUser," | Item updated | ","SUCCESS");
+            System.out.println(loggedInUser);
+
         } else {
             System.out.println("Item with ID " + item.getItemId() + " not found for update.");
         }
@@ -194,7 +202,7 @@ public class ItemDaoImpl implements ItemDao {
     public void writeToLog(String uniqueId, String description, String status) {
   
         try {
-                File logFilePath = new File("log.txt");
+                File logFilePath = new File("src/Databases/Log.txt");
                 int counter = 1;
 
                 // Create log.txt if it doesn't exist

@@ -30,12 +30,12 @@ import javax.swing.plaf.ColorUIResource;
  * @author RAVEN
  */
 public class AdminIMPage extends javax.swing.JFrame {
-        private String loggedInUser;
-
-
-    public AdminIMPage( String loggedInUser) {
-        this.loggedInUser = loggedInUser;
+    private String loggedInUser;
+    
+    public AdminIMPage(String loggedInUser) {
         initComponents();
+        this.loggedInUser = loggedInUser;
+        System.out.println(loggedInUser);
         
         InventoryController inventoryController = new InventoryController();
         ItemInputPanel itemInputPanel = new ItemInputPanel();
@@ -74,19 +74,17 @@ public class AdminIMPage extends javax.swing.JFrame {
             }
         });
     }
-    
-    
-    //lol the constructor im so fucking stupifd i even\ okie thankl you remember to call the correct constructore when init the new mainpage
-    
+
     public AdminIMPage() {
-         
-        initComponents();}
+        
+    }
+   
     
     public void showForm(JPanel formToShow) {
-    body.removeAll();
-    body.add(formToShow, BorderLayout.CENTER);
-    body.revalidate();
-    body.repaint();
+        body.removeAll();
+        body.add(formToShow, BorderLayout.CENTER);
+        body.revalidate();
+        body.repaint();
     }
 
 
@@ -120,9 +118,7 @@ public class AdminIMPage extends javax.swing.JFrame {
                 .addComponent(header1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(body, javax.swing.GroupLayout.DEFAULT_SIZE, 695, Short.MAX_VALUE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 0, 0)
-                        .addComponent(menu1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                    .addComponent(menu1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
 
         pack();

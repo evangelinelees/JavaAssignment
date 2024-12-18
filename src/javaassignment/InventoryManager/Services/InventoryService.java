@@ -13,7 +13,6 @@ public class InventoryService {
     
     public void addItem(Item item) {
         itemDao.addItem(item);
-        
         this.loggedInUser = loggedInUser;
     }
 
