@@ -34,7 +34,7 @@ public class ItemDaoImpl implements ItemDao {
     public void addItem(Item item) {
         // Add item to the list
         itemList.add(item);
-        writeToLog(loggedInUser," | Item added | ","SUCCESS");
+        
         
         // Write item to the file
         writeToFile(item);
@@ -78,7 +78,7 @@ public class ItemDaoImpl implements ItemDao {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(FILE_PATH, true))) {
             writer.write(itemToString(item));
             writer.newLine();
-            writeToLog(loggedInUser," | Item saved | ","SUCCESS");
+            
         } catch (IOException e) {
             e.printStackTrace(); // Handle file writing exceptions
         }
@@ -100,7 +100,7 @@ public class ItemDaoImpl implements ItemDao {
 
         if (updated) {
             saveAll(items); // Save only if an item was updated
-//            writeToLog(loggedInUser," | Item updated | ","SUCCESS");
+//            
             System.out.println(loggedInUser);
 
         } else {

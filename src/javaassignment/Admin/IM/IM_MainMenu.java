@@ -57,6 +57,10 @@ public class IM_MainMenu extends JComponent {
         this.loggedInUser = loggedInUser;
     }
     
+    public void setLoggedInUser(String loggedInUser) {
+        this.loggedInUser = loggedInUser;
+    }
+    
     public IM_MainMenu() {
         init();
     }
@@ -108,7 +112,7 @@ public class IM_MainMenu extends JComponent {
     repaint();
 }
     private void performLogout() {
-        AdminMainPage AMP = new AdminMainPage();
+        AdminMainPage AMP = new AdminMainPage(loggedInUser);
         AMP.setVisible(true);
         Window window = SwingUtilities.getWindowAncestor(this);
         window.dispose();

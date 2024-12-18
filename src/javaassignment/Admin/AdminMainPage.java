@@ -26,6 +26,7 @@ public class AdminMainPage extends javax.swing.JFrame {
     public AdminMainPage(String loggedInUser) {
         initComponents();
         this.loggedInUser = loggedInUser;
+        System.out.println(loggedInUser);
         
     }
     
@@ -257,6 +258,7 @@ public class AdminMainPage extends javax.swing.JFrame {
 
     private void InventoryBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_InventoryBTNActionPerformed
         System.out.println("Inventory Button Clicked!");
+        
         AdminIMPage AMP = new AdminIMPage(loggedInUser);
         AMP.setVisible(true);
         this.dispose();  // Close the current window

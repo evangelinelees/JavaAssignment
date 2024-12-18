@@ -15,7 +15,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
 import javaassignment.InventoryManager.Components.ItemInputPanel;
-
 import javaassignment.InventoryManager.Components.SupplierSelection;
 import javaassignment.InventoryManager.Controller.InventoryController;
 import javaassignment.InventoryManager.Controller.SupplierController;
@@ -35,26 +34,24 @@ public final class ItemInputForm extends JPanel {
     public String loggedInUser;
     
     
-    
-
-    public void ItemInputForm(String loggedInUser){
-        initComponents();
-        this.loggedInUser = loggedInUser;
-    }
+   
     
     public void ItemInputForm(){
         initComponents();
         
     }
 
-    public ItemInputForm(InventoryController inventoryController, SupplierSelection supplierSelection, ItemInputPanel itemInputPanel1,ItemDao itemDao, SupplierController supplierController ) {
+    public ItemInputForm(InventoryController inventoryController, SupplierSelection supplierSelection, ItemInputPanel itemInputPanel1,
+            ItemDao itemDao, SupplierController supplierController,String loggedInUser ) {
+        this.loggedInUser = loggedInUser;
         this.supplierController = supplierController;
         this.inventoryController = inventoryController;
         this.itemInputPanel = itemInputPanel1;
         this.supplierSelection = supplierSelection;
         this.inputValidator = new DataHandling(itemDao);
+        System.out.println(loggedInUser);
         initComponents();
-        loadItems(); 
+        loadItems();
         populateComboBox();
         addListeners();
         clearFields();
@@ -78,14 +75,9 @@ public final class ItemInputForm extends JPanel {
         String description = descriptionField.getText().trim();
         String quantityText = quantityField.getText().trim();
         String priceText = priceField.getText().trim();
-
         String name = supplierSelection.getSelectedSupplier();
         
-        int selectedRow = itemInputPanel1.getTable().getSelectedRow();
-        if (selectedRow == -1) {
-            JOptionPane.showMessageDialog(this, "Item info cannot be empty.", "Error", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
+        
         
         if (inputValidator.isItemIdExists(itemId)) {
             JOptionPane.showMessageDialog(this, "Item ID already exists. Please choose a unique ID.", "Input Error", JOptionPane.ERROR_MESSAGE);
@@ -115,7 +107,6 @@ public final class ItemInputForm extends JPanel {
 
         // Optionally update the item input panel or table with the new item
         itemInputPanel1.addItem(itemId, itemName, description, String.valueOf(quantity), String.valueOf(price),name);
-        writeToLog(loggedInUser," | Submitted daily report | ","SUCCESS");
         // Clear the fields after saving
         clearFields();
         supplierSelection.resetSelection();
@@ -224,7 +215,7 @@ public final class ItemInputForm extends JPanel {
     
     public void writeToLog(String uniqueId, String description, String status) {
         try {
-            File logFilePath = new File("log.txt");
+            File logFilePath = new File("src/Databases/Log.txt");
 
             // Create log.txt if it doesn't exist
             if (!logFilePath.exists()) {
@@ -233,7 +224,7 @@ public final class ItemInputForm extends JPanel {
 
             // Append log entry
             try (BufferedWriter logWriter = new BufferedWriter(new FileWriter(logFilePath, true))) {
-                String logEntry = uniqueId  + description  + status;
+                String logEntry = uniqueId + description  + status;
                 logWriter.write(logEntry);
                 logWriter.newLine();
             }
@@ -395,6 +386,8 @@ public final class ItemInputForm extends JPanel {
    
     private void customizeSaveButton(String text) {
         universalButton1.setText(text);
+        System.out.println(loggedInUser);
+        writeToLog(loggedInUser," | Submitted daily report | ","SUCCESS");
     }      
     
     private void customizeUpdateButton(String text) {

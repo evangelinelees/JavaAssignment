@@ -6,3 +6,22 @@
 6 | null | New user created | SUCCESS
 7 | null | New user created | SUCCESS
 8 | SM2804 | Submitted daily report | SUCCESS
+nullnull | Submitted daily report | SUCCESS
+nullnull | Submitted daily report | SUCCESS
+nullnull | Submitted daily report | SUCCESS
+adminadmin | Submitted daily report | SUCCESS
+admin | Submitted daily report | SUCCESS
+admin | Submitted daily report | SUCCESS
+admin | Submitted daily report | SUCCESS
+admin | Submitted daily report | SUCCESS
+admin | Submitted daily report | SUCCESS
+admin | Submitted daily report | SUCCESS
+admin | Submitted daily report | SUCCESS
+admin | Submitted daily report | SUCCESS
+admin | Submitted daily report | SUCCESS
+admin | Submitted daily report | SUCCESS
+admin | Submitted daily report | SUCCESS
+admin | Submitted daily report | SUCCESS
+admin | Submitted daily report | SUCCESS
+adminadmin | Submitted daily report | SUCCESS
+adminadmin | Submitted daily report | SUCCESS
