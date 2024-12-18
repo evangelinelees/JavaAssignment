@@ -26,7 +26,7 @@ import net.miginfocom.swing.MigLayout;
 
 
 public class IM_MainMenu extends JComponent {
-    private String loggedInUser;
+    public String loggedInUser;
 
     public MenuEvent getEvent() {
         return event;
@@ -54,10 +54,6 @@ public class IM_MainMenu extends JComponent {
      
     public IM_MainMenu(String loggedInUser) {
         init();
-        this.loggedInUser = loggedInUser;
-    }
-    
-    public void setLoggedInUser(String loggedInUser) {
         this.loggedInUser = loggedInUser;
     }
     
@@ -112,7 +108,7 @@ public class IM_MainMenu extends JComponent {
     repaint();
 }
     private void performLogout() {
-        AdminMainPage AMP = new AdminMainPage(loggedInUser);
+        AdminMainPage AMP = new AdminMainPage();
         AMP.setVisible(true);
         Window window = SwingUtilities.getWindowAncestor(this);
         window.dispose();

@@ -329,7 +329,7 @@ public class EditUser extends javax.swing.JFrame {
     
     private void saveUserToFile(User user) {
         try {
-        String filePath = "src/Databases/USERS.TXT";
+        String filePath = "C:\\Users\\jchok\\Desktop\\Java_Assignment\\JavaAssignment-master\\USERS.TXT";
         File file = new File(filePath);
 
         // Check if the file exists

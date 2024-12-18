@@ -663,7 +663,7 @@ private void updateItemQuantityInItemsFile(String Code, int quantitySold, int lo
 
     public void writeToLog(String uniqueId, String description, String status) {
         try {
-                File logFilePath = new File("src/Databases/Log.txt");
+                File logFilePath = new File("log.txt");
                 int counter = 1;
 
                 // Create log.txt if it doesn't exist

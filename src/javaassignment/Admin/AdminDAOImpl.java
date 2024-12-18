@@ -13,7 +13,8 @@ import javaassignment.Admin.AdminDAO;
 import javax.swing.JOptionPane;
 
 public class AdminDAOImpl implements AdminDAO {
-    private final String filePath = "src/Databases/USERS.txt";
+    private final String filePath = "USERS.TXT";
+    private final String logFilePath = "log.txt";
     private String loggedInUser;
     
     
@@ -229,9 +230,9 @@ public class AdminDAOImpl implements AdminDAO {
             }
 
     @Override
-    public void writeToLog(String loggedInUser, String description, String status) {
+    public void writeToLog(String uniqueId, String description, String status) {
         try {
-                File logFilePath = new File("src/Databases/Log.txt");
+                File logFilePath = new File("log.txt");
                 int counter = 1;
 
                 // Create log.txt if it doesn't exist
