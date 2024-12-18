@@ -133,11 +133,6 @@ public class SalesManagerMainPage extends javax.swing.JFrame {
 
         ViewPOBTN.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         ViewPOBTN.setText("View Purchaser Orders");
-        ViewPOBTN.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ViewPOBTNActionPerformed(evt);
-            }
-        });
 
         editDailyItems.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         editDailyItems.setText("Delete Daily Sales Entry");
@@ -221,12 +216,6 @@ public class SalesManagerMainPage extends javax.swing.JFrame {
         EDSE.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_editDailyItemsActionPerformed
-
-    private void ViewPOBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ViewPOBTNActionPerformed
-        ViewPurchaseOrder VPO = new ViewPurchaseOrder();
-        VPO.setVisible(true);
-        this.dispose();
-    }//GEN-LAST:event_ViewPOBTNActionPerformed
 
     /**
      * @param args the command line arguments
